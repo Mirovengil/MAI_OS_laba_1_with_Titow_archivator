@@ -1,17 +1,36 @@
-all : directories main.o archivator.o
-	gcc ./obj/main.o ./obj/archivator_by_IVAN.o -o ./bin/runme
-	./bin/runme
+# директории
+SRC_DIR=./src/
+OBJ_DIR=./obj/
+BIN_DIR=./bin/
+HEADERS_DIR=./headers/
+
+# компилятор
+CC=gcc
+
+# имя выходного файла
+OUT_FILENAME=runme
+
+# мои библиотеки
+ARCHIVATOR=archivator_by_IVAN
+TREE=tree_by_IVAN
+
+all : directories main.o $(ARCHIVATOR).o $(TREE).o
+	$(CC) $(OBJ_DIR)main.o $(OBJ_DIR)$(ARCHIVATOR).o $(OBJ_DIR)$(TREE).o -o $(BIN_DIR)$(OUT_FILENAME)
+	$(BIN_DIR)$(OUT_FILENAME)
 	
 main.o : 
-	gcc -I./headers/ ./src/main.c -c -o./obj/main.o
+	$(CC) -I$(HEADERS_DIR) $(SRC_DIR)main.c -c -o $(OBJ_DIR)main.o
 
-archivator.o : 
-	gcc -I./headers/ ./src/archivator_by_IVAN.c -c -o ./obj/archivator_by_IVAN.o
+$(ARCHIVATOR).o : 
+	$(CC) -I$(HEADERS_DIR) $(SRC_DIR)$(ARCHIVATOR).c -c -o $(OBJ_DIR)$(ARCHIVATOR).o
+
+$(TREE).o :
+	$(CC) -I$(HEADERS_DIR) $(SRC_DIR)$(TREE).c -c -o $(OBJ_DIR)$(TREE).o
 
 directories : 
-	mkdir obj
-	mkdir bin
+	mkdir -p obj
+	mkdir -p bin
 
 clean : 
-	rm -rf ./obj/*
-	rm -rf ./bin/*
+	rm -rf $(OBJ_DIR)*
+	rm -rf $(BIN_DIR)*
