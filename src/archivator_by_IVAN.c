@@ -20,8 +20,7 @@ enum ErrorCodes _printAllFilesInDirectory(int numberOfTabs, const char *director
 
     directory = opendir(directoryName);
     if (!directory) {
-        perror("diropen");
-        exit(1);
+        return DIRECTORY_NOT_OPENED;
     };
 
     while ( (currentObject = readdir(directory)) != NULL) {
@@ -35,7 +34,11 @@ enum ErrorCodes _printAllFilesInDirectory(int numberOfTabs, const char *director
 			printf("папка)\n");
 			
 			char *subdirectoryFullName = formSubdirectoryFullName(directoryName, currentObject->d_name);
-			_printAllFilesInDirectory(numberOfTabs+1, subdirectoryFullName);
+			
+			enum ErrorCodes errCode = _printAllFilesInDirectory(numberOfTabs+1, subdirectoryFullName);
+			if (errCode != OK)
+				return errCode;
+			
 			free(subdirectoryFullName);
 		}
 		else
