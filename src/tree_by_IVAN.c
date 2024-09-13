@@ -100,7 +100,7 @@ void printTree(struct Node *tree)
 void _printTree(int numberOfTabs, struct Node *tree)
 {
     for (int i = 0; i < numberOfTabs; ++i)
-        printf("\n");
+        printf("\t");
     
     if (tree->type == FILE_NODE)
         printf("%s (файл)\n", tree->name);

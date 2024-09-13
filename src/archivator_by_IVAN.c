@@ -1,20 +1,13 @@
 #include "archivator_by_IVAN.h"
-#include <stdio.h>
 #include <dirent.h>		// библиотека для работы с папками 
 #include <stdlib.h>
 #include <string.h>
 
-enum ErrorCodes _printAllFilesInDirectory(int numberOfTabs, const char *directoryName);
-
-// стандартная сишная конструкция, что-то вроде параметра по умолчанию
-enum ErrorCodes printAllFilesInDirectory(const char *directory)
+enum ErrorCodes formTreeWithDirectory(struct Node **tree, const char *directoryName)
 {
-	return _printAllFilesInDirectory(0, directory);
-};
 
-
-enum ErrorCodes _printAllFilesInDirectory(int numberOfTabs, const char *directoryName)
-{
+	// перед тем, как выделять память под дерево и начинать забивать в него директорию,
+	// надо убедиться, что пользователь не мудак и указал правильную директорию
 	DIR *directory;
     struct dirent *currentObject;
 
@@ -23,26 +16,34 @@ enum ErrorCodes _printAllFilesInDirectory(int numberOfTabs, const char *director
         return DIRECTORY_NOT_OPENED;
     };
 
+	// создаём дерево; первая вершина, очевидно, папка
+	*tree = createNewFolderNode(directoryName);
+
     while ( (currentObject = readdir(directory)) != NULL) {
+
+		// скрытые папки и файлы не рассматриваем
 		if (currentObject->d_name[0] == '.')
 			continue;
-		for (int i = 0; i <= numberOfTabs; ++i)
-			printf("\t");
-		printf("%s (", currentObject->d_name);
+
 		if (currentObject->d_type == 4)
 		{
-			printf("папка)\n");
-			
+			// добавляем в дерево FOLDER_NODE
 			char *subdirectoryFullName = formSubdirectoryFullName(directoryName, currentObject->d_name);
-			
-			enum ErrorCodes errCode = _printAllFilesInDirectory(numberOfTabs+1, subdirectoryFullName);
+
+			struct Node *folderNode = createNewFolderNode(currentObject->d_name);
+			addNewObjectToFolderNode(folderNode, *tree);
+			enum ErrorCodes errCode = formTreeWithDirectory(&folderNode, subdirectoryFullName);
 			if (errCode != OK)
 				return errCode;
 			
 			free(subdirectoryFullName);
 		}
 		else
-			printf("файл)\n");
+		{
+			// добавляем в дерево FILE_NODE
+			struct Node* fileNode = createNewFileNode(currentObject->d_name);
+			addNewObjectToFolderNode(fileNode, *tree);
+		}
     };
 
     closedir(directory);
