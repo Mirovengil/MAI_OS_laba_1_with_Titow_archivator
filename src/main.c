@@ -1,7 +1,9 @@
 #include "archivator_by_IVAN.h"
+#include "tree_by_IVAN.h"
 #include "errors_codes.h"
+#include <stdio.h>
 
-const char *directoryToCompress = "./directory_for_compression/p";
+const char *directoryToCompress = "./directory_for_compression/";
 
 int main(void)
 {

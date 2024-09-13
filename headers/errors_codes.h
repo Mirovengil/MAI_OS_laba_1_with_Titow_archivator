@@ -4,13 +4,17 @@
 enum ErrorCodes
 {
     DIRECTORY_NOT_OPENED,
+    CLEAR_NULL_PTR,
+    NODE_TYPE_ERROR,
     NUMBER_OF_REGISTERED_ERRORS,
-    OK 
+    OK
 };
 
 static const char* ERROR_MESSAGES[NUMBER_OF_REGISTERED_ERRORS] = 
 {
     "Ошибка сжатия: не удалось открыть входную папку!\n",
+    "Ошибка с указателями: произведена попытка удалить NULL!\n",
+    "Ошибка работы с Node: обращение к папке как к файлу или к файлу как к папке!\n",
 };
 
 #endif //ERRORS_CODES_H

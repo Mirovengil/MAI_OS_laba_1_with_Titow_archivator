@@ -1,10 +1,12 @@
 #ifndef TREE_BY_IVAN_H
 #define TREE_BY_IVAN_H
 
+#include "errors_codes.h"
+
 enum NodeTypes
 {
-    FILE, 
-    FOLDER,
+    FILE_NODE, 
+    FOLDER_NODE,
     NUMBER_OF_NODE_TYPES
 };
 
@@ -22,6 +24,19 @@ struct Node
 
 struct Node* createNewFolderNode(const char *directory_name);
 struct Node* createNewFileNode(const char *directory_name);
-void deleteTree(struct Node* tree);
+
+enum ErrorCodes deleteTree(struct Node* tree);
+enum ErrorCodes addNewObjectToFolderNode(struct Node* object, struct Node* folderNode);
+
+// получить/задать число объектов в папке
+int getNumberOfObjectsInFolderNode(struct Node* folderNode);
+void setNumberOfObjectsInFolderNode(int number, struct Node* folderNode);
+
+
+// согласен, длинновато, но: получить указатель на начало списка объектов в папке
+struct Node** getStartOfArrayOfObjectsInFolderNode(struct Node* folderNode);
+
+// отладочная ф-я, печатает дерево, обходя оное симметрично
+void printTree(struct Node *tree);
 
 #endif //TREE_BY_IVAN_H
