@@ -5,6 +5,8 @@
 
 // приватные функции, которые не стоит выставлять в .h файл
 char* formSubdirectoryFullName(const char *directoryName, const char *subdirectoryName);
+enum ErrorCodes getBytesArrayFromFile(const char *fullFilename, char **bytesArray, long *lengthOfArray)
+
 
 #include <stdio.h>	// ну кто бы сомневался, что придётся дебажить...
 enum ErrorCodes formTreeWithDirectory(struct Node **tree, const char *directoryName)
@@ -33,7 +35,8 @@ enum ErrorCodes formTreeWithDirectory(struct Node **tree, const char *directoryN
 			// добавляем в дерево FOLDER_NODE
 			char *subdirectoryFullName = formSubdirectoryFullName(directoryName, currentObject->d_name);
 
-			// да, вот такой костыль. Надо починить.
+			// ВОТ ЭТО МЕСТО НАПИСАНО ЧЕРЕЗ ЖОПУ!!!!
+			// надо починить!!!!!
 			struct Node *tmp = createNewFolderNode(currentObject->d_name);
 			formTreeWithDirectory(&tmp, subdirectoryFullName);
 			addNewObjectToFolderNode(tmp, *tree);
@@ -71,4 +74,20 @@ char* formSubdirectoryFullName(const char *directoryName, const char *subdirecto
 	subdirectoryFullName[strlen(directoryName) + strlen(subdirectoryName) + 1] = '\0';
 	
 	return subdirectoryFullName;
+};
+
+enum ErrorCodes getBytesArrayFromFile(const char *fullFilename, char **bytesArray, long *lengthOfArray)
+{
+	FILE *fIn;
+
+	fIn = fopen(fullFilename, "rb");
+	fseek(fIn, 0, SEEK_END);
+	*lengthOfArray = ftell(fIn);
+	rewind(fIn);
+
+	*bytesArray = malloc(*lengthOfArray * sizeof(char));
+	fread(*bytesArray, *lengthOfArray, 1, fIn);
+	fclose(fIn);
+
+	return OK;
 };
