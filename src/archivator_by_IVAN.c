@@ -2,10 +2,11 @@
 #include <dirent.h>		// библиотека для работы с папками 
 #include <stdlib.h>
 #include <string.h>
+#include <stdio.h>
 
 // приватные функции, которые не стоит выставлять в .h файл
 char* formSubdirectoryFullName(const char *directoryName, const char *subdirectoryName);
-enum ErrorCodes getBytesArrayFromFile(const char *fullFilename, char **bytesArray, long *lengthOfArray)
+enum ErrorCodes getBytesArrayFromFile(const char *fullFilename, char **bytesArray, long *lengthOfArray);
 
 
 #include <stdio.h>	// ну кто бы сомневался, что придётся дебажить...
