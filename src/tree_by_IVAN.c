@@ -107,7 +107,7 @@ void _printTree(int numberOfTabs, struct Node *tree)
     
     if (tree->type == FOLDER_NODE)
     {
-        printf("%s (папка)\n", tree->name);
+        printf("%s (папка; %d объектов)\n", tree->name, getNumberOfObjectsInFolderNode(tree));
         for (int i = 0; i < getNumberOfObjectsInFolderNode(tree); ++i)
             _printTree(numberOfTabs + 1, getStartOfArrayOfObjectsInFolderNode(tree)[i]);
     };

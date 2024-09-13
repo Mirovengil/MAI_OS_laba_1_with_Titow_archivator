@@ -5,7 +5,7 @@ BIN_DIR=./bin/
 HEADERS_DIR=./headers/
 
 # компилятор
-CC=gcc
+CC=gcc -g
 
 # имя выходного файла
 OUT_FILENAME=runme

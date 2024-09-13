@@ -3,9 +3,10 @@
 #include <stdlib.h>
 #include <string.h>
 
+
+#include <stdio.h>	// ну кто бы сомневался, что придётся дебажить...
 enum ErrorCodes formTreeWithDirectory(struct Node **tree, const char *directoryName)
 {
-
 	// перед тем, как выделять память под дерево и начинать забивать в него директорию,
 	// надо убедиться, что пользователь не мудак и указал правильную директорию
 	DIR *directory;
@@ -30,11 +31,13 @@ enum ErrorCodes formTreeWithDirectory(struct Node **tree, const char *directoryN
 			// добавляем в дерево FOLDER_NODE
 			char *subdirectoryFullName = formSubdirectoryFullName(directoryName, currentObject->d_name);
 
-			struct Node *folderNode = createNewFolderNode(currentObject->d_name);
-			addNewObjectToFolderNode(folderNode, *tree);
-			enum ErrorCodes errCode = formTreeWithDirectory(&folderNode, subdirectoryFullName);
-			if (errCode != OK)
-				return errCode;
+			// да, вот такой костыль. Надо починить.
+			struct Node *tmp = createNewFolderNode(currentObject->d_name);
+			formTreeWithDirectory(&tmp, subdirectoryFullName);
+			addNewObjectToFolderNode(tmp, *tree);
+			// enum ErrorCodes errCode = formTreeWithDirectory(&tmp, subdirectoryFullName);
+			// if (errCode != OK)
+				// return errCode;
 			
 			free(subdirectoryFullName);
 		}
