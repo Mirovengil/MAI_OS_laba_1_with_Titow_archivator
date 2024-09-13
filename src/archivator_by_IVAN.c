@@ -3,6 +3,8 @@
 #include <stdlib.h>
 #include <string.h>
 
+// приватные функции, которые не стоит выставлять в .h файл
+char* formSubdirectoryFullName(const char *directoryName, const char *subdirectoryName);
 
 #include <stdio.h>	// ну кто бы сомневался, что придётся дебажить...
 enum ErrorCodes formTreeWithDirectory(struct Node **tree, const char *directoryName)
