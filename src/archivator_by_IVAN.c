@@ -23,7 +23,7 @@ enum ErrorCodes formTreeWithDirectory(struct Node **tree, const char *directoryN
     };
 
 	// создаём дерево; первая вершина, очевидно, папка
-	*tree = createNewFolderNode(directoryName);
+	*tree = createNewNode(directoryName, FOLDER_NODE);
 
     while ( (currentObject = readdir(directory)) != NULL) {
 
@@ -38,7 +38,7 @@ enum ErrorCodes formTreeWithDirectory(struct Node **tree, const char *directoryN
 
 			// ВОТ ЭТО МЕСТО НАПИСАНО ЧЕРЕЗ ЖОПУ!!!!
 			// надо починить!!!!!
-			struct Node *tmp = createNewFolderNode(currentObject->d_name);
+			struct Node *tmp = createNewNode(currentObject->d_name, FOLDER_NODE);
 			formTreeWithDirectory(&tmp, subdirectoryFullName);
 			addNewObjectToFolderNode(tmp, *tree);
 			// enum ErrorCodes errCode = formTreeWithDirectory(&tmp, subdirectoryFullName);
@@ -50,7 +50,7 @@ enum ErrorCodes formTreeWithDirectory(struct Node **tree, const char *directoryN
 		else
 		{
 			// добавляем в дерево FILE_NODE
-			struct Node* fileNode = createNewFileNode(currentObject->d_name);
+			struct Node* fileNode = createNewNode(currentObject->d_name, FILE_NODE);
 			addNewObjectToFolderNode(fileNode, *tree);
 		}
     };

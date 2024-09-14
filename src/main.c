@@ -18,5 +18,7 @@ int main(void)
 	
 	printf("Директория, которую вы хотите сжать, имеет вид: \n");
 	printTree(directoryTree);
+
+	deleteTree(directoryTree);
 	return 0;
 };
