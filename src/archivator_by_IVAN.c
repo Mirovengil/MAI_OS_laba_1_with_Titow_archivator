@@ -6,6 +6,7 @@
 
 // приватные функции, которые не стоит выставлять в .h файл
 char* formSubdirectoryFullName(const char *directoryName, const char *subdirectoryName);
+char* formFileFullName(const char *directoryName, const char *fileName);
 enum ErrorCodes getBytesArrayFromFile(const char *fullFilename, char **bytesArray, long *lengthOfArray);
 
 
@@ -36,6 +37,7 @@ enum ErrorCodes formTreeWithDirectory(struct Node **tree, const char *directoryN
 			// добавляем в дерево FOLDER_NODE
 			char *subdirectoryFullName = formSubdirectoryFullName(directoryName, currentObject->d_name);
 
+			// TODO:
 			// ВОТ ЭТО МЕСТО НАПИСАНО ЧЕРЕЗ ЖОПУ!!!!
 			// надо починить!!!!!
 			struct Node *tmp = createNewNode(currentObject->d_name, FOLDER_NODE);
@@ -52,6 +54,13 @@ enum ErrorCodes formTreeWithDirectory(struct Node **tree, const char *directoryN
 			// добавляем в дерево FILE_NODE
 			struct Node* fileNode = createNewNode(currentObject->d_name, FILE_NODE);
 			addNewObjectToFolderNode(fileNode, *tree);
+
+			// формируем имя файла целиком
+			char *fileFullName = formFileFullName(directoryName, currentObject->d_name);
+
+			// считываем его содержимое
+			// TODO: доделать код ошибки, который возвращает ф-я getBytesArrayFromFile
+			getBytesArrayFromFile(fileFullName, &fileNode->data, &fileNode->dataSize);
 		}
     };
 
@@ -77,12 +86,30 @@ char* formSubdirectoryFullName(const char *directoryName, const char *subdirecto
 	return subdirectoryFullName;
 };
 
+char* formFileFullName(const char *directoryName, const char *fileName)
+{
+	char *fileFullName = malloc(sizeof(char) * (strlen(directoryName) + strlen(fileName) + 2)); 
+	
+	// первая часть: полный путь до файла
+	strncpy(fileFullName, directoryName, strlen(directoryName));
+	fileFullName[strlen(directoryName)] = '/';
+	
+	// вторая часть: само название файла
+	strncpy(fileFullName+strlen(directoryName), fileName, strlen(fileName));
+	fileFullName[strlen(directoryName) + strlen(fileName)] = '\0';
+	
+	return fileFullName;
+};
+
 enum ErrorCodes getBytesArrayFromFile(const char *fullFilename, char **bytesArray, long *lengthOfArray)
 {
 	FILE *fIn;
 
 	fIn = fopen(fullFilename, "rb");
+
 	fseek(fIn, 0, SEEK_END);
+	
+
 	*lengthOfArray = ftell(fIn);
 	rewind(fIn);
 
