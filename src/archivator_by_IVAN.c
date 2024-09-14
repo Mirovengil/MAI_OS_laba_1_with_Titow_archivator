@@ -4,11 +4,21 @@
 #include <string.h>
 #include <stdio.h>
 
+/*****************************
+ * 
+ * Большое TODO: приватным функциям можно возвращать, что угодно, потому что они сокрыты от
+ * всех, кроме меня, а вот библиотечные функции должны возвращать строго коды ошибок
+ * 
+ * 
+ * Ещё большое TODO: сделай все типы строгими (в духе: int32_t)
+*****************************/
+
 // приватные функции, которые не стоит выставлять в .h файл
 char* formSubdirectoryFullName(const char *directoryName, const char *subdirectoryName);
 char* formFileFullName(const char *directoryName, const char *fileName);
 enum ErrorCodes getBytesArrayFromFile(const char *fullFilename, char **bytesArray, long *lengthOfArray);
 
+const char codesOfTypesOfNodes[NUMBER_OF_NODE_TYPES] = {0, 1};
 
 #include <stdio.h>	// ну кто бы сомневался, что придётся дебажить...
 enum ErrorCodes formTreeWithDirectory(struct Node **tree, const char *directoryName)
@@ -118,4 +128,14 @@ enum ErrorCodes getBytesArrayFromFile(const char *fullFilename, char **bytesArra
 	fclose(fIn);
 
 	return OK;
+};
+
+// кодирует дерево как массив байтов и возвращает указатель на оный массив 
+char* codeTreeAsArrayOfBytes(struct Node *tree)
+{
+	long sizeOfCodedTreeInBytes = 0;
+	sizeOfCodedTreeInBytes += sizeof(char);		// тип Node: файл или папка?
+	sizeOfCodedTreeInBytes += strlen(tree->name) * sizeof(char);	// имя файла/папки
+	
+	sizeOfCodedTreeInBytes += sizeof(long);		// 
 };
