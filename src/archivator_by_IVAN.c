@@ -17,6 +17,8 @@
 char* formSubdirectoryFullName(const char *directoryName, const char *subdirectoryName);
 char* formFileFullName(const char *directoryName, const char *fileName);
 enum ErrorCodes getBytesArrayFromFile(const char *fullFilename, char **bytesArray, long *lengthOfArray);
+void codeTreeAsArrayOfBytes(struct Node *tree, char **startOfArray, 
+	int *shift, int *sizeOfArray);
 
 const char codesOfTypesOfNodes[NUMBER_OF_NODE_TYPES] = {0, 1};
 
@@ -131,11 +133,40 @@ enum ErrorCodes getBytesArrayFromFile(const char *fullFilename, char **bytesArra
 };
 
 // кодирует дерево как массив байтов и возвращает указатель на оный массив 
-char* codeTreeAsArrayOfBytes(struct Node *tree)
+void codeTreeAsArrayOfBytes(struct Node *tree, char **startOfArray, 
+	int *shift, int *sizeOfArray)
 {
-	long sizeOfCodedTreeInBytes = 0;
-	sizeOfCodedTreeInBytes += sizeof(char);		// тип Node: файл или папка?
-	sizeOfCodedTreeInBytes += strlen(tree->name) * sizeof(char);	// имя файла/папки
+
+	long sizeOfCodedNodeInBytes = 0;
+	sizeOfCodedNodeInBytes += sizeof(char);		// тип Node: файл или папка?
+	sizeOfCodedNodeInBytes += sizeof(int);		// длина имени (названия)
+	sizeOfCodedNodeInBytes += strlen(tree->name) * sizeof(char);	// имя файла/папки
+	sizeOfCodedNodeInBytes += sizeof(long);		// число объектов в папке / длина файла (в зависимости от типа)
+
+	// выделяем память под запись текущего узла
+	*sizeOfArray += sizeOfCodedNodeInBytes;
+	*startOfArray = realloc(*startOfArray, *sizeOfArray);
+
+	char signatureOfNode = codesOfTypesOfNodes[tree->type];
+	int lengthOfNodesName = strlen(tree->name);
+	(*startOfArray)[*shift] = signatureOfNode;
+	memcpy(*startOfArray + *shift + sizeof(char), &lengthOfNodesName, sizeof(int));
+	memcpy(*startOfArray + *shift  + sizeof(char) + sizeof(int), tree->name, lengthOfNodesName * sizeof(char));
+	memcpy(*startOfArray + *shift  + sizeof(char) + sizeof(int) + sizeof(char) * lengthOfNodesName, 
+		&tree->dataSize, sizeof(long));
 	
-	sizeOfCodedTreeInBytes += sizeof(long);		// 
+	*shift += sizeOfCodedNodeInBytes; 
+
+	// дальше -- опять раздвоение логики: 
+	// 1. для файла -- просто печатаем его байты подряд
+	// 2. для папки -- рекурсивно печатаем её содержимое
+	if (tree->type == FILE_NODE)
+		memcpy(*startOfArray + *shift  + sizeof(char) + sizeof(int) + sizeof(char) * lengthOfNodesName + sizeof(long), 
+			tree->data, sizeof(char) * tree->dataSize);
+	
+	if (tree->type == FOLDER_NODE)
+		for(int i = 0; i < tree->dataSize; ++i)
+			codeTreeAsArrayOfBytes(tree, startOfArray, shift, sizeOfArray);
+
+
 };
