@@ -19,7 +19,16 @@ int main(void)
 	printf("Директория, которую вы хотите сжать, имеет вид: \n");
 	printTree(directoryTree);
 
-	
+	char *codedTree;
+	int shift, sizeOfArray;
+	codeTreeAsArrayOfBytes(directoryTree, &codedTree, &shift, &sizeOfArray);
+
+	for (int i = 0; i < sizeOfArray; ++i)
+	{
+		printf("%d\t", codedTree[i]);
+		if (i % 8 == 0)
+			printf("\n");
+	}
 
 	deleteTree(directoryTree);
 	return 0;
