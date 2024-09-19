@@ -136,7 +136,6 @@ enum ErrorCodes getBytesArrayFromFile(const char *fullFilename, char **bytesArra
 void codeTreeAsArrayOfBytes(struct Node *tree, char **startOfArray, 
 	int *shift, int *sizeOfArray)
 {
-
 	printf("OK1\n");
 	//printf("OK4\n");
 	//printf("OK5\n");
@@ -182,9 +181,11 @@ void codeTreeAsArrayOfBytes(struct Node *tree, char **startOfArray,
 	// 2. для папки -- рекурсивно печатаем её содержимое
 	if (tree->type == FILE_NODE)
 	{
-		memcpy(*startOfArray + *shift  + sizeof(char) + sizeof(int) + sizeof(char) * lengthOfNodesName + sizeof(long), 
+		memcpy(*startOfArray + *shift, 
 			tree->data, sizeof(char) * tree->dataSize);
 		*shift += sizeof(char) * sizeOfCodedNodeDataInBytes;
+		*sizeOfArray += sizeof(char) * sizeOfCodedNodeDataInBytes;
+		// TODO : а схера ли, извиняюсь, я сделал shift и sizeOfArray -- разными выражениями?..
 	}
 
 	if (tree->type == FOLDER_NODE)
