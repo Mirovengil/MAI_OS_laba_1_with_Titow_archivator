@@ -137,18 +137,35 @@ void codeTreeAsArrayOfBytes(struct Node *tree, char **startOfArray,
 	int *shift, int *sizeOfArray)
 {
 
+	printf("OK1\n");
+	//printf("OK4\n");
+	//printf("OK5\n");
+
+	// основная информация об узле
 	long sizeOfCodedNodeInBytes = 0;
+	long sizeOfCodedNodeDataInBytes = 0;
 	sizeOfCodedNodeInBytes += sizeof(char);		// тип Node: файл или папка?
 	sizeOfCodedNodeInBytes += sizeof(int);		// длина имени (названия)
 	sizeOfCodedNodeInBytes += strlen(tree->name) * sizeof(char);	// имя файла/папки
 	sizeOfCodedNodeInBytes += sizeof(long);		// число объектов в папке / длина файла (в зависимости от типа)
-
-	// выделяем память под запись текущего узла
-	*sizeOfArray += sizeOfCodedNodeInBytes;
-	*startOfArray = realloc(*startOfArray, *sizeOfArray);
+	
+	// для файла : надо выделить память под содержание файла
+	sizeOfCodedNodeDataInBytes += (tree->type == FILE_NODE) * sizeof(char) * tree->dataSize;
 
 	char signatureOfNode = codesOfTypesOfNodes[tree->type];
 	int lengthOfNodesName = strlen(tree->name);
+
+	// выделяем память под запись текущего узла
+	*sizeOfArray += sizeOfCodedNodeInBytes;
+	printf("header info size in bytes : %d\n", sizeOfCodedNodeInBytes);
+	printf("data info size in bytes : %d\n", sizeOfCodedNodeDataInBytes);
+	printf("current array size : %d\n", *sizeOfArray);
+	printf("type : %d\n", signatureOfNode);
+	printf("node name : %s\n", tree->name);
+	*startOfArray = realloc(*startOfArray, *sizeOfArray + sizeOfCodedNodeDataInBytes);
+
+	printf("OK2\n");
+
 	(*startOfArray)[*shift] = signatureOfNode;
 	memcpy(*startOfArray + *shift + sizeof(char), &lengthOfNodesName, sizeof(int));
 	memcpy(*startOfArray + *shift  + sizeof(char) + sizeof(int), tree->name, lengthOfNodesName * sizeof(char));
@@ -156,17 +173,23 @@ void codeTreeAsArrayOfBytes(struct Node *tree, char **startOfArray,
 		&tree->dataSize, sizeof(long));
 	
 	*shift += sizeOfCodedNodeInBytes; 
+	
+	printf("OK3\n");
+
 
 	// дальше -- опять раздвоение логики: 
 	// 1. для файла -- просто печатаем его байты подряд
 	// 2. для папки -- рекурсивно печатаем её содержимое
 	if (tree->type == FILE_NODE)
+	{
 		memcpy(*startOfArray + *shift  + sizeof(char) + sizeof(int) + sizeof(char) * lengthOfNodesName + sizeof(long), 
 			tree->data, sizeof(char) * tree->dataSize);
-	
+		*shift += sizeof(char) * sizeOfCodedNodeDataInBytes;
+	}
+
 	if (tree->type == FOLDER_NODE)
 		for(int i = 0; i < tree->dataSize; ++i)
-			codeTreeAsArrayOfBytes(tree, startOfArray, shift, sizeOfArray);
+			codeTreeAsArrayOfBytes(((struct Node**)tree->data)[i], startOfArray, shift, sizeOfArray);
 
 
 };

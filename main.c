@@ -2,8 +2,9 @@
 #include "archivator_by_IVAN.h"
 #include "errors_codes.h"
 #include <stdio.h>
+#include <stdlib.h>
 
-const char *directoryToCompress = "./directory_for_compression/";
+const char *directoryToCompress = "../directory_for_compression/";
 
 int main(void)
 {
@@ -18,11 +19,14 @@ int main(void)
 	
 	printf("Директория, которую вы хотите сжать, имеет вид: \n");
 	printTree(directoryTree);
-
+	
 	char *codedTree;
+	codedTree = malloc(1);
 	int shift, sizeOfArray;
+	shift = 0; sizeOfArray = 0;
 	codeTreeAsArrayOfBytes(directoryTree, &codedTree, &shift, &sizeOfArray);
 
+	return 0;
 	for (int i = 0; i < sizeOfArray; ++i)
 	{
 		printf("%d\t", codedTree[i]);
