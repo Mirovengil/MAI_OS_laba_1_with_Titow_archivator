@@ -6,8 +6,8 @@
 
 enum ErrorCodes formTreeWithDirectory(struct Node **tree, const char *directoryName);
 
-// представляет дерево целиком в виде массива байтов
 void codeTreeAsArrayOfBytes(struct Node *tree, char **startOfArray, 
 	int *shift, int *sizeOfArray);
+void saveArrayOfBytesToFile(char *arrayOfBytes, int length, char *fileName);
 
 #endif //ARCHIVATOR_BY_IVAN

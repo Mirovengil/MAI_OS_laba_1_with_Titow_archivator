@@ -22,18 +22,15 @@ int main(void)
 	
 	char *codedTree;
 	codedTree = malloc(1);
-	int shift, sizeOfArray;
+	int shift, sizeOfArray;	// TODO : а нужен ли shift вообще?
+							// если нужен -- его надо скрыть отсюда! он чисто внутри функции codeTreeAsArrayOfBytes 
 	shift = 0; sizeOfArray = 0;
-	codeTreeAsArrayOfBytes(directoryTree, &codedTree, &shift, &sizeOfArray);
-
-	return 0;
-	for (int i = 0; i < sizeOfArray; ++i)
-	{
-		printf("%d\t", codedTree[i]);
-		if (i % 8 == 0)
-			printf("\n");
-	}
-
+	codeTreeAsArrayOfBytes(directoryTree, &codedTree, &sizeOfArray, &shift);
+	saveArrayOfBytesToFile(codedTree, sizeOfArray, "coded_directory.dat");
+	
+	// удаляём всё
 	deleteTree(directoryTree);
+	free(codedTree);
+
 	return 0;
 };
