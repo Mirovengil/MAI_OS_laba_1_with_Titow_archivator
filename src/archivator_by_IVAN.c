@@ -197,8 +197,15 @@ void codeTreeAsArrayOfBytes(struct Node *tree, char **startOfArray,
 
 void saveArrayOfBytesToFile(char *arrayOfBytes, int length, char *fileName)
 {
-	FILE *fOut = fopen(fileName, "bw");
-	// TODO : добавь проверку, что файл открылся!!!
-	fwrite(arrayOfBytes, sizeof(char), length, fOut);
+	FILE *fOut = fopen(fileName, "wb");
+
+	//  TODO : сделай единый стандарт проверок и подгони эту хрень под него
+	if (fOut == NULL)
+	{
+		printf("Файл не открылся!!1!111!\n");
+		return;
+	}
+
+	fwrite(arrayOfBytes, sizeof(char), length-1, fOut);
 	fclose(fOut);
 }

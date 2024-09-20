@@ -26,7 +26,7 @@ int main(void)
 							// если нужен -- его надо скрыть отсюда! он чисто внутри функции codeTreeAsArrayOfBytes 
 	shift = 0; sizeOfArray = 0;
 	codeTreeAsArrayOfBytes(directoryTree, &codedTree, &sizeOfArray, &shift);
-	saveArrayOfBytesToFile(codedTree, sizeOfArray, "coded_directory.dat");
+	saveArrayOfBytesToFile(codedTree, sizeOfArray, "./coded_directory.dat");
 	
 	// удаляём всё
 	deleteTree(directoryTree);
