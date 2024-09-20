@@ -31,6 +31,7 @@ int main(void)
 	deleteTree(directoryTree);
 	free(codedTree);
 
+
 	/******************************/
 	// вообще для красоты я бы создал два файла .c:
 	// первый сохраняет, второй загружает
@@ -39,12 +40,13 @@ int main(void)
 
 	char *loadedTree; int loadedTreeSizeInBytes;
 	getBytesArrayFromFile("./coded_directory.dat", &loadedTree, &loadedTreeSizeInBytes);
-	
-	struct Node *decodedTree;
-	int position;
-	decodeTreeFromArrayOfBytes(&decodedTree, &loadedTree, loadedTreeSizeInBytes, &position);
 
-	printf("работает :))))");
+	struct Node *decodedTree;
+	int position = 0;
+	decodeTreeFromArrayOfBytes(&decodedTree, loadedTree, loadedTreeSizeInBytes, &position);
+
+	printf("Дерево после декодирования из файла: \n");
+	printTree(decodedTree);
 
 	deleteTree(decodedTree);
 	free(loadedTree);

@@ -207,7 +207,7 @@ void saveArrayOfBytesToFile(char *arrayOfBytes, int length, char *fileName)
 		return;
 	}
 
-	fwrite(arrayOfBytes, sizeof(char), length-1, fOut);
+	fwrite(arrayOfBytes, sizeof(char) * length, 1, fOut);
 	fclose(fOut);
 }
 
@@ -215,7 +215,7 @@ void decodeTreeFromArrayOfBytes(struct Node **tree, char *arrayOfBytes, int size
 {
 	// не уверен, что это нужно, но пусть пока будет
 	// TODO : подумай, стоит ли оптимизировать эту ф-ю
-	if (sizeOfArray == 0)
+	if (sizeOfArray <= *position)
 		return;
 
 	// TODO : в ф-ии записи сделай с shift'ом по аналогии
@@ -224,21 +224,24 @@ void decodeTreeFromArrayOfBytes(struct Node **tree, char *arrayOfBytes, int size
 	int shift = 0;
 
 	char nodeType;
-	nodeType = arrayOfBytes[0];
+	nodeType = arrayOfBytes[*position];
 	shift += sizeof(char);
 
 	int lengthOfNodesName;
-	memcpy(&lengthOfNodesName, arrayOfBytes + shift, sizeof(int));
+	memcpy(&lengthOfNodesName, arrayOfBytes + shift + *position, sizeof(int));
 	shift += sizeof(int);
 	
-	char *nameOfNode = malloc(sizeof(char) * lengthOfNodesName);
-	memcpy(nameOfNode, arrayOfBytes + shift, sizeof(char) * lengthOfNodesName);
+	char *nameOfNode = malloc(sizeof(char) * (lengthOfNodesName + 1));
+	memcpy(nameOfNode, arrayOfBytes + shift + *position, sizeof(char) * lengthOfNodesName);
+	nameOfNode[lengthOfNodesName] = '\0';	// потому что в файле имя лежит без терминального нуля, угу-ага
+	// TODO : подумай над строчкой выше
 	shift += sizeof(char) * lengthOfNodesName;
 
 	*tree = createNewNode(nameOfNode, decodedTypesOfNodes[nodeType]);
 	free(nameOfNode);
 
-	memcpy(&((*tree)->dataSize), arrayOfBytes + shift, sizeof(long));
+	long dataSize;
+	memcpy(&dataSize, arrayOfBytes + shift + *position, sizeof(long));
 	shift += sizeof(long);
 	
 	// сдвигаем укзаатель чтения
@@ -246,17 +249,21 @@ void decodeTreeFromArrayOfBytes(struct Node **tree, char *arrayOfBytes, int size
 
 	if((*tree)->type == FILE_NODE)
 	{
+		(*tree)->dataSize = dataSize;
 		(*tree)->data = malloc(sizeof(char) * (*tree)->dataSize);
-		memcpy((*tree)->data, arrayOfBytes + shift, sizeof(char) * (*tree)->dataSize);
+		memcpy((*tree)->data, arrayOfBytes + *position, sizeof(char) * (*tree)->dataSize);
 		*position += sizeof(char) * (*tree)->dataSize;
 	}
 
+	printf("position: %d\n", *position);
+
 	if((*tree)->type == FOLDER_NODE)
 	{
-		for (int i = 0; i < (*tree)->dataSize; ++i)
+		for (int i = 0; i < dataSize; ++i)
 		{
-			struct Node *sonNode;
+			struct Node *sonNode = NULL;
 			decodeTreeFromArrayOfBytes(&sonNode, arrayOfBytes, sizeOfArray, position);
+			
 			addNewObjectToFolderNode(sonNode, *tree);
 		}
 	}
