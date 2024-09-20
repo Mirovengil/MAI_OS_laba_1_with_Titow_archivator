@@ -32,5 +32,16 @@ int main(void)
 	deleteTree(directoryTree);
 	free(codedTree);
 
+	/******************************/
+	// вообще для красоты я бы создал два файла .c:
+	// первый сохраняет, второй загружает
+	// но пока что -- пусть всё будет здесь
+	/******************************/
+
+	char *loadedTree; int loadedTreeSizeInBytes;
+	getBytesArrayFromFile("./coded_directory.dat", &loadedTree, &loadedTreeSizeInBytes);
+
+	printf("работает :))))");
+
 	return 0;
 };

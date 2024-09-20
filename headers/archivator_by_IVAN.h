@@ -9,5 +9,6 @@ enum ErrorCodes formTreeWithDirectory(struct Node **tree, const char *directoryN
 void codeTreeAsArrayOfBytes(struct Node *tree, char **startOfArray, 
 	int *shift, int *sizeOfArray);
 void saveArrayOfBytesToFile(char *arrayOfBytes, int length, char *fileName);
+enum ErrorCodes getBytesArrayFromFile(const char *fullFilename, char **bytesArray, long *lengthOfArray);
 
 #endif //ARCHIVATOR_BY_IVAN

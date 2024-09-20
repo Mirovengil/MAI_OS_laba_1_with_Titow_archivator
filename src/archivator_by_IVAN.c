@@ -136,7 +136,7 @@ enum ErrorCodes getBytesArrayFromFile(const char *fullFilename, char **bytesArra
 void codeTreeAsArrayOfBytes(struct Node *tree, char **startOfArray, 
 	int *shift, int *sizeOfArray)
 {
-	printf("OK1\n");
+	// printf("OK1\n");
 	//printf("OK4\n");
 	//printf("OK5\n");
 
@@ -156,14 +156,14 @@ void codeTreeAsArrayOfBytes(struct Node *tree, char **startOfArray,
 
 	// выделяем память под запись текущего узла
 	*sizeOfArray += sizeOfCodedNodeInBytes;
-	printf("header info size in bytes : %d\n", sizeOfCodedNodeInBytes);
-	printf("data info size in bytes : %d\n", sizeOfCodedNodeDataInBytes);
-	printf("current array size : %d\n", *sizeOfArray);
-	printf("type : %d\n", signatureOfNode);
-	printf("node name : %s\n", tree->name);
+	// printf("header info size in bytes : %d\n", sizeOfCodedNodeInBytes);
+	// printf("data info size in bytes : %d\n", sizeOfCodedNodeDataInBytes);
+	// printf("current array size : %d\n", *sizeOfArray);
+	// printf("type : %d\n", signatureOfNode);
+	// printf("node name : %s\n", tree->name);
 	*startOfArray = realloc(*startOfArray, *sizeOfArray + sizeOfCodedNodeDataInBytes);
 
-	printf("OK2\n");
+	// printf("OK2\n");
 
 	(*startOfArray)[*shift] = signatureOfNode;
 	memcpy(*startOfArray + *shift + sizeof(char), &lengthOfNodesName, sizeof(int));
@@ -173,7 +173,7 @@ void codeTreeAsArrayOfBytes(struct Node *tree, char **startOfArray,
 	
 	*shift += sizeOfCodedNodeInBytes; 
 	
-	printf("OK3\n");
+	// printf("OK3\n");
 
 
 	// дальше -- опять раздвоение логики: 
