@@ -21,6 +21,7 @@ void codeTreeAsArrayOfBytes(struct Node *tree, char **startOfArray,
 	int *shift, int *sizeOfArray);
 
 const char codesOfTypesOfNodes[NUMBER_OF_NODE_TYPES] = {0, 1};
+const enum NodeTypes decodedTypesOfNodes[NUMBER_OF_NODE_TYPES] = {FILE_NODE, FOLDER_NODE};
 
 #include <stdio.h>	// ну кто бы сомневался, что придётся дебажить...
 enum ErrorCodes formTreeWithDirectory(struct Node **tree, const char *directoryName)
@@ -208,4 +209,55 @@ void saveArrayOfBytesToFile(char *arrayOfBytes, int length, char *fileName)
 
 	fwrite(arrayOfBytes, sizeof(char), length-1, fOut);
 	fclose(fOut);
+}
+
+void decodeTreeFromArrayOfBytes(struct Node **tree, char *arrayOfBytes, int sizeOfArray, int *position)
+{
+	// не уверен, что это нужно, но пусть пока будет
+	// TODO : подумай, стоит ли оптимизировать эту ф-ю
+	if (sizeOfArray == 0)
+		return;
+
+	// TODO : в ф-ии записи сделай с shift'ом по аналогии
+
+	// на сколько сдвинется arrayOfBytes для следующей Node
+	int shift = 0;
+
+	char nodeType;
+	nodeType = arrayOfBytes[0];
+	shift += sizeof(char);
+
+	int lengthOfNodesName;
+	memcpy(&lengthOfNodesName, arrayOfBytes + shift, sizeof(int));
+	shift += sizeof(int);
+	
+	char *nameOfNode = malloc(sizeof(char) * lengthOfNodesName);
+	memcpy(nameOfNode, arrayOfBytes + shift, sizeof(char) * lengthOfNodesName);
+	shift += sizeof(char) * lengthOfNodesName;
+
+	*tree = createNewNode(nameOfNode, decodedTypesOfNodes[nodeType]);
+	free(nameOfNode);
+
+	memcpy(&((*tree)->dataSize), arrayOfBytes + shift, sizeof(long));
+	shift += sizeof(long);
+	
+	// сдвигаем укзаатель чтения
+	*position += shift;
+
+	if((*tree)->type == FILE_NODE)
+	{
+		(*tree)->data = malloc(sizeof(char) * (*tree)->dataSize);
+		memcpy((*tree)->data, arrayOfBytes + shift, sizeof(char) * (*tree)->dataSize);
+		*position += sizeof(char) * (*tree)->dataSize;
+	}
+
+	if((*tree)->type == FOLDER_NODE)
+	{
+		for (int i = 0; i < (*tree)->dataSize; ++i)
+		{
+			struct Node *sonNode;
+			decodeTreeFromArrayOfBytes(&sonNode, arrayOfBytes, sizeOfArray, position);
+			addNewObjectToFolderNode(sonNode, *tree);
+		}
+	}
 }

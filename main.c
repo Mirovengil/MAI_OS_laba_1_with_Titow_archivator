@@ -28,7 +28,6 @@ int main(void)
 	codeTreeAsArrayOfBytes(directoryTree, &codedTree, &sizeOfArray, &shift);
 	saveArrayOfBytesToFile(codedTree, sizeOfArray, "./coded_directory.dat");
 	
-	// удаляём всё
 	deleteTree(directoryTree);
 	free(codedTree);
 
@@ -40,8 +39,14 @@ int main(void)
 
 	char *loadedTree; int loadedTreeSizeInBytes;
 	getBytesArrayFromFile("./coded_directory.dat", &loadedTree, &loadedTreeSizeInBytes);
+	
+	struct Node *decodedTree;
+	int position;
+	decodeTreeFromArrayOfBytes(&decodedTree, &loadedTree, loadedTreeSizeInBytes, &position);
 
 	printf("работает :))))");
 
+	deleteTree(decodedTree);
+	free(loadedTree);
 	return 0;
 };
