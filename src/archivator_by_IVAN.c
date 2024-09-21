@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
-
+#include <sys/stat.h>
 /*****************************
  * 
  * Большое TODO: приватным функциям можно возвращать, что угодно, потому что они сокрыты от
@@ -268,3 +268,27 @@ void decodeTreeFromArrayOfBytes(struct Node **tree, char *arrayOfBytes, int size
 		}
 	}
 }
+
+void formDirectoryWithTree(struct Node *tree, char *directory)
+{
+	if (tree->type == FILE_NODE)
+	{
+		char *fileFullName = formFileFullName(directory, tree->name);
+
+		// воспользуюсь ранее объявленной функцией, чего бы и нет?
+		saveArrayOfBytesToFile(tree->data, tree->dataSize, fileFullName);
+		
+		free(fileFullName);
+	}
+
+	if (tree->type == FOLDER_NODE)
+	{
+		// TODO : вставь проверку, что директория ещё не существует!
+
+
+		mkdir(tree->name, 0700);
+
+		for (int i = 0; i < tree->dataSize; ++i)
+			formDirectoryWithTree(((struct Node **)(tree->data))[i], tree->name);
+	}
+};

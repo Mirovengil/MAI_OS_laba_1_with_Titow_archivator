@@ -8,28 +8,29 @@ const char *directoryToCompress = "../directory_for_compression/";
 
 int main(void)
 {
+
+	// пока что закомментил первую часть, потому что закодированная директория у меня уже есть!	
+	// struct Tree *directoryTree;
+	// enum ErrorCodes errCode = formTreeWithDirectory(&directoryTree, directoryToCompress);
+	// if (errCode != OK)
+	// {
+	// 	printf("Error: %s", ERROR_MESSAGES[errCode]);
+	// 	return errCode;
+	// };
 	
-	struct Tree *directoryTree;
-	enum ErrorCodes errCode = formTreeWithDirectory(&directoryTree, directoryToCompress);
-	if (errCode != OK)
-	{
-		printf("Error: %s", ERROR_MESSAGES[errCode]);
-		return errCode;
-	};
+	// printf("Директория, которую вы хотите сжать, имеет вид: \n");
+	// printTree(directoryTree);
 	
-	printf("Директория, которую вы хотите сжать, имеет вид: \n");
-	printTree(directoryTree);
+	// char *codedTree;
+	// codedTree = malloc(1);
+	// int shift, sizeOfArray;	// TODO : а нужен ли shift вообще?
+	// 						// если нужен -- его надо скрыть отсюда! он чисто внутри функции codeTreeAsArrayOfBytes 
+	// shift = 0; sizeOfArray = 0;
+	// codeTreeAsArrayOfBytes(directoryTree, &codedTree, &sizeOfArray, &shift);
+	// saveArrayOfBytesToFile(codedTree, sizeOfArray, "./coded_directory.dat");
 	
-	char *codedTree;
-	codedTree = malloc(1);
-	int shift, sizeOfArray;	// TODO : а нужен ли shift вообще?
-							// если нужен -- его надо скрыть отсюда! он чисто внутри функции codeTreeAsArrayOfBytes 
-	shift = 0; sizeOfArray = 0;
-	codeTreeAsArrayOfBytes(directoryTree, &codedTree, &sizeOfArray, &shift);
-	saveArrayOfBytesToFile(codedTree, sizeOfArray, "./coded_directory.dat");
-	
-	deleteTree(directoryTree);
-	free(codedTree);
+	// deleteTree(directoryTree);
+	// free(codedTree);
 
 
 	/******************************/
@@ -47,6 +48,8 @@ int main(void)
 
 	printf("Дерево после декодирования из файла: \n");
 	printTree(decodedTree);
+
+	formDirectoryWithTree(decodedTree, "./");
 
 	deleteTree(decodedTree);
 	free(loadedTree);
