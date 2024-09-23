@@ -37,7 +37,9 @@ enum ErrorCodes formTreeWithDirectory(struct Node **tree, const char *directoryN
     };
 
 	// создаём дерево; первая вершина, очевидно, папка
-	*tree = createNewNode(directoryName, FOLDER_NODE);
+	char *nodePersonalName = getFolderPersonalName(directoryName);
+	*tree = createNewNode(nodePersonalName, FOLDER_NODE);
+	free(nodePersonalName);
 
     while ( (currentObject = readdir(directory)) != NULL) {
 

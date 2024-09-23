@@ -9,14 +9,6 @@ const int MAX_LEN_OF_STRING_NAME = 255;
 
 int main(void)
 {
-
-	printf("start: %s %s %s :end", 
-	getFolderPersonalName("kek/\0"),
-	getFolderPersonalName("kek/lol/orbidol/\0"),
-	getFolderPersonalName("kek/../../../lol/cheburek/\0")
-	);
-	return 0;
-
 	char directoryToCompress[MAX_LEN_OF_STRING_NAME];
 	char compressedDirectoryName[MAX_LEN_OF_STRING_NAME];
 
