@@ -82,6 +82,7 @@ enum ErrorCodes formTreeWithDirectory(struct Node **tree, const char *directoryN
 	return OK;
 };
 
+// TODO : можешь сделать проверку где-нибудь, что имя директории действительно заканчивается на '//'
 char* formSubdirectoryFullName(const char *directoryName, const char *subdirectoryName)
 {
 	
@@ -97,6 +98,28 @@ char* formSubdirectoryFullName(const char *directoryName, const char *subdirecto
 	subdirectoryFullName[strlen(directoryName) + strlen(subdirectoryName) + 1] = '\0';
 	
 	return subdirectoryFullName;
+};
+
+char *getFolderPersonalName(const char *directoryFullName)
+{
+	int lastSymbolIndex = strlen(directoryFullName)-1;
+	int firstSymbolIndex;
+	
+	for (firstSymbolIndex = lastSymbolIndex-1; firstSymbolIndex >= 0; --firstSymbolIndex)
+	{
+		if(directoryFullName[firstSymbolIndex] == '/')
+		{
+			break;
+		}
+	}	
+	firstSymbolIndex += 1;
+
+	char *folderPersonalName = malloc(sizeof(char) * (lastSymbolIndex - firstSymbolIndex + 1));
+	for (int i = firstSymbolIndex; i < lastSymbolIndex; ++i)
+		folderPersonalName[i - firstSymbolIndex] = directoryFullName[i];
+	folderPersonalName[lastSymbolIndex - firstSymbolIndex] = '\0';
+
+	return folderPersonalName;
 };
 
 char* formFileFullName(const char *directoryName, const char *fileName)

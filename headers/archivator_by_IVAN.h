@@ -13,4 +13,7 @@ void 			saveArrayOfBytesToFile(char *arrayOfBytes, int length, char *fileName);
 enum ErrorCodes getBytesArrayFromFile(const char *fullFilename, char **bytesArray, long *lengthOfArray);
 void 			decodeTreeFromArrayOfBytes(struct Node **tree, char *arrayOfBytes, int sizeOfArray, int *position);
 
+// TODO : меня сюда вынесли чисто для отладки, убей меня отсюда!!!
+char *getFolderPersonalName(const char *directoryFullName);
+
 #endif //ARCHIVATOR_BY_IVAN
