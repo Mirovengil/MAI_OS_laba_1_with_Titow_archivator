@@ -311,9 +311,12 @@ void formDirectoryWithTree(struct Node *tree, char *directory)
 		// TODO : вставь проверку, что директория ещё не существует!
 
 
-		mkdir(tree->name, 0700);
+		char *subdirectoryName = formSubdirectoryFullName(directory, tree->name);
+		mkdir(subdirectoryName, 0700);
 
 		for (int i = 0; i < tree->dataSize; ++i)
-			formDirectoryWithTree(((struct Node **)(tree->data))[i], tree->name);
+			formDirectoryWithTree(((struct Node **)(tree->data))[i], subdirectoryName);
+		
+		free(subdirectoryName);
 	}
 };
