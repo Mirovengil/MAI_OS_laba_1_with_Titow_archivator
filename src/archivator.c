@@ -6,10 +6,11 @@
 #include <stdio.h>		// здесь есть ф-ии работы с файлами
 
 // приватные функции, которые не стоит выставлять в .h файл
-char* formSubdirectoryFullName(const char *directoryName, const char *subdirectoryName);
-char* formFileFullName(const char *directoryName, const char *fileName);
-char *getFolderPersonalName(const char *directoryFullName);
+char* _formSubdirectoryFullName(const char *directoryName, const char *subdirectoryName);
+char* _formFileFullName(const char *directoryName, const char *fileName);
+char *_getFolderPersonalName(const char *directoryFullName);
 enum ErrorCodes _decodeTreeFromArrayOfBytes(struct Node **tree, char *arrayOfBytes, int sizeOfArray, int *position);
+// конец приватных функций
 
 const char codesOfTypesOfNodes[NUMBER_OF_NODE_TYPES] = {0, 1};
 const enum NodeTypes decodedTypesOfNodes[NUMBER_OF_NODE_TYPES] = {FILE_NODE, FOLDER_NODE};
@@ -29,7 +30,7 @@ enum ErrorCodes formTreeWithDirectory(struct Node **tree, const char *directoryN
     };
 
 	// создаём дерево; первая вершина, очевидно, папка
-	char *nodePersonalName = getFolderPersonalName(directoryName);
+	char *nodePersonalName = _getFolderPersonalName(directoryName);
 	createNewNode(tree, nodePersonalName, FOLDER_NODE);
 	free(nodePersonalName);
 
@@ -42,7 +43,7 @@ enum ErrorCodes formTreeWithDirectory(struct Node **tree, const char *directoryN
 		if (currentObject->d_type == 4)
 		{
 			// добавляем в дерево FOLDER_NODE
-			char *subdirectoryFullName = formSubdirectoryFullName(directoryName, currentObject->d_name);
+			char *subdirectoryFullName = _formSubdirectoryFullName(directoryName, currentObject->d_name);
 
 			struct Node *tmp;
 
@@ -70,7 +71,7 @@ enum ErrorCodes formTreeWithDirectory(struct Node **tree, const char *directoryN
 				return errCode;
 
 			// формируем имя файла целиком
-			char *fileFullName = formFileFullName(directoryName, currentObject->d_name);
+			char *fileFullName = _formFileFullName(directoryName, currentObject->d_name);
 
 			// считываем его содержимое
 			enum ErrorCodes errCode;
@@ -85,7 +86,7 @@ enum ErrorCodes formTreeWithDirectory(struct Node **tree, const char *directoryN
 	return OK;
 };
 
-char* formSubdirectoryFullName(const char *directoryName, const char *subdirectoryName)
+char* _formSubdirectoryFullName(const char *directoryName, const char *subdirectoryName)
 {
 	
 	char *subdirectoryFullName = malloc(sizeof(char) * (strlen(directoryName) + strlen(subdirectoryName) + 3)); 
@@ -102,7 +103,7 @@ char* formSubdirectoryFullName(const char *directoryName, const char *subdirecto
 	return subdirectoryFullName;
 };
 
-char *getFolderPersonalName(const char *directoryFullName)
+char *_getFolderPersonalName(const char *directoryFullName)
 {
 	int lastSymbolIndex = strlen(directoryFullName)-1;
 	int firstSymbolIndex;
@@ -124,7 +125,7 @@ char *getFolderPersonalName(const char *directoryFullName)
 	return folderPersonalName;
 };
 
-char* formFileFullName(const char *directoryName, const char *fileName)
+char* _formFileFullName(const char *directoryName, const char *fileName)
 {
 	char *fileFullName = malloc(sizeof(char) * (strlen(directoryName) + strlen(fileName) + 2)); 
 	
@@ -316,7 +317,7 @@ enum ErrorCodes formDirectoryWithTree(struct Node *tree, char *directory)
 	
 	if (tree->type == FILE_NODE)
 	{
-		char *fileFullName = formFileFullName(directory, tree->name);
+		char *fileFullName = _formFileFullName(directory, tree->name);
 
 		// воспользуюсь ранее объявленной функцией, чего бы и нет?
 		errCode = saveArrayOfBytesToFile(tree->data, tree->dataSize, fileFullName);
@@ -328,7 +329,7 @@ enum ErrorCodes formDirectoryWithTree(struct Node *tree, char *directory)
 
 	if (tree->type == FOLDER_NODE)
 	{
-		char *subdirectoryName = formSubdirectoryFullName(directory, tree->name);
+		char *subdirectoryName = _formSubdirectoryFullName(directory, tree->name);
 
 		struct stat st = {0};
 		if (stat(subdirectoryName, &st) != -1)

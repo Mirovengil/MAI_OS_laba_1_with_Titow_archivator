@@ -13,7 +13,7 @@ enum NodeTypes
 struct Node
 {
     enum NodeTypes type;    // папка или файл?
-    char *name;         // имя файла/папки
+    char *name;             // имя файла/папки
 
     // в переменных data / dataSize может быть два типа данных:
     // 1. если type == FILE, то в переменную data побайтово копируется содержание файла,
