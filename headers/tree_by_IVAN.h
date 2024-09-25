@@ -26,8 +26,7 @@ struct Node
 
 };
 
-struct Node*    createNewNode(const char *directory_name, enum NodeTypes nodeType);
-
+enum ErrorCodes createNewNode(struct Node** nodePtr, const char *directory_name, enum NodeTypes nodeType);
 enum ErrorCodes deleteTree(struct Node* tree);
 enum ErrorCodes addNewObjectToFolderNode(struct Node* object, struct Node* folderNode);
 

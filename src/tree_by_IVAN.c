@@ -3,20 +3,23 @@
 #include <string.h>
 #include <stdio.h>
 
-struct Node* createNewNode(const char *directory_name, enum NodeTypes nodeType)
+enum ErrorCodes createNewNode(struct Node** nodePtr, const char *directory_name, enum NodeTypes nodeType)
 {
-    struct Node *newTree = malloc(sizeof(struct Node));
-    
-    newTree->type = nodeType;
+    if ((nodeType == FILE_NODE) + (nodeType == FOLDER_NODE) != 1)
+        return UNREGISTERED_TYPE_OF_NODE;
 
-    newTree->data = NULL;
-    newTree->dataSize = 0;
+    (*nodePtr) = malloc(sizeof(struct Node));
+    
+    (*nodePtr)->type = nodeType;
+
+    (*nodePtr)->data = NULL;
+    (*nodePtr)->dataSize = 0;
     
     // копируем название по-сишному
-    newTree->name = malloc(sizeof(char)*strlen(directory_name));
-    strcpy(newTree->name, directory_name);
+    (*nodePtr)->name = malloc(sizeof(char)*strlen(directory_name));
+    strcpy((*nodePtr)->name, directory_name);
 
-    return newTree;
+    return OK;
 };
 
 enum ErrorCodes deleteTree(struct Node* tree)

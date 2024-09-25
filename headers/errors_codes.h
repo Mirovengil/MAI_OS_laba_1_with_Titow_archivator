@@ -10,6 +10,7 @@ enum ErrorCodes
     TREE_PTR_ERROR,
     UNREGISTERED_ERROR_CODE,
     DIRECTORY_ALREADY_EXISTS,
+    UNREGISTERED_TYPE_OF_NODE,
     NUMBER_OF_REGISTERED_ERRORS,
     OK
 };
@@ -23,6 +24,7 @@ static const char* ERROR_MESSAGES[NUMBER_OF_REGISTERED_ERRORS] =
     "Ошибка работы с Node: передан объект типа Node*, равный NULL!\n",
     "Ошибка в коде ошибки: обнаружен некорректный код ошибки!\n",
     "Ошибка файловой системы: попытка создать папку поверх уже существующей папки!\n",
+    "Ошибка работы с Node: передан неверный тип Node!\n",
 };
 
 #endif //ERRORS_CODES_H

@@ -5,8 +5,6 @@
 #include <stdio.h>
 #include <sys/stat.h>
 
-#include <stdio.h> // TODO : удоли меня!!
-
 /*****************************
  * 
  * Большое TODO: приватным функциям можно возвращать, что угодно, потому что они сокрыты от
@@ -38,7 +36,7 @@ enum ErrorCodes formTreeWithDirectory(struct Node **tree, const char *directoryN
 
 	// создаём дерево; первая вершина, очевидно, папка
 	char *nodePersonalName = getFolderPersonalName(directoryName);
-	*tree = createNewNode(nodePersonalName, FOLDER_NODE);
+	createNewNode(tree, nodePersonalName, FOLDER_NODE);
 	free(nodePersonalName);
 
     while ( (currentObject = readdir(directory)) != NULL) {
@@ -64,7 +62,8 @@ enum ErrorCodes formTreeWithDirectory(struct Node **tree, const char *directoryN
 		else
 		{
 			// добавляем в дерево FILE_NODE
-			struct Node* fileNode = createNewNode(currentObject->d_name, FILE_NODE);
+			struct Node* fileNode;
+			createNewNode(&fileNode, currentObject->d_name, FILE_NODE);
 			addNewObjectToFolderNode(fileNode, *tree);
 
 			// формируем имя файла целиком
@@ -257,7 +256,7 @@ enum ErrorCodes decodeTreeFromArrayOfBytes(struct Node **tree, char *arrayOfByte
 	// TODO : подумай над строчкой выше
 	shift += sizeof(char) * lengthOfNodesName;
 
-	*tree = createNewNode(nameOfNode, decodedTypesOfNodes[nodeType]);
+	createNewNode(tree, nameOfNode, decodedTypesOfNodes[nodeType]);
 	free(nameOfNode);
 
 	long dataSize;

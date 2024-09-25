@@ -40,11 +40,13 @@ int main(void)
 	
 	errCode = saveArrayOfBytesToFile(codedTree, numberOfBytesInCodedTree, nameOfFileWithCompressedDirectory);
 	processError(errCode);
-	
+
 	printf("Директория была успешно сжата!\n");
 	printf("Благодарим за использование нашей программы!\n");
 
-	deleteTree(directoryAsTree);
+	errCode = deleteTree(directoryAsTree);
+	processError(errCode);
+
 	free(codedTree);
 
 	return 0;

@@ -40,7 +40,9 @@ int main(void)
 	printf("Файл был успешно распакован!\n");
 	printf("\nБлагодарю за использование моей программы...\n");
 
-	deleteTree(decodedTree);
+	errCode = deleteTree(decodedTree);
+	processError(errCode);
+
 	free(treeCodedInBytes);
 	return 0;
 };
