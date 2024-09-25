@@ -7,7 +7,7 @@ void _printTree(int numberOfTabs, struct Node *tree);
 void printTree(struct Node *tree)
 {
     if (tree == NULL)
-        printErrorMessage(TREE_PTR_ERROR);
+        processError(TREE_PTR_ERROR);
 
     // т.к. в языке СИ нет параметров по умолчанию, то будет вот такая конструкция
     _printTree(0, tree);
@@ -29,8 +29,11 @@ void _printTree(int numberOfTabs, struct Node *tree)
     }
 }
 
-void printErrorMessage(enum ErrorCodes code)
+void processError(enum ErrorCodes code)
 {
+    if (code == OK)
+        return;
+    
     if (code < DIRECTORY_NOT_OPENED || code >= NUMBER_OF_REGISTERED_ERRORS)
         code = UNREGISTERED_ERROR_CODE;
 

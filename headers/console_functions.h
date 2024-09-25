@@ -10,7 +10,7 @@ static const int MAX_LEN_OF_STRING_NAME = 255;
 // сразу печатают о ней и завершают программу
 
 void printTree(struct Node *tree);  // симметрично обходит дерево и печатает
-void printErrorMessage(enum ErrorCodes code);
+void processError(enum ErrorCodes code);
 void getFileOrFolderNameFromKeyboard(char *result, char *textOfPromt);
 
 #endif //CONSOLE_FUNCTIONS_H
