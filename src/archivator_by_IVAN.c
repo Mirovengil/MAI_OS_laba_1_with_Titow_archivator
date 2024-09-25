@@ -2,22 +2,14 @@
 #include <dirent.h>		// библиотека для работы с папками 
 #include <stdlib.h>
 #include <string.h>
-#include <stdio.h>
 #include <sys/stat.h>
-
-/*****************************
- * 
- * Большое TODO: приватным функциям можно возвращать, что угодно, потому что они сокрыты от
- * всех, кроме меня, а вот библиотечные функции должны возвращать строго коды ошибок
- * 
- * 
- * Ещё большое TODO: сделай все типы строгими (в духе: int32_t)
-*****************************/
+#include <stdio.h>		// здесь есть ф-ии работы с файлами
 
 // приватные функции, которые не стоит выставлять в .h файл
 char* formSubdirectoryFullName(const char *directoryName, const char *subdirectoryName);
 char* formFileFullName(const char *directoryName, const char *fileName);
 char *getFolderPersonalName(const char *directoryFullName);
+enum ErrorCodes _decodeTreeFromArrayOfBytes(struct Node **tree, char *arrayOfBytes, int sizeOfArray, int *position);
 
 const char codesOfTypesOfNodes[NUMBER_OF_NODE_TYPES] = {0, 1};
 const enum NodeTypes decodedTypesOfNodes[NUMBER_OF_NODE_TYPES] = {FILE_NODE, FOLDER_NODE};
@@ -232,7 +224,14 @@ enum ErrorCodes saveArrayOfBytesToFile(char *arrayOfBytes, int length, char *fil
 	return OK;
 }
 
-enum ErrorCodes decodeTreeFromArrayOfBytes(struct Node **tree, char *arrayOfBytes, int sizeOfArray, int *position)
+// опять скрыл параметр по-сишному
+enum ErrorCodes	decodeTreeFromArrayOfBytes(struct Node **tree, char *arrayOfBytes, int sizeOfArray)
+{
+	int position = 0;
+	return _decodeTreeFromArrayOfBytes(tree, arrayOfBytes, sizeOfArray, &position);
+};
+
+enum ErrorCodes _decodeTreeFromArrayOfBytes(struct Node **tree, char *arrayOfBytes, int sizeOfArray, int *position)
 {
 	if (tree == NULL)
 		return TREE_PTR_ERROR;
@@ -280,7 +279,7 @@ enum ErrorCodes decodeTreeFromArrayOfBytes(struct Node **tree, char *arrayOfByte
 		for (int i = 0; i < dataSize; ++i)
 		{
 			struct Node *sonNode = NULL;
-			errCode = decodeTreeFromArrayOfBytes(&sonNode, arrayOfBytes, sizeOfArray, position);
+			errCode = _decodeTreeFromArrayOfBytes(&sonNode, arrayOfBytes, sizeOfArray, position);
 			if (errCode != OK)
 				return errCode;
 			addNewObjectToFolderNode(sonNode, *tree);

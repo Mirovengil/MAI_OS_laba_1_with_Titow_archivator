@@ -27,8 +27,7 @@ int main(void)
 	getFileOrFolderNameFromKeyboard(directoryToDearchivateIn, "> ");
 
 	struct Node *decodedTree;
-	int position = 0;	// TODO : чё за позишн, ёпта? его надо убрать...
-	errCode = decodeTreeFromArrayOfBytes(&decodedTree, treeCodedInBytes, numberOfBytesTreeCodedWith, &position);
+	errCode = decodeTreeFromArrayOfBytes(&decodedTree, treeCodedInBytes, numberOfBytesTreeCodedWith);
 	processError(errCode);
 
 	printf("Содержимое файла: \n");
