@@ -16,7 +16,7 @@
 // приватные функции, которые не стоит выставлять в .h файл
 char* formSubdirectoryFullName(const char *directoryName, const char *subdirectoryName);
 char* formFileFullName(const char *directoryName, const char *fileName);
-enum ErrorCodes getBytesArrayFromFile(const char *fullFilename, char **bytesArray, long *lengthOfArray);
+void getBytesArrayFromFile(const char *fullFilename, char **bytesArray, long *lengthOfArray);
 void codeTreeAsArrayOfBytes(struct Node *tree, char **startOfArray, 
 	int *shift, int *sizeOfArray);
 
@@ -139,7 +139,7 @@ char* formFileFullName(const char *directoryName, const char *fileName)
 	return fileFullName;
 };
 
-enum ErrorCodes getBytesArrayFromFile(const char *fullFilename, char **bytesArray, long *lengthOfArray)
+void getBytesArrayFromFile(const char *fullFilename, char **bytesArray, long *lengthOfArray)
 {
 	FILE *fIn;
 
