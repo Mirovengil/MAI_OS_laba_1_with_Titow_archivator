@@ -31,7 +31,4 @@ struct Node* createNewNode(const char *directory_name, enum NodeTypes nodeType);
 enum ErrorCodes deleteTree(struct Node* tree);
 enum ErrorCodes addNewObjectToFolderNode(struct Node* object, struct Node* folderNode);
 
-// отладочная ф-я, печатает дерево, обходя оное симметрично
-void printTree(struct Node *tree);
-
 #endif //TREE_BY_IVAN_H

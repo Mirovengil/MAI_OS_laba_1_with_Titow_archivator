@@ -68,25 +68,3 @@ enum ErrorCodes addNewObjectToFolderNode(struct Node* object, struct Node* folde
 
     return OK;
 };
-
-// отладочная ф-я, печатает дерево, обходя оное симметрично
-void printTree(struct Node *tree)
-{
-    _printTree(0, tree);
-};
-
-void _printTree(int numberOfTabs, struct Node *tree)
-{
-    for (int i = 0; i < numberOfTabs; ++i)
-        printf("\t");
-    
-    if (tree->type == FILE_NODE)
-        printf("%s (файл; %d байт)\n", tree->name, tree->dataSize);
-    
-    if (tree->type == FOLDER_NODE)
-    {
-        printf("%s (папка; %d объектов)\n", tree->name, tree->dataSize);
-        for (int i = 0; i < tree->dataSize; ++i)
-            _printTree(numberOfTabs + 1, ((struct Node**)tree->data)[i]);
-    };
-}

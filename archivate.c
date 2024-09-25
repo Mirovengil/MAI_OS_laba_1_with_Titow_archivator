@@ -1,6 +1,8 @@
 #include "tree_by_IVAN.h"
 #include "archivator_by_IVAN.h"
 #include "errors_codes.h"
+#include "console_functions.h"
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -13,7 +15,6 @@ int main(void)
 	char compressedDirectoryName[MAX_LEN_OF_STRING_NAME];
 
 	printf("Доброе утро! вас приветствует программа-архиватор...\n");
-	printf("Используется алгоритм сжатия Deflate (пока что нет, лол)\n\n");
 	printf("Пожалуйста, введите директорию, которую хотели бы сжать.\n");
 	printf("Директория: ");
 	fgets(directoryToCompress, MAX_LEN_OF_STRING_NAME, stdin);

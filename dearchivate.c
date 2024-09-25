@@ -1,6 +1,8 @@
 #include "tree_by_IVAN.h"
 #include "archivator_by_IVAN.h"
 #include "errors_codes.h"
+#include "console_functions.h"
+
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -11,7 +13,6 @@ int main(void)
 	char *loadedTree; int loadedTreeSizeInBytes;
 
 	printf("Доброе утро! Вас приветствует программа-деархиватор...");
-	printf("Программа умеет работать с алгоритмом Deflate (пока нет, лол)\n");
 	printf("Введите имя файла, который будет распакован.\n");
 	printf("Ввод: ");
 
