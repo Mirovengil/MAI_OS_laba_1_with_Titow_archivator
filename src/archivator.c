@@ -16,8 +16,10 @@ const enum NodeTypes decodedTypesOfNodes[NUMBER_OF_NODE_TYPES] = {FILE_NODE, FOL
 
 enum ErrorCodes formTreeWithDirectory(struct Node **tree, const char *directoryName)
 {
+	enum ErrorCodes errCode;
+
 	// перед тем, как выделять память под дерево и начинать забивать в него директорию,
-	// надо убедиться, что пользователь не мудак и указал правильную директорию
+	// надо убедиться, что пользователь хороший человек и указал правильную директорию
 	DIR *directory;
     struct dirent *currentObject;
 
@@ -43,20 +45,29 @@ enum ErrorCodes formTreeWithDirectory(struct Node **tree, const char *directoryN
 			char *subdirectoryFullName = formSubdirectoryFullName(directoryName, currentObject->d_name);
 
 			struct Node *tmp;
-			formTreeWithDirectory(&tmp, subdirectoryFullName);
-			addNewObjectToFolderNode(tmp, *tree);
-			// enum ErrorCodes errCode = formTreeWithDirectory(&tmp, subdirectoryFullName);
-			// if (errCode != OK)
-				// return errCode;
-			
+
+			errCode = formTreeWithDirectory(&tmp, subdirectoryFullName);
+			if (errCode != OK)
+				return errCode;
+
+			errCode = addNewObjectToFolderNode(tmp, *tree);
+			if (errCode != OK)
+				return errCode;
+
 			free(subdirectoryFullName);
 		}
 		else
 		{
 			// добавляем в дерево FILE_NODE
 			struct Node* fileNode;
-			createNewNode(&fileNode, currentObject->d_name, FILE_NODE);
-			addNewObjectToFolderNode(fileNode, *tree);
+
+			errCode = createNewNode(&fileNode, currentObject->d_name, FILE_NODE);
+			if (errCode != OK)
+				return errCode;
+
+			errCode = addNewObjectToFolderNode(fileNode, *tree);
+			if (errCode != OK)
+				return errCode;
 
 			// формируем имя файла целиком
 			char *fileFullName = formFileFullName(directoryName, currentObject->d_name);
@@ -234,6 +245,8 @@ enum ErrorCodes	decodeTreeFromArrayOfBytes(struct Node **tree, char *arrayOfByte
 
 enum ErrorCodes _decodeTreeFromArrayOfBytes(struct Node **tree, char *arrayOfBytes, int sizeOfArray, int *position)
 {
+	enum ErrorCodes errCode;
+
 	if (tree == NULL)
 		return TREE_PTR_ERROR;
 
@@ -254,7 +267,10 @@ enum ErrorCodes _decodeTreeFromArrayOfBytes(struct Node **tree, char *arrayOfByt
 
 	shift += sizeof(char) * lengthOfNodesName;
 
-	createNewNode(tree, nameOfNode, decodedTypesOfNodes[nodeType]);
+	errCode = createNewNode(tree, nameOfNode, decodedTypesOfNodes[nodeType]);
+	if (errCode != OK)
+		return errCode;
+	
 	free(nameOfNode);
 
 	long dataSize;
@@ -281,7 +297,10 @@ enum ErrorCodes _decodeTreeFromArrayOfBytes(struct Node **tree, char *arrayOfByt
 			errCode = _decodeTreeFromArrayOfBytes(&sonNode, arrayOfBytes, sizeOfArray, position);
 			if (errCode != OK)
 				return errCode;
-			addNewObjectToFolderNode(sonNode, *tree);
+			
+			errCode = addNewObjectToFolderNode(sonNode, *tree);
+			if (errCode != OK)
+				return errCode;
 		}
 	}
 
@@ -290,6 +309,8 @@ enum ErrorCodes _decodeTreeFromArrayOfBytes(struct Node **tree, char *arrayOfByt
 
 enum ErrorCodes formDirectoryWithTree(struct Node *tree, char *directory)
 {
+	enum ErrorCodes errCode;
+
 	if (tree == NULL)
 		return TREE_PTR_ERROR;
 	
@@ -298,8 +319,10 @@ enum ErrorCodes formDirectoryWithTree(struct Node *tree, char *directory)
 		char *fileFullName = formFileFullName(directory, tree->name);
 
 		// воспользуюсь ранее объявленной функцией, чего бы и нет?
-		saveArrayOfBytesToFile(tree->data, tree->dataSize, fileFullName);
-		
+		errCode = saveArrayOfBytesToFile(tree->data, tree->dataSize, fileFullName);
+		if (errCode != OK)
+			return errCode;
+
 		free(fileFullName);
 	}
 
