@@ -8,7 +8,7 @@
 // приватные функции, которые не стоит выставлять в .h файл
 char* _formSubdirectoryFullName(const char *directoryName, const char *subdirectoryName);
 char* _formFileFullName(const char *directoryName, const char *fileName);
-char *_getFolderPersonalName(const char *directoryFullName);
+char* _getFolderPersonalName(const char *directoryFullName);
 enum ErrorCodes _decodeTreeFromArrayOfBytes(struct Node **tree, char *arrayOfBytes, int sizeOfArray, int *position);
 // конец приватных функций
 
