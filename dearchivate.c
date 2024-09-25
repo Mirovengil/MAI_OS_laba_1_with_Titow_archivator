@@ -1,5 +1,5 @@
-#include "tree_by_IVAN.h"
-#include "archivator_by_IVAN.h"
+#include "tree.h"
+#include "archivator.h"
 #include "errors_codes.h"
 #include "console_functions.h"
 

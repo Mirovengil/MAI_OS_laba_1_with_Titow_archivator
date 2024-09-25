@@ -1,5 +1,5 @@
-#ifndef TREE_BY_IVAN_H
-#define TREE_BY_IVAN_H
+#ifndef TREE_H
+#define TREE_H
 
 #include "errors_codes.h"
 
@@ -30,4 +30,4 @@ enum ErrorCodes createNewNode(struct Node** nodePtr, const char *directory_name,
 enum ErrorCodes deleteTree(struct Node* tree);
 enum ErrorCodes addNewObjectToFolderNode(struct Node* object, struct Node* folderNode);
 
-#endif //TREE_BY_IVAN_H
+#endif //TREE_H

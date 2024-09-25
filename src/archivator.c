@@ -1,4 +1,4 @@
-#include "archivator_by_IVAN.h"
+#include "archivator.h"
 #include <dirent.h>		// библиотека для работы с папками 
 #include <stdlib.h>
 #include <string.h>
