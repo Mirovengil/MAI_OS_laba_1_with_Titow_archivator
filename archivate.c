@@ -33,8 +33,7 @@ int main(void)
 	printf("\n\nТеперь укажите имя файла, в который должна быть сжата директория:\n");
 	getFileOrFolderNameFromKeyboard(compressedDirectoryName, "> ");
 
-	char *codedTree;
-	codedTree = malloc(1);	// TODO : а нужен ли этот malloc? вообще в сишном стандарте сказано, что нет...
+	char *codedTree = NULL;
 	int shift, sizeOfArray;	// TODO : а нужен ли shift вообще?
 							// если нужен -- его надо скрыть отсюда! он чисто внутри функции codeTreeAsArrayOfBytes 
 	shift = 0; sizeOfArray = 0;
