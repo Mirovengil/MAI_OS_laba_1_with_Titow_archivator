@@ -54,10 +54,7 @@ enum ErrorCodes formTreeWithDirectory(struct Node **tree, const char *directoryN
 			// добавляем в дерево FOLDER_NODE
 			char *subdirectoryFullName = formSubdirectoryFullName(directoryName, currentObject->d_name);
 
-			// TODO:
-			// ВОТ ЭТО МЕСТО НАПИСАНО ЧЕРЕЗ ЖОПУ!!!!
-			// надо починить!!!!!
-			struct Node *tmp = createNewNode(currentObject->d_name, FOLDER_NODE);
+			struct Node *tmp;
 			formTreeWithDirectory(&tmp, subdirectoryFullName);
 			addNewObjectToFolderNode(tmp, *tree);
 			// enum ErrorCodes errCode = formTreeWithDirectory(&tmp, subdirectoryFullName);
