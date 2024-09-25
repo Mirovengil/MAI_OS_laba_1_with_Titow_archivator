@@ -27,7 +27,7 @@ int main(void)
 	enum ErrorCodes errCode = formTreeWithDirectory(&directoryTree, directoryToCompress);
 	if (errCode != OK)
 	{
-		printf("Error: %s", ERROR_MESSAGES[errCode]);
+		
 		return errCode;
 	};
 	
