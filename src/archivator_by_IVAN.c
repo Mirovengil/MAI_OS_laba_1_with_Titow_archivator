@@ -150,8 +150,7 @@ enum ErrorCodes getBytesArrayFromFile(const char *fullFilename, char **bytesArra
 };
 
 // кодирует дерево как массив байтов и возвращает указатель на оный массив 
-enum ErrorCodes codeTreeAsArrayOfBytes(struct Node *tree, char **startOfArray, 
-	int *shift, int *sizeOfArray)
+enum ErrorCodes codeTreeAsArrayOfBytes(struct Node *tree, char **startOfArray, int *sizeOfArray)
 {
 	if (tree == NULL)
 		return TREE_PTR_ERROR;
@@ -162,7 +161,8 @@ enum ErrorCodes codeTreeAsArrayOfBytes(struct Node *tree, char **startOfArray,
 	sizeOfCodedNodeInBytes += sizeof(char);		// тип Node: файл или папка?
 	sizeOfCodedNodeInBytes += sizeof(int);		// длина имени (названия)
 	sizeOfCodedNodeInBytes += strlen(tree->name) * sizeof(char);	// имя файла/папки
-	sizeOfCodedNodeInBytes += sizeof(long);		// число объектов в папке / длина файла (в зависимости от типа)
+	sizeOfCodedNodeInBytes += sizeof(long);		// число объектов в папке / длина файла (в зависимости от типа Node)
+	
 	
 	// для файла : надо выделить память под содержание файла
 	sizeOfCodedNodeDataInBytes += (tree->type == FILE_NODE) * sizeof(char) * tree->dataSize;
@@ -170,18 +170,20 @@ enum ErrorCodes codeTreeAsArrayOfBytes(struct Node *tree, char **startOfArray,
 	char signatureOfNode = codesOfTypesOfNodes[tree->type];
 	int lengthOfNodesName = strlen(tree->name);
 
+	long shift = *sizeOfArray;
+
 	// выделяем память под запись текущего узла
 	*sizeOfArray += sizeOfCodedNodeInBytes;
 	*startOfArray = realloc(*startOfArray, *sizeOfArray + sizeOfCodedNodeDataInBytes);
 
-
-	(*startOfArray)[*shift] = signatureOfNode;
-	memcpy(*startOfArray + *shift + sizeof(char), &lengthOfNodesName, sizeof(int));
-	memcpy(*startOfArray + *shift  + sizeof(char) + sizeof(int), tree->name, lengthOfNodesName * sizeof(char));
-	memcpy(*startOfArray + *shift  + sizeof(char) + sizeof(int) + sizeof(char) * lengthOfNodesName, 
-		&tree->dataSize, sizeof(long));
-	
-	*shift += sizeOfCodedNodeInBytes; 
+	memcpy(*startOfArray + shift, &signatureOfNode, sizeof(char));
+	shift += sizeof(char);
+	memcpy(*startOfArray + shift, &lengthOfNodesName, sizeof(int));
+	shift += sizeof(int);
+	memcpy(*startOfArray + shift, tree->name, lengthOfNodesName * sizeof(char));
+	shift += sizeof(char) * lengthOfNodesName;
+	memcpy(*startOfArray + shift, &tree->dataSize, sizeof(long));
+	shift += sizeof(long); 
 	
 
 
@@ -190,11 +192,8 @@ enum ErrorCodes codeTreeAsArrayOfBytes(struct Node *tree, char **startOfArray,
 	// 2. для папки -- рекурсивно печатаем её содержимое
 	if (tree->type == FILE_NODE)
 	{
-		memcpy(*startOfArray + *shift, 
-			tree->data, sizeof(char) * tree->dataSize);
-		*shift += sizeof(char) * sizeOfCodedNodeDataInBytes;
+		memcpy(*startOfArray + shift, tree->data, sizeof(char) * tree->dataSize);
 		*sizeOfArray += sizeof(char) * sizeOfCodedNodeDataInBytes;
-		// TODO : а схера ли, извиняюсь, я сделал shift и sizeOfArray -- разными выражениями?..
 	}
 
 	if (tree->type == FOLDER_NODE)
@@ -202,7 +201,7 @@ enum ErrorCodes codeTreeAsArrayOfBytes(struct Node *tree, char **startOfArray,
 		enum ErrorCodes errCode;
 		for(int i = 0; i < tree->dataSize; ++i)
 		{
-			errCode = codeTreeAsArrayOfBytes(((struct Node**)tree->data)[i], startOfArray, shift, sizeOfArray);
+			errCode = codeTreeAsArrayOfBytes(((struct Node**)tree->data)[i], startOfArray, sizeOfArray);
 			if (errCode != OK)
 				return errCode;
 		}

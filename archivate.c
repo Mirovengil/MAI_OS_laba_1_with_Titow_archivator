@@ -30,12 +30,12 @@ int main(void)
 	getFileOrFolderNameFromKeyboard(nameOfFileWithCompressedDirectory, "> ");
 
 	char *codedTree = NULL;
-	int shift, numberOfBytesInCodedTree;	
+	int numberOfBytesInCodedTree;	
 	// TODO : а нужен ли shift вообще?
 	// если нужен -- его надо скрыть отсюда! он чисто внутри функции codeTreeAsArrayOfBytes 
 	
-	shift = 0; numberOfBytesInCodedTree = 0;
-	errCode = codeTreeAsArrayOfBytes(directoryAsTree, &codedTree, &numberOfBytesInCodedTree, &shift);
+	numberOfBytesInCodedTree = 0;
+	errCode = codeTreeAsArrayOfBytes(directoryAsTree, &codedTree, &numberOfBytesInCodedTree);
 	processError(errCode);
 	
 	errCode = saveArrayOfBytesToFile(codedTree, numberOfBytesInCodedTree, nameOfFileWithCompressedDirectory);
