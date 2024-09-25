@@ -62,8 +62,10 @@ enum ErrorCodes formTreeWithDirectory(struct Node **tree, const char *directoryN
 			char *fileFullName = formFileFullName(directoryName, currentObject->d_name);
 
 			// считываем его содержимое
-			// TODO: доделать код ошибки, который возвращает ф-я getBytesArrayFromFile
-			getBytesArrayFromFile(fileFullName, &fileNode->data, &fileNode->dataSize);
+			enum ErrorCodes errCode;
+			errCode = getBytesArrayFromFile(fileFullName, &fileNode->data, &fileNode->dataSize);
+			if (errCode != OK)
+				return errCode;
 		}
     };
 
