@@ -35,3 +35,14 @@ void printErrorMessage(enum ErrorCodes code)
 {
     printf("Error: %s", ERROR_MESSAGES[code]);
 }
+
+void getFileOrFolderNameFromKeyboard(char *result, char *textOfPromt)
+{
+	// особенности национального ввода с клавиатуры:
+    // мне надо, чтоб строка заканчивалась на терминальный нуль,
+    // а по дефолту она заканчивается на перенос строки...
+
+    printf("%s", textOfPromt);
+    fgets(result, MAX_LEN_OF_STRING_NAME, stdin);
+	result[strlen(result)-1] = '\0';
+};

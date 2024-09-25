@@ -7,8 +7,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-const int MAX_LEN_OF_STRING_NAME = 255;
-
 int main(void)
 {
 	char directoryToCompress[MAX_LEN_OF_STRING_NAME];
@@ -16,18 +14,15 @@ int main(void)
 
 	printf("Доброе утро! вас приветствует программа-архиватор...\n");
 	printf("Пожалуйста, введите директорию, которую хотели бы сжать.\n");
-	printf("Директория: ");
-	fgets(directoryToCompress, MAX_LEN_OF_STRING_NAME, stdin);
-	
-	// особенности национального ввода с клавиатуры
-	directoryToCompress[strlen(directoryToCompress)-1] = '\0';
- 	printf("Вас интересует директория: \"%s\"\n", directoryToCompress);
+
+	getFileOrFolderNameFromKeyboard(directoryToCompress, "> ");
+ 	printf("Вас интересует директория: \"%s\"\n\n", directoryToCompress);
 
 	struct Node *directoryTree;
 	enum ErrorCodes errCode = formTreeWithDirectory(&directoryTree, directoryToCompress);
 	if (errCode != OK)
 	{
-		
+		printErrorMessage(errCode);
 		return errCode;
 	};
 	
@@ -35,19 +30,20 @@ int main(void)
 	printf("Директория, которую вы хотите сжать, имеет вид: \n");
 	printTree(directoryTree);
 	
-	printf("\nТеперь укажите имя файла, в который должна быть сжата директория:\n");
-	printf("Имя файла: ");
-	fgets(compressedDirectoryName, MAX_LEN_OF_STRING_NAME, stdin);
-	compressedDirectoryName[strlen(compressedDirectoryName) - 1] = '\0'; // затираю перенос строки, ага
+	printf("\n\nТеперь укажите имя файла, в который должна быть сжата директория:\n");
+	getFileOrFolderNameFromKeyboard(compressedDirectoryName, "> ");
 
 	char *codedTree;
-	codedTree = malloc(1);
+	codedTree = malloc(1);	// TODO : а нужен ли этот malloc? вообще в сишном стандарте сказано, что нет...
 	int shift, sizeOfArray;	// TODO : а нужен ли shift вообще?
 							// если нужен -- его надо скрыть отсюда! он чисто внутри функции codeTreeAsArrayOfBytes 
 	shift = 0; sizeOfArray = 0;
 	codeTreeAsArrayOfBytes(directoryTree, &codedTree, &sizeOfArray, &shift);
 	saveArrayOfBytesToFile(codedTree, sizeOfArray, compressedDirectoryName);
-	
+
+	printf("Директория была успешно сжата!\n");
+	printf("Благодарим за использование нашей программы!\n");
+
 	deleteTree(directoryTree);
 	free(codedTree);
 

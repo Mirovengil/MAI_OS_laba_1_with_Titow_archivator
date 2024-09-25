@@ -6,27 +6,23 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-const int MAX_LEN_OF_STRING_NAME = 255;
-
 int main(void)
 {
+	// TODO : поизменяй имена переменных так, чтоб выглядело поадекватней
+	char fileToDearchivate[MAX_LEN_OF_STRING_NAME];
+	char directoryToDearchivate[MAX_LEN_OF_STRING_NAME];
+
 	char *loadedTree; int loadedTreeSizeInBytes;
 
-	printf("Доброе утро! Вас приветствует программа-деархиватор...");
+	printf("Доброе утро! Вас приветствует программа-деархиватор...\n");
 	printf("Введите имя файла, который будет распакован.\n");
-	printf("Ввод: ");
+	getFileOrFolderNameFromKeyboard(fileToDearchivate, "> ");
 
-	char fileToDearchivate[MAX_LEN_OF_STRING_NAME];
-	fgets(fileToDearchivate, MAX_LEN_OF_STRING_NAME, stdin);
-	fileToDearchivate[strlen(fileToDearchivate) - 1] = '\0';
 	getBytesArrayFromFile(fileToDearchivate, &loadedTree, &loadedTreeSizeInBytes);
 	printf("Файл %s был успешно загружен из памяти!\n");
 
-	char directoryToDearchivate[MAX_LEN_OF_STRING_NAME];
 	printf("\nВведите имя директории, в которую следует распаковать файл.\n");
-	printf("Ввод: ");
-	fgets(directoryToDearchivate, MAX_LEN_OF_STRING_NAME, stdin);
-	directoryToDearchivate[strlen(directoryToDearchivate) - 1] = '\0';
+	getFileOrFolderNameFromKeyboard(directoryToDearchivate, "> ");
 
 	struct Node *decodedTree;
 	int position = 0;
