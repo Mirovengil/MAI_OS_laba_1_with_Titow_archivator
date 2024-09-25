@@ -83,7 +83,6 @@ enum ErrorCodes formTreeWithDirectory(struct Node **tree, const char *directoryN
 	return OK;
 };
 
-// TODO : можешь сделать проверку где-нибудь, что имя директории действительно заканчивается на '//'
 char* formSubdirectoryFullName(const char *directoryName, const char *subdirectoryName)
 {
 	

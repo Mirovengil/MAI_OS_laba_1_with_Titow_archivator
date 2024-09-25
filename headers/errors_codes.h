@@ -7,6 +7,7 @@ enum ErrorCodes
     CLEAR_NULL_PTR,
     NODE_TYPE_ERROR,
     TREE_PTR_ERROR,
+    UNREGISTERED_ERROR_CODE,
     NUMBER_OF_REGISTERED_ERRORS,
     OK
 };
@@ -16,7 +17,8 @@ static const char* ERROR_MESSAGES[NUMBER_OF_REGISTERED_ERRORS] =
     "Ошибка файловой системы: не удалось открыть папку!\n",
     "Ошибка с указателями: произведена попытка удалить NULL!\n",
     "Ошибка работы с Node: обращение к папке как к файлу или к файлу как к папке!\n",
-    "Ошибка работы с Node: передан объект типа Node*, равный NULL!\n"
+    "Ошибка работы с Node: передан объект типа Node*, равный NULL!\n",
+    "Ошибка в коде ошибки: обнаружен некорректный код ошибки!\n",
 };
 
 #endif //ERRORS_CODES_H

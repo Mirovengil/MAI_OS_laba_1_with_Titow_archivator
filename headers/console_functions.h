@@ -6,6 +6,9 @@
 
 static const int MAX_LEN_OF_STRING_NAME = 255;
 
+// местные ф-ии не возвращают код ошибок, потому что они работают с консолью и, в случае ошибки,
+// сразу печатают о ней и завершают программу
+
 void printTree(struct Node *tree);  // симметрично обходит дерево и печатает
 void printErrorMessage(enum ErrorCodes code);
 void getFileOrFolderNameFromKeyboard(char *result, char *textOfPromt);

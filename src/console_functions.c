@@ -7,9 +7,7 @@ void _printTree(int numberOfTabs, struct Node *tree);
 void printTree(struct Node *tree)
 {
     if (tree == NULL)
-    {
         printErrorMessage(TREE_PTR_ERROR);
-    }
 
     // т.к. в языке СИ нет параметров по умолчанию, то будет вот такая конструкция
     _printTree(0, tree);
@@ -33,7 +31,11 @@ void _printTree(int numberOfTabs, struct Node *tree)
 
 void printErrorMessage(enum ErrorCodes code)
 {
+    if (code < DIRECTORY_NOT_OPENED || code >= NUMBER_OF_REGISTERED_ERRORS)
+        code = UNREGISTERED_ERROR_CODE;
+
     printf("Error: %s", ERROR_MESSAGES[code]);
+    exit(code);
 }
 
 void getFileOrFolderNameFromKeyboard(char *result, char *textOfPromt)
