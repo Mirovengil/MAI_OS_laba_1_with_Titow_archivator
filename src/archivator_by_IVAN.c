@@ -237,8 +237,6 @@ enum ErrorCodes _decodeTreeFromArrayOfBytes(struct Node **tree, char *arrayOfByt
 	if (tree == NULL)
 		return TREE_PTR_ERROR;
 
-	// TODO : в ф-ии записи сделай с shift'ом по аналогии
-
 	// на сколько сдвинется arrayOfBytes для следующей Node
 	int shift = 0;
 
@@ -253,7 +251,7 @@ enum ErrorCodes _decodeTreeFromArrayOfBytes(struct Node **tree, char *arrayOfByt
 	char *nameOfNode = malloc(sizeof(char) * (lengthOfNodesName + 1));
 	memcpy(nameOfNode, arrayOfBytes + shift + *position, sizeof(char) * lengthOfNodesName);
 	nameOfNode[lengthOfNodesName] = '\0';	// потому что в файле имя лежит без терминального нуля, угу-ага
-	// TODO : подумай над строчкой выше
+
 	shift += sizeof(char) * lengthOfNodesName;
 
 	createNewNode(tree, nameOfNode, decodedTypesOfNodes[nodeType]);
@@ -307,10 +305,6 @@ enum ErrorCodes formDirectoryWithTree(struct Node *tree, char *directory)
 
 	if (tree->type == FOLDER_NODE)
 	{
-		// TODO : вставь проверку, что директория ещё не существует!
-
-
-
 		char *subdirectoryName = formSubdirectoryFullName(directory, tree->name);
 
 		struct stat st = {0};

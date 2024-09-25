@@ -31,8 +31,6 @@ int main(void)
 
 	char *codedTree = NULL;
 	int numberOfBytesInCodedTree;	
-	// TODO : а нужен ли shift вообще?
-	// если нужен -- его надо скрыть отсюда! он чисто внутри функции codeTreeAsArrayOfBytes 
 	
 	numberOfBytesInCodedTree = 0;
 	errCode = codeTreeAsArrayOfBytes(directoryAsTree, &codedTree, &numberOfBytesInCodedTree);
