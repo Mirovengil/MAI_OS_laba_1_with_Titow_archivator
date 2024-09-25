@@ -8,9 +8,10 @@
 
 int main(void)
 {
-	// TODO : поизменяй имена переменных так, чтоб выглядело поадекватней
+	enum ErrorCodes errCode;
+
 	char fileWithCompressedDirectory[MAX_LEN_OF_STRING_NAME];
-	char directoryToDearchivate[MAX_LEN_OF_STRING_NAME];
+	char directoryToDearchivateIn[MAX_LEN_OF_STRING_NAME];
 
 	char *treeCodedInBytes; int numberOfBytesTreeCodedWith;
 
@@ -18,20 +19,23 @@ int main(void)
 	printf("Введите имя файла, который будет распакован.\n");
 	getFileOrFolderNameFromKeyboard(fileWithCompressedDirectory, "> ");
 
-	getBytesArrayFromFile(fileWithCompressedDirectory, &treeCodedInBytes, &numberOfBytesTreeCodedWith);
+	errCode = getBytesArrayFromFile(fileWithCompressedDirectory, &treeCodedInBytes, &numberOfBytesTreeCodedWith);
+	processError(errCode);
 	printf("Файл \"%s\" был успешно загружен из памяти!\n", fileWithCompressedDirectory);
 
 	printf("\nВведите имя директории, в которую следует распаковать файл.\n");
-	getFileOrFolderNameFromKeyboard(directoryToDearchivate, "> ");
+	getFileOrFolderNameFromKeyboard(directoryToDearchivateIn, "> ");
 
 	struct Node *decodedTree;
 	int position = 0;	// TODO : чё за позишн, ёпта? его надо убрать...
-	decodeTreeFromArrayOfBytes(&decodedTree, treeCodedInBytes, numberOfBytesTreeCodedWith, &position);
+	errCode = decodeTreeFromArrayOfBytes(&decodedTree, treeCodedInBytes, numberOfBytesTreeCodedWith, &position);
+	processError(errCode);
 
 	printf("Содержимое файла: \n");
 	printTree(decodedTree);
 
-	formDirectoryWithTree(decodedTree, directoryToDearchivate);
+	errCode = formDirectoryWithTree(decodedTree, directoryToDearchivateIn);
+	processError(errCode);
 
 	printf("Файл был успешно распакован!\n");
 	printf("\nБлагодарю за использование моей программы...\n");

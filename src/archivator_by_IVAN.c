@@ -19,8 +19,6 @@
 // приватные функции, которые не стоит выставлять в .h файл
 char* formSubdirectoryFullName(const char *directoryName, const char *subdirectoryName);
 char* formFileFullName(const char *directoryName, const char *fileName);
-void codeTreeAsArrayOfBytes(struct Node *tree, char **startOfArray, 
-	int *shift, int *sizeOfArray);
 char *getFolderPersonalName(const char *directoryFullName);
 
 const char codesOfTypesOfNodes[NUMBER_OF_NODE_TYPES] = {0, 1};
@@ -142,6 +140,8 @@ enum ErrorCodes getBytesArrayFromFile(const char *fullFilename, char **bytesArra
 	FILE *fIn;
 
 	fIn = fopen(fullFilename, "rb");
+	if (fIn == NULL)
+		return FILE_NOT_OPENED;
 
 	fseek(fIn, 0, SEEK_END);
 	
@@ -157,9 +157,11 @@ enum ErrorCodes getBytesArrayFromFile(const char *fullFilename, char **bytesArra
 };
 
 // кодирует дерево как массив байтов и возвращает указатель на оный массив 
-void codeTreeAsArrayOfBytes(struct Node *tree, char **startOfArray, 
+enum ErrorCodes codeTreeAsArrayOfBytes(struct Node *tree, char **startOfArray, 
 	int *shift, int *sizeOfArray)
 {
+	if (tree == NULL)
+		return TREE_PTR_ERROR;
 
 	// основная информация об узле
 	long sizeOfCodedNodeInBytes = 0;
@@ -203,33 +205,38 @@ void codeTreeAsArrayOfBytes(struct Node *tree, char **startOfArray,
 	}
 
 	if (tree->type == FOLDER_NODE)
+	{
+		enum ErrorCodes errCode;
 		for(int i = 0; i < tree->dataSize; ++i)
-			codeTreeAsArrayOfBytes(((struct Node**)tree->data)[i], startOfArray, shift, sizeOfArray);
+		{
+			errCode = codeTreeAsArrayOfBytes(((struct Node**)tree->data)[i], startOfArray, shift, sizeOfArray);
+			if (errCode != OK)
+				return errCode;
+		}
+	}
 
-
+	return OK;
 };
 
-void saveArrayOfBytesToFile(char *arrayOfBytes, int length, char *fileName)
+enum ErrorCodes saveArrayOfBytesToFile(char *arrayOfBytes, int length, char *fileName)
 {
 	FILE *fOut = fopen(fileName, "wb");
 
-	//  TODO : сделай единый стандарт проверок и подгони эту хрень под него
 	if (fOut == NULL)
 	{
-		printf("Файл не открылся!!1!111!\n");
-		return;
+		return FILE_NOT_OPENED;
 	}
 
 	fwrite(arrayOfBytes, sizeof(char) * length, 1, fOut);
 	fclose(fOut);
+
+	return OK;
 }
 
-void decodeTreeFromArrayOfBytes(struct Node **tree, char *arrayOfBytes, int sizeOfArray, int *position)
+enum ErrorCodes decodeTreeFromArrayOfBytes(struct Node **tree, char *arrayOfBytes, int sizeOfArray, int *position)
 {
-	// не уверен, что это нужно, но пусть пока будет
-	// TODO : подумай, стоит ли оптимизировать эту ф-ю
-	if (sizeOfArray <= *position)
-		return;
+	if (tree == NULL)
+		return TREE_PTR_ERROR;
 
 	// TODO : в ф-ии записи сделай с shift'ом по аналогии
 
@@ -270,18 +277,25 @@ void decodeTreeFromArrayOfBytes(struct Node **tree, char *arrayOfBytes, int size
 
 	if((*tree)->type == FOLDER_NODE)
 	{
+		enum ErrorCodes errCode;
 		for (int i = 0; i < dataSize; ++i)
 		{
 			struct Node *sonNode = NULL;
-			decodeTreeFromArrayOfBytes(&sonNode, arrayOfBytes, sizeOfArray, position);
-			
+			errCode = decodeTreeFromArrayOfBytes(&sonNode, arrayOfBytes, sizeOfArray, position);
+			if (errCode != OK)
+				return errCode;
 			addNewObjectToFolderNode(sonNode, *tree);
 		}
 	}
+
+	return OK;
 }
 
-void formDirectoryWithTree(struct Node *tree, char *directory)
+enum ErrorCodes formDirectoryWithTree(struct Node *tree, char *directory)
 {
+	if (tree == NULL)
+		return TREE_PTR_ERROR;
+	
 	if (tree->type == FILE_NODE)
 	{
 		char *fileFullName = formFileFullName(directory, tree->name);
@@ -297,12 +311,24 @@ void formDirectoryWithTree(struct Node *tree, char *directory)
 		// TODO : вставь проверку, что директория ещё не существует!
 
 
+
 		char *subdirectoryName = formSubdirectoryFullName(directory, tree->name);
+
+		struct stat st = {0};
+		if (stat(subdirectoryName, &st) != -1)
+			return DIRECTORY_ALREADY_EXISTS;
+
 		mkdir(subdirectoryName, 0700);
 
+		enum ErrorCodes errCode;
 		for (int i = 0; i < tree->dataSize; ++i)
-			formDirectoryWithTree(((struct Node **)(tree->data))[i], subdirectoryName);
-		
+		{
+			errCode = formDirectoryWithTree(((struct Node **)(tree->data))[i], subdirectoryName);
+			if (errCode != OK)
+				return errCode;
+		}
 		free(subdirectoryName);
 	}
+
+	return OK;
 };

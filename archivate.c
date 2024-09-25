@@ -35,9 +35,12 @@ int main(void)
 	// если нужен -- его надо скрыть отсюда! он чисто внутри функции codeTreeAsArrayOfBytes 
 	
 	shift = 0; numberOfBytesInCodedTree = 0;
-	codeTreeAsArrayOfBytes(directoryAsTree, &codedTree, &numberOfBytesInCodedTree, &shift);
-	saveArrayOfBytesToFile(codedTree, numberOfBytesInCodedTree, nameOfFileWithCompressedDirectory);
-
+	errCode = codeTreeAsArrayOfBytes(directoryAsTree, &codedTree, &numberOfBytesInCodedTree, &shift);
+	processError(errCode);
+	
+	errCode = saveArrayOfBytesToFile(codedTree, numberOfBytesInCodedTree, nameOfFileWithCompressedDirectory);
+	processError(errCode);
+	
 	printf("Директория была успешно сжата!\n");
 	printf("Благодарим за использование нашей программы!\n");
 
