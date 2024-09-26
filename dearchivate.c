@@ -23,8 +23,6 @@ int main(void)
 	processError(errCode);
 	printf("Файл \"%s\" был успешно загружен из памяти!\n", fileWithCompressedDirectory);
 
-	printf("\nВведите имя директории, в которую следует распаковать файл.\n");
-	getFileOrFolderNameFromKeyboard(directoryToDearchivateIn, "> ");
 
 	struct Node *decodedTree;
 	errCode = decodeTreeFromArrayOfBytes(&decodedTree, treeCodedInBytes, numberOfBytesTreeCodedWith);
@@ -32,6 +30,9 @@ int main(void)
 
 	printf("Содержимое файла: \n");
 	printTree(decodedTree);
+
+	printf("\nВведите имя директории, в которую следует распаковать файл.\n");
+	getFileOrFolderNameFromKeyboard(directoryToDearchivateIn, "> ");
 
 	errCode = formDirectoryWithTree(decodedTree, directoryToDearchivateIn);
 	processError(errCode);
