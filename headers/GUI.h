@@ -9,6 +9,7 @@
 #include <QSlider>
 #include <QMessageBox>
 #include <QFileDialog>
+#include <QString>
 
 class MyGUI : public QWidget
 {
@@ -24,10 +25,12 @@ private:
     QFileDialog *_fileDialogForSelectImageFile;
 
     int _numberOfThreads;
+    void _openImage(QString filename);
+    
 public slots:
     void renewNumberOfThreads();
     void makeProcessing();
-
+    void selectImageFile();
 public:
     MyGUI();
     ~MyGUI();

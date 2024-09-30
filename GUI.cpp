@@ -1,14 +1,15 @@
 #include "GUI.h"
-#include <QString>
-
-const std::pair <int, int> _stdSizeOfGUIWindow = {1200, 800}; 
-const std::pair <int, int> _stdSizeOfImageLabel = {1000, 600};
+#include <QStringList>
+#include <QDebug>   // TODO : убей меня
+#include <QSize>
+const QSize _stdSizeOfGUIWindow = {1200, 800}; 
+const QSize _stdSizeOfImageLabel = {1200, 600};
 const int _stdValueOfSlider = 0;
 const QString _sliderText = "Заданное число потоков: ";
 
 MyGUI::MyGUI()
 {
-    this->resize(_stdSizeOfGUIWindow.first, _stdSizeOfGUIWindow.second);
+    this->resize(_stdSizeOfGUIWindow);
 
     _pixmapImageLoader = new QPixmap;
 
@@ -20,8 +21,9 @@ MyGUI::MyGUI()
     
     _lblImagePreview = new QLabel("Здесь будет изображение");
     _pixmapImageLoader->load("../pic/picture_404.png");
-    _lblImagePreview->setPixmap(*_pixmapImageLoader);
-    _lblImagePreview->resize(_stdSizeOfImageLabel.first, _stdSizeOfImageLabel.second);
+    _lblImagePreview->setPixmap(_pixmapImageLoader->scaled(_stdSizeOfImageLabel, Qt::KeepAspectRatio));
+    
+    _lblImagePreview->resize(_stdSizeOfImageLabel);
     _layoutMain->addWidget(_lblImagePreview);
 
     _numberOfThreads = 1;
@@ -38,12 +40,34 @@ MyGUI::MyGUI()
     _btnUseSobelsFilter->setText("Применить фильтр Собела");
     _layoutMain->addWidget(_btnUseSobelsFilter);
 
+    // эти товарищи не являются детьми основного виджета, и в деструкторе их надо убивать по отдельности
     _messageBoxTimesResult = new QMessageBox;
+
+    _fileDialogForSelectImageFile = new QFileDialog;
+    _fileDialogForSelectImageFile->setNameFilter(tr("Images (*.png *.png)"));
+    _fileDialogForSelectImageFile->setFileMode(QFileDialog::ExistingFile);
 
     // привязываю сигналы к слотам
     connect(_sliderNumberOfThreads, &QSlider::valueChanged, this, &MyGUI::renewNumberOfThreads);
     connect(_btnUseSobelsFilter, &QPushButton::pressed, this, &MyGUI::makeProcessing);
+    connect(_btnSelectImage, &QPushButton::pressed, this, &MyGUI::selectImageFile);
 };
+
+void MyGUI::selectImageFile()
+{
+    QStringList selectedFile;
+    if (_fileDialogForSelectImageFile->exec())
+    {
+        selectedFile = _fileDialogForSelectImageFile->selectedFiles();
+        _openImage(selectedFile[0]);
+    }
+};
+
+void MyGUI::_openImage(QString filename)
+{
+    _pixmapImageLoader->load(filename);
+    _lblImagePreview->setPixmap(_pixmapImageLoader->scaled(_stdSizeOfImageLabel, Qt::KeepAspectRatio));
+};  
 
 void MyGUI::makeProcessing()
 {
@@ -61,4 +85,5 @@ MyGUI::~MyGUI()
 {
     delete _layoutMain;
     delete _messageBoxTimesResult;
+    delete _fileDialogForSelectImageFile;
 };
