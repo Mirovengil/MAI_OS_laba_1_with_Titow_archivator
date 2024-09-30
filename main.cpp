@@ -1,7 +1,13 @@
 #include <iostream>
+#include "ImageMatrix.h"
+#include "sobelsFilter.h"
+#include "GUI.h"
+#include <QApplication>
 
-int main(void)
+int main(int argc, char **argv)
 {
-    std::cout << "Я родился!!\n";
-    return 0;
+    QApplication app(argc, argv);
+    MyGUI gui;
+    gui.show();
+    return app.exec();
 }
