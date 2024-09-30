@@ -7,39 +7,39 @@ RGBCell::RGBCell()
     _blueColor = 0;
 };
 
-RGBCell::RGBCell(uint8_t r, uint8_t g, uint8_t b)
+RGBCell::RGBCell(int r, int g, int b)
 {
     _redColor = r;
     _greenColor = g;
     _blueColor = b;
 };
 
-uint8_t RGBCell::getRedValue()
+int RGBCell::getRedValue()
 {
     return _redColor;
 };
 
-uint8_t RGBCell::getGreenValue()
+int RGBCell::getGreenValue()
 {
     return _greenColor;
 };
 
-uint8_t RGBCell::getBlueValue()
+int RGBCell::getBlueValue()
 {
     return _blueColor;
 };
 
-void RGBCell::setRedValue(uint8_t value)
+void RGBCell::setRedValue(int value)
 {
     _redColor = value;
 };
 
-void RGBCell::setGreenValue(uint8_t value)
+void RGBCell::setGreenValue(int value)
 {
     _greenColor = value;
 };
 
-void RGBCell::setBlueValue(uint8_t value)
+void RGBCell::setBlueValue(int value)
 {
     _blueColor = value;
 };

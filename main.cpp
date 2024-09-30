@@ -1,6 +1,6 @@
 #include <iostream>
 #include "ImageMatrix.h"
-#include "sobelsFilter.h"
+#include "TCore.h"
 #include "GUI.h"
 #include <QApplication>
 

@@ -6,19 +6,19 @@
 class RGBCell
 {
 private:
-    uint8_t _redColor;
-    uint8_t _greenColor;
-    uint8_t _blueColor;
+    int _redColor;
+    int _greenColor;
+    int _blueColor;
 public:
-    RGBCell(uint8_t r, uint8_t g, uint8_t b);
+    RGBCell(int r, int g, int b);
     RGBCell();
-    uint8_t getRedValue();
-    uint8_t getGreenValue();
-    uint8_t getBlueValue();
+    int getRedValue();
+    int getGreenValue();
+    int getBlueValue();
 
-    void setRedValue(uint8_t value);
-    void setGreenValue(uint8_t value);
-    void setBlueValue(uint8_t value);
+    void setRedValue(int value);
+    void setGreenValue(int value);
+    void setBlueValue(int value);
 };
 
 #endif //RGBCELL_H
