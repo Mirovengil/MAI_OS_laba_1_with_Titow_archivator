@@ -1,6 +1,0 @@
-#ifndef SOBOLS_FILTER_H
-#define SOBOLS_FILTER_H
-
-
-
-#endif //SOBOLS_FILTER_H
