@@ -24,7 +24,8 @@ MyGUI::MyGUI()
     _lblImagePreview->resize(_stdSizeOfImageLabel.first, _stdSizeOfImageLabel.second);
     _layoutMain->addWidget(_lblImagePreview);
 
-    _lblNumberOfThreads = new QLabel(_sliderText + QString::number(_stdValueOfSlider));
+    _numberOfThreads = 1;
+    _lblNumberOfThreads = new QLabel(_sliderText + "1");
     _layoutMain->addWidget(_lblNumberOfThreads);
     
     _sliderNumberOfThreads = new QSlider(Qt::Horizontal);
@@ -37,11 +38,27 @@ MyGUI::MyGUI()
     _btnUseSobelsFilter->setText("Применить фильтр Собела");
     _layoutMain->addWidget(_btnUseSobelsFilter);
 
+    _messageBoxTimesResult = new QMessageBox;
 
+    // привязываю сигналы к слотам
+    connect(_sliderNumberOfThreads, &QSlider::valueChanged, this, &MyGUI::renewNumberOfThreads);
+    connect(_btnUseSobelsFilter, &QPushButton::pressed, this, &MyGUI::makeProcessing);
+};
 
+void MyGUI::makeProcessing()
+{
+    _messageBoxTimesResult->setText("А вот тут будет временной замер: ABOBA!!!\n");
+    _messageBoxTimesResult->exec();
+};
+
+void MyGUI::renewNumberOfThreads()
+{
+    _numberOfThreads = 1 << _sliderNumberOfThreads->value();
+    _lblNumberOfThreads->setText(_sliderText + QString::number(_numberOfThreads));
 };
 
 MyGUI::~MyGUI()
 {
     delete _layoutMain;
+    delete _messageBoxTimesResult;
 };

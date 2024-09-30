@@ -7,6 +7,8 @@
 #include <QLabel>
 #include <QPixmap>
 #include <QSlider>
+#include <QMessageBox>
+#include <QFileDialog>
 
 class MyGUI : public QWidget
 {
@@ -18,6 +20,13 @@ private:
     QPixmap *_pixmapImageLoader;
     QLabel *_lblNumberOfThreads;
     QSlider *_sliderNumberOfThreads;
+    QMessageBox *_messageBoxTimesResult;
+    QFileDialog *_fileDialogForSelectImageFile;
+
+    int _numberOfThreads;
+public slots:
+    void renewNumberOfThreads();
+    void makeProcessing();
 
 public:
     MyGUI();
