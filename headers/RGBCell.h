@@ -1,8 +1,6 @@
 #ifndef RGBCELL_H
 #define RGBCELL_H
 
-#include <cstdint>
-
 class RGBCell
 {
 private:

@@ -20,3 +20,22 @@ ImageMatrix::ImageMatrix(QImage *image)
     }
 
 };
+
+QImage ImageMatrix::convertToImage()
+{
+    // TODO : реализуй ф-ю
+    return QImage();
+};
+
+void ImageMatrix::doConvolution(const TCore *with)
+{
+    for (int i = 1; i < _data.size()-1; ++i)
+    {
+        for (int j = 1; j < _data[i].size(); ++j)
+        {
+            int buffer = 0;
+            // интерсивность света: 0.299r + 0.587g + 0.114b
+            // сумму -- пишу в ячейку
+        }
+    }
+};
