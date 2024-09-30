@@ -47,10 +47,15 @@ MyGUI::MyGUI()
     _fileDialogForSelectImageFile->setNameFilter(tr("Images (*.png *.png)"));
     _fileDialogForSelectImageFile->setFileMode(QFileDialog::ExistingFile);
 
+    _imageForProcessing = new QImage;
+
     // привязываю сигналы к слотам
     connect(_sliderNumberOfThreads, &QSlider::valueChanged, this, &MyGUI::renewNumberOfThreads);
     connect(_btnUseSobelsFilter, &QPushButton::pressed, this, &MyGUI::makeProcessing);
     connect(_btnSelectImage, &QPushButton::pressed, this, &MyGUI::selectImageFile);
+
+    // здесь -- стартовые значения обработки
+    _imageMatrix = nullptr;
 };
 
 void MyGUI::selectImageFile()
@@ -71,6 +76,11 @@ void MyGUI::_openImage(QString filename)
 
 void MyGUI::makeProcessing()
 {
+    *_imageForProcessing = _pixmapImageLoader->toImage();
+
+    if (_imageMatrix == nullptr)
+        _imageMatrix = new ImageMatrix(_imageForProcessing);
+
     _messageBoxTimesResult->setText("А вот тут будет временной замер: ABOBA!!!\n");
     _messageBoxTimesResult->exec();
 };
@@ -86,4 +96,5 @@ MyGUI::~MyGUI()
     delete _layoutMain;
     delete _messageBoxTimesResult;
     delete _fileDialogForSelectImageFile;
+    delete _imageForProcessing;
 };

@@ -10,6 +10,8 @@
 #include <QMessageBox>
 #include <QFileDialog>
 #include <QString>
+#include <QImage>
+#include "ImageMatrix.h"
 
 class MyGUI : public QWidget
 {
@@ -19,14 +21,17 @@ private:
     QPushButton *_btnUseSobelsFilter;
     QLabel *_lblImagePreview;
     QPixmap *_pixmapImageLoader;
+    QImage *_imageForProcessing;
     QLabel *_lblNumberOfThreads;
     QSlider *_sliderNumberOfThreads;
     QMessageBox *_messageBoxTimesResult;
     QFileDialog *_fileDialogForSelectImageFile;
 
+    ImageMatrix *_imageMatrix;
+
     int _numberOfThreads;
     void _openImage(QString filename);
-    
+
 public slots:
     void renewNumberOfThreads();
     void makeProcessing();

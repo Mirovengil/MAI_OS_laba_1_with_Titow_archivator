@@ -10,7 +10,7 @@ class ImageMatrix
 private:
     std::vector <std::vector <RGBCell>> _data;
 public:
-    ImageMatrix(QImage image);
+    ImageMatrix(QImage *image);
 };
 
 #endif //MATRIX_H
