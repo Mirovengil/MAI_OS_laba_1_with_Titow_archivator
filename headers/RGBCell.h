@@ -19,6 +19,8 @@ public:
     void setRedValue(uint8_t value);
     void setGreenValue(uint8_t value);
     void setBlueValue(uint8_t value);
+
+    uint32_t getLuminosity();
 };
 
 #endif //RGBCELL_H

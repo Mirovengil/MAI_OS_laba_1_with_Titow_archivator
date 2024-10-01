@@ -1,5 +1,15 @@
 #include "RGBCell.h"
 
+uint32_t RGBCell::getLuminosity()
+{
+    uint32_t result = 0;
+    result += static_cast<uint32_t>(0.299 * static_cast<double>(_redColor)); 
+    result += static_cast<uint32_t>(0.587 * static_cast<double>(_greenColor)); 
+    result += static_cast<uint32_t>(0.114 * static_cast<double>(_blueColor)); 
+
+    
+};
+
 RGBCell::RGBCell()
 {
     _redColor = 0;

@@ -1,8 +1,16 @@
 #include "ImageMatrix.h"
 
+int ImageMatrix::getN()
+{
+    return _data.size();
+};
+int ImageMatrix::getM()
+{
+    return _data[0].size();
+};
+
 ImageMatrix::ImageMatrix(QImage *image)
 {
-    // TODO : напиши конструктор от QT-шной картинки 
     int height = image->height();
     int width = image->width();
 
@@ -27,15 +35,19 @@ QImage ImageMatrix::convertToImage()
     return QImage();
 };
 
-void ImageMatrix::doConvolution(const TCore *with)
+RGBCell ImageMatrix::getRGBValue(int i, int j)
 {
-    for (int i = 1; i < _data.size()-1; ++i)
-    {
-        for (int j = 1; j < _data[i].size(); ++j)
-        {
-            int buffer = 0;
-            // интерсивность света: 0.299r + 0.587g + 0.114b
-            // сумму -- пишу в ячейку
-        }
-    }
+    return _data[i][j];
 };
+
+// void ImageMatrix::doConvolution(const TCore *with)
+// {
+//     for (int i = 1; i < _data.size()-1; ++i)
+//     {
+//         for (int j = 1; j < _data[i].size(); ++j)
+//         {
+//             int buffer = 0;
+
+//         }
+//     }
+// };

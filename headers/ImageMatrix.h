@@ -1,5 +1,5 @@
-#ifndef MATRIX_H
-#define MATRIX_H
+#ifndef IMAGE_MATRIX_H
+#define IMAGE_MATRIX_H
 
 #include <vector>
 #include "RGBCell.h"
@@ -13,7 +13,12 @@ private:
 public:
     ImageMatrix(QImage *image);
     QImage convertToImage();
-    void doConvolution(const TCore *with);
+    int getN(); // число элементов по горизонтали
+    int getM(); // число элементов по вертикали
+    RGBCell getRGBValue(int i, int j);
+
+    // void doConvolution(const TCore *with);   // TODO : либо реализуй и здесь 
+            // свёртки с какой-нибудь прикольной шнягой, либо удали функцию 
 };
 
-#endif //MATRIX_H
+#endif //IMAGE_MATRIX_H

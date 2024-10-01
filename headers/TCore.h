@@ -9,7 +9,7 @@ private:
     std::vector <std::vector <int>> _data;
 public:
     TCore(std::vector <std::vector <int>> data){_data = data;};
-    int getValue(int i, int j) const {return _data[i][j];};
+    int getValue(int i, int j) const {return _data[i+2][j+2];};
 };
 
 static const TCore SobelsMatrixY(
