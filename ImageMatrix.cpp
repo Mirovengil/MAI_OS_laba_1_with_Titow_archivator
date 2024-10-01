@@ -31,8 +31,19 @@ ImageMatrix::ImageMatrix(QImage *image)
 
 QImage ImageMatrix::convertToImage()
 {
-    // TODO : реализуй ф-ю
-    return QImage();
+    QImage result(_data.size(), _data[0].size(), QImage::Format_RGB32);
+    for (int i = 0; i < _data.size(); ++i)
+        for (int j = 0; j < _data[i].size(); ++j)
+        {
+
+            int r = static_cast<int>(_data[i][j].getRedValue());
+            int g = static_cast<int>(_data[i][j].getGreenValue());
+            int b = static_cast<int>(_data[i][j].getBlueValue());
+            QRgb value = qRgb(r, g, b);
+            
+            result.setPixel(i, j, value);
+        }
+    return result;
 };
 
 RGBCell ImageMatrix::getRGBValue(int i, int j)
@@ -44,12 +55,27 @@ void ImageMatrix::setRGBValue(int i, int j, RGBCell value)
 {
     _data[i][j] = value;
 };
+
 void ImageMatrix::setRGBValue(int i, int j, uint8_t coeff)
 {
     _data[i][j].setRedValue(coeff);
     _data[i][j].setGreenValue(coeff);
     _data[i][j].setBlueValue(coeff);
 }; 
+
+ImageMatrix::ImageMatrix(int sizeN, int sizeM)
+{
+    _data.resize(sizeN);
+    for (int i = 0; i < sizeN; ++i)
+    {
+        _data[i].resize(sizeM);
+        for (int j = 0; j < sizeM; ++j)
+        {
+            setRGBValue(i, j, 0);
+        }
+    }
+};
+
 
 // void ImageMatrix::doConvolution(const TCore *with)
 // {

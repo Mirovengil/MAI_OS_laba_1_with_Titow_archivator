@@ -3,6 +3,7 @@
 #include <QDebug>   // TODO : убей меня
 #include <QSize>
 #include "Matrix.h"
+#include <math.h>
 
 const QSize _stdSizeOfGUIWindow = {1200, 800}; 
 const QSize _stdSizeOfImageLabel = {1200, 600};
@@ -85,15 +86,38 @@ void MyGUI::makeProcessing()
 
     // формирую две матрицы светимости: для работы с вертикальным ядром собеля и с горизонтальным
 
-    auto functor =  [](RGBCell rgbCell)
+    auto luminosityFunctor =  [](RGBCell rgbCell)
         {
             return (int)rgbCell.getLuminosity();
         };
 
-    Matrix matrixForXConvolution(*_imageMatrix, functor);
-    Matrix matrixForYConvolution(*_imageMatrix, functor);
+    Matrix matrixForXConvolution(*_imageMatrix, luminosityFunctor);
+    Matrix matrixForYConvolution(*_imageMatrix, luminosityFunctor);
     matrixForXConvolution.doConvolution(SobelsMatrixX);
     matrixForYConvolution.doConvolution(SobelsMatrixY);
+
+    auto pow2Functor = [](int value)
+    {
+        return value * value;
+    };
+
+    matrixForXConvolution.useFunctionToCells(pow2Functor);
+    matrixForYConvolution.useFunctionToCells(pow2Functor);
+
+    // чтоб не порождать новые, занимающие дофига памяти, сущности
+    matrixForXConvolution += matrixForYConvolution;
+
+    matrixForXConvolution.useFunctionToCells([](int value)
+    {
+        double result = sqrt(value);
+        result = result * 255.0 / 1442.5;
+        return (int)result;
+    });
+
+    ImageMatrix resultImage = matrixForXConvolution.convertToImageMatrix();
+    QImage operatedImage = resultImage.convertToImage();
+    QPixmap temporalPixmap = QPixmap::fromImage(operatedImage);
+    _lblImagePreview->setPixmap(temporalPixmap.scaled(_stdSizeOfImageLabel));
 
     _messageBoxTimesResult->setText("А вот тут будет временной замер: ABOBA!!!\n");
     _messageBoxTimesResult->exec();

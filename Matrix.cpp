@@ -42,18 +42,57 @@ Matrix::Matrix(ImageMatrix &source, int (*func)(RGBCell))
 
 void Matrix::doConvolution(const TCore &with)
 {
+    Matrix tmpMatrix(_data.size(), _data[0].size());
+
     for (int i = 1; i < _data.size()-1; ++i)
     {
         for (int j = 1; j < _data[i].size()-1; ++j)
         {
-            _data[i][j] = 0;
+            
             for (int coreI = -1; coreI <= 1; ++coreI)
             {
                 for (int coreJ = -1; coreJ <= 1; ++coreJ)
                 {
-                    _data[i][j] += _data[i + coreI][j + coreJ] * with.getValue(coreI, coreJ);
+                    tmpMatrix._data[i][j] += _data[i + coreI][j + coreJ] * with.getValue(coreI, coreJ);
                 }
             }
         }
     }
+
+    *this = tmpMatrix;
 }; 
+
+void Matrix::useFunctionToCells(int (*func)(int))
+{
+    for (int i = 0; i < _data.size(); ++i)
+    {
+        for (int j = 0; j < _data[i].size(); ++j)
+        {
+            _data[i][j] = func(_data[i][j]);
+        }
+    }
+};
+
+void Matrix::operator+=(Matrix &with)
+{
+    for (int i = 0; i < with._data.size(); ++i)
+    {
+        for (int j = 0; j < with._data[i].size(); ++j)
+        {
+            _data[i][j] += with._data[i][j];
+        }
+    }
+};
+
+ImageMatrix Matrix::convertToImageMatrix()
+{
+    ImageMatrix result(_data.size(), _data[0].size());
+    for (int i = 0; i < _data.size(); ++i)
+    {
+        for (int j = 0; j < _data[i].size(); ++j)
+        {
+            result.setRGBValue(i, j, _data[i][j]);
+        }
+    }
+    return result;
+};
