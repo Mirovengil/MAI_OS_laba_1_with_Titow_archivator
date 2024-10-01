@@ -2,6 +2,8 @@
 #include <QStringList>
 #include <QDebug>   // TODO : убей меня
 #include <QSize>
+#include "Matrix.h"
+
 const QSize _stdSizeOfGUIWindow = {1200, 800}; 
 const QSize _stdSizeOfImageLabel = {1200, 600};
 const int _stdValueOfSlider = 0;
@@ -80,6 +82,18 @@ void MyGUI::makeProcessing()
 
     if (_imageMatrix == nullptr)
         _imageMatrix = new ImageMatrix(_imageForProcessing);
+
+    // формирую две матрицы светимости: для работы с вертикальным ядром собеля и с горизонтальным
+
+    auto functor =  [](RGBCell rgbCell)
+        {
+            return (int)rgbCell.getLuminosity();
+        };
+
+    Matrix matrixForXConvolution(*_imageMatrix, functor);
+    Matrix matrixForYConvolution(*_imageMatrix, functor);
+    matrixForXConvolution.doConvolution(SobelsMatrixX);
+    matrixForYConvolution.doConvolution(SobelsMatrixY);
 
     _messageBoxTimesResult->setText("А вот тут будет временной замер: ABOBA!!!\n");
     _messageBoxTimesResult->exec();

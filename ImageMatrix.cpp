@@ -40,6 +40,17 @@ RGBCell ImageMatrix::getRGBValue(int i, int j)
     return _data[i][j];
 };
 
+void ImageMatrix::setRGBValue(int i, int j, RGBCell value)
+{
+    _data[i][j] = value;
+};
+void ImageMatrix::setRGBValue(int i, int j, uint8_t coeff)
+{
+    _data[i][j].setRedValue(coeff);
+    _data[i][j].setGreenValue(coeff);
+    _data[i][j].setBlueValue(coeff);
+}; 
+
 // void ImageMatrix::doConvolution(const TCore *with)
 // {
 //     for (int i = 1; i < _data.size()-1; ++i)

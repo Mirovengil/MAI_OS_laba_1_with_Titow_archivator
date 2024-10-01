@@ -39,3 +39,21 @@ Matrix::Matrix(ImageMatrix &source, int (*func)(RGBCell))
         for (int j = 0; j < _data[i].size(); ++j)
             _data[i][j] = func(source.getRGBValue(i, j));    
 };
+
+void Matrix::doConvolution(const TCore &with)
+{
+    for (int i = 1; i < _data.size()-1; ++i)
+    {
+        for (int j = 1; j < _data[i].size()-1; ++j)
+        {
+            _data[i][j] = 0;
+            for (int coreI = -1; coreI <= 1; ++coreI)
+            {
+                for (int coreJ = -1; coreJ <= 1; ++coreJ)
+                {
+                    _data[i][j] += _data[i + coreI][j + coreJ] * with.getValue(coreI, coreJ);
+                }
+            }
+        }
+    }
+}; 
