@@ -43,6 +43,10 @@ MyGUI::MyGUI()
     _btnUseSobelsFilter->setText("Применить фильтр Собела");
     _layoutMain->addWidget(_btnUseSobelsFilter);
 
+    _btnReset = new QPushButton;
+    _btnReset->setText("Сбросить результат фильтрации");
+    _layoutMain->addWidget(_btnReset);
+
     // эти товарищи не являются детьми основного виджета, и в деструкторе их надо убивать по отдельности
     _messageBoxTimesResult = new QMessageBox;
 
@@ -56,9 +60,15 @@ MyGUI::MyGUI()
     connect(_sliderNumberOfThreads, &QSlider::valueChanged, this, &MyGUI::renewNumberOfThreads);
     connect(_btnUseSobelsFilter, &QPushButton::pressed, this, &MyGUI::makeProcessing);
     connect(_btnSelectImage, &QPushButton::pressed, this, &MyGUI::selectImageFile);
+    connect(_btnReset, &QPushButton::pressed, this, &MyGUI::resetImageToNonFiltered);
 
     // здесь -- стартовые значения обработки
     _imageMatrix = nullptr;
+};
+
+void MyGUI::resetImageToNonFiltered()
+{
+    _lblImagePreview->setPixmap(_pixmapImageLoader->scaled(_stdSizeOfImageLabel, Qt::KeepAspectRatio));
 };
 
 void MyGUI::selectImageFile()
@@ -68,6 +78,11 @@ void MyGUI::selectImageFile()
     {
         selectedFile = _fileDialogForSelectImageFile->selectedFiles();
         _openImage(selectedFile[0]);
+        if (_imageMatrix != nullptr)
+        {
+            delete _imageMatrix;
+            _imageMatrix = nullptr;
+        }
     }
 };
 
@@ -117,7 +132,7 @@ void MyGUI::makeProcessing()
     ImageMatrix resultImage = matrixForXConvolution.convertToImageMatrix();
     QImage operatedImage = resultImage.convertToImage();
     QPixmap temporalPixmap = QPixmap::fromImage(operatedImage);
-    _lblImagePreview->setPixmap(temporalPixmap.scaled(_stdSizeOfImageLabel));
+    _lblImagePreview->setPixmap(temporalPixmap.scaled(_stdSizeOfImageLabel, Qt::KeepAspectRatio));
 
     _messageBoxTimesResult->setText("А вот тут будет временной замер: ABOBA!!!\n");
     _messageBoxTimesResult->exec();
@@ -135,4 +150,5 @@ MyGUI::~MyGUI()
     delete _messageBoxTimesResult;
     delete _fileDialogForSelectImageFile;
     delete _imageForProcessing;
+    delete _imageMatrix;
 };

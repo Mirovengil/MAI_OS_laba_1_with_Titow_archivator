@@ -26,7 +26,7 @@ private:
     QSlider *_sliderNumberOfThreads;
     QMessageBox *_messageBoxTimesResult;
     QFileDialog *_fileDialogForSelectImageFile;
-
+    QPushButton *_btnReset;
     ImageMatrix *_imageMatrix;
 
     int _numberOfThreads;
@@ -36,6 +36,7 @@ public slots:
     void renewNumberOfThreads();
     void makeProcessing();
     void selectImageFile();
+    void resetImageToNonFiltered();
 public:
     MyGUI();
     ~MyGUI();
