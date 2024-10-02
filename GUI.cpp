@@ -113,6 +113,7 @@ void MyGUI::makeProcessing()
     Matrix matrixOfXConvolution(_imageMatrix->getN(), _imageMatrix->getM());
     Matrix matrixOfYConvolution(_imageMatrix->getN(), _imageMatrix->getM());
     ImageMatrix resultImage(_imageMatrix->getN(), _imageMatrix->getM());
+    QImage operatedImage;
 
     // здесь начинается многопоточка и замер времени
 
@@ -128,8 +129,8 @@ void MyGUI::makeProcessing()
         return value * value;
     };
 
-    matrixOfXConvolution.useFunctionToCells(pow2Functor);
-    matrixOfYConvolution.useFunctionToCells(pow2Functor);
+    matrixOfXConvolution.useFunctionToCells(pow2Functor, 1, _imageMatrix->getN()-1);
+    matrixOfYConvolution.useFunctionToCells(pow2Functor, 1, _imageMatrix->getN()-1);
 
     // чтоб не порождать новые, занимающие дофига памяти, сущности
     matrixOfXConvolution += matrixOfYConvolution;
@@ -139,10 +140,16 @@ void MyGUI::makeProcessing()
         double result = sqrt(value);
         result = result * 255.0 / 1442.5;
         return (int)result;
-    });
+    },
+    1, _imageMatrix->getN() - 1);
     
     resultImage = matrixOfXConvolution.convertToImageMatrix();
-    QImage operatedImage = resultImage.convertToImage();
+
+
+    operatedImage = resultImage.convertToImage();
+    
+    // здесь уже можно заканчивать замер времени
+    
     QPixmap temporalPixmap = QPixmap::fromImage(operatedImage);
     _lblImagePreview->setPixmap(temporalPixmap.scaled(_stdSizeOfImageLabel, Qt::KeepAspectRatio));
 

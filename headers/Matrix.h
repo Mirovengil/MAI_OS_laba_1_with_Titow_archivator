@@ -19,7 +19,6 @@ public:
     void resize(int n, int m);
     int getValue(int i, int j);
     void setValue(int i, int j, int value);
-    void useFunctionToCells(int (*func)(int));
     void operator+=(Matrix &with);
 
     // операции, которые следует отдавать разным потокам
@@ -27,6 +26,8 @@ public:
         int startLine, int endLine);
     void doConvolution(const TCore &with, Matrix &resultMatrix,
         int startLine, int endLine);    
+    void useFunctionToCells(int (*func)(int),
+        int startLine, int endLine);
 };
 
 #endif// MATRIX_H

@@ -59,15 +59,12 @@ void Matrix::doConvolution(const TCore &with, Matrix &resultMatrix,
                     resultMatrix._data[i][j] += _data[i + coreI][j + coreJ] * with.getValue(coreI, coreJ);
 }; 
 
-void Matrix::useFunctionToCells(int (*func)(int))
+void Matrix::useFunctionToCells(int (*func)(int),
+        int startLine, int endLine)
 {
-    for (int i = 0; i < _data.size(); ++i)
-    {
+    for (int i = startLine; i < endLine; ++i)
         for (int j = 0; j < _data[i].size(); ++j)
-        {
             _data[i][j] = func(_data[i][j]);
-        }
-    }
 };
 
 void Matrix::operator+=(Matrix &with)
