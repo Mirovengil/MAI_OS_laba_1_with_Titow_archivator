@@ -29,9 +29,9 @@ ImageMatrix::ImageMatrix(QImage *image)
 
 };
 
-QImage ImageMatrix::convertToImage()
+void ImageMatrix::convertToImage(QImage &result,
+    int startLine,  int endLine)
 {
-    QImage result(_data.size(), _data[0].size(), QImage::Format_RGB32);
     for (int i = 0; i < _data.size(); ++i)
         for (int j = 0; j < _data[i].size(); ++j)
         {
@@ -43,7 +43,6 @@ QImage ImageMatrix::convertToImage()
             
             result.setPixel(i, j, value);
         }
-    return result;
 };
 
 RGBCell ImageMatrix::getRGBValue(int i, int j)

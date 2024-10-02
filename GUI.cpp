@@ -116,12 +116,14 @@ void MyGUI::makeProcessing()
         return (int)result;
     };
 
+    // TODO : добавить замер времени!!
+    // TODO на подумать : сделать перевод времени во внятные величины?
     // выделяю сразу всю память перед тем, как начать замер времени
     Matrix matrixOfLuminosity(_imageMatrix->getN(), _imageMatrix->getM());
     Matrix matrixOfXConvolution(_imageMatrix->getN(), _imageMatrix->getM());
     Matrix matrixOfYConvolution(_imageMatrix->getN(), _imageMatrix->getM());
-    ImageMatrix resultImage(_imageMatrix->getN(), _imageMatrix->getM());
-    QImage operatedImage;
+    ImageMatrix resultImageMatrix(_imageMatrix->getN(), _imageMatrix->getM());
+    QImage resultImage(_imageMatrix->getN(), _imageMatrix->getM(), QImage::Format_RGB32);
 
     // здесь начинается многопоточка и замер времени
 
@@ -145,13 +147,14 @@ void MyGUI::makeProcessing()
     matrixOfXConvolution.useFunctionToCells(sqrtFunctor, 1, _imageMatrix->getN() - 1);
     
     // TODO : добавить многопоточку
-    matrixOfXConvolution.convertToImageMatrix(resultImage, 1, _imageMatrix->getN()-1);
+    matrixOfXConvolution.convertToImageMatrix(resultImageMatrix, 1, _imageMatrix->getN()-1);
 
-    operatedImage = resultImage.convertToImage();
+    // TODO : добавить многопоточку
+    resultImageMatrix.convertToImage(resultImage, 0, _imageMatrix->getN());
     
     // здесь уже можно заканчивать замер времени
     
-    QPixmap temporalPixmap = QPixmap::fromImage(operatedImage);
+    QPixmap temporalPixmap = QPixmap::fromImage(resultImage);
     _lblImagePreview->setPixmap(temporalPixmap.scaled(_stdSizeOfImageLabel, Qt::KeepAspectRatio));
 
     _messageBoxTimesResult->setText("А вот тут будет временной замер: ABOBA!!!\n");
