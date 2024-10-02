@@ -18,7 +18,7 @@ void MyThread::run()
     // все оставшиеся вычисления провожу с _matrixOfXConvolution
     _matrixOfXConvolution->summWith(*_matrixOfXConvolution, _startLine, _endLine);
     _matrixOfXConvolution->useFunctionToCells(_functorOfSqrt, _startLine, _endLine);
-    _matrixOfXConvolution->convertToImageMatrix(*_resultImageMatrix, _startLine, _endLine);
+    _matrixOfXConvolution->convertToImageMatrix(*_resultImageMatrix, _startLine+1, _endLine-1);
     _resultImageMatrix->convertToImage(*_resultImage, _startLine, _endLine);
 }
 

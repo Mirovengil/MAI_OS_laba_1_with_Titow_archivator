@@ -8,7 +8,7 @@
 const QSize _stdSizeOfGUIWindow = {1200, 800}; 
 const QSize _stdSizeOfImageLabel = {1200, 600};
 const int _stdValueOfSlider = 0;
-const int _maxValueOfSlider = 10;
+const int _maxValueOfSlider = 7;
 const QString _sliderText = "Заданное число потоков: ";
 
 MyGUI::MyGUI()
@@ -36,7 +36,7 @@ MyGUI::MyGUI()
     
     _sliderNumberOfThreads = new QSlider(Qt::Horizontal);
     _sliderNumberOfThreads->setMinimum(0);                  // 2^0 = 1 поток
-    _sliderNumberOfThreads->setMaximum(_maxValueOfSlider);  // 2^10 = 1024 потока
+    _sliderNumberOfThreads->setMaximum(_maxValueOfSlider);  // 2^7 = 128 потоков
     _sliderNumberOfThreads->setValue(_stdValueOfSlider);
     _layoutMain->addWidget(_sliderNumberOfThreads);
 
