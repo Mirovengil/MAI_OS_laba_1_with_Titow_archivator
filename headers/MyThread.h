@@ -14,7 +14,6 @@ private:
     Matrix *_matrixOfXConvolution;
     Matrix *_matrixOfYConvolution;
     ImageMatrix *_resultImageMatrix;
-    QImage *_resultImage;
 
     int (*_functorOfLuminocity)(RGBCell);
     int (*_functorOfPow2)(int);
@@ -35,7 +34,6 @@ public:
     void setMatrixOfLuminocity(Matrix *m);
     void setMatrixOfXYConvolution(Matrix *mx, Matrix *my);
     void setResultImageMatrix(ImageMatrix *m);
-    void setResultImage(QImage *m);
     void setFunctorOfLuminocity(int (*f)(RGBCell));
     void setFunctorOfPow2(int (*f)(int));
     void setFunctorOfSqrt(int (*f)(int));

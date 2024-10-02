@@ -146,7 +146,6 @@ void MyGUI::makeProcessing()
         _threads[i]->setMatrixOfLuminocity(&matrixOfLuminosity);
         _threads[i]->setMatrixOfXYConvolution(&matrixOfXConvolution, &matrixOfYConvolution);
         _threads[i]->setResultImageMatrix(&resultImageMatrix);
-        _threads[i]->setResultImage(&resultImage);
         _threads[i]->setFunctorOfLuminocity(luminosityFunctor);
         _threads[i]->setFunctorOfPow2(pow2Functor);
         _threads[i]->setFunctorOfSqrt(sqrtFunctor);
@@ -155,14 +154,15 @@ void MyGUI::makeProcessing()
 
     }
 
-    _timerOfProcessing->start();
     for (int i = 0; i < _numberOfThreads; ++i)
         _threads[i]->start();    
+    _timerOfProcessing->start();
 
 
     for (int i = 0; i < _numberOfThreads; ++i)
         _threads[i]->wait();
     processingTimeElapsed = _timerOfProcessing->elapsed();
+    resultImage = resultImageMatrix.convertToImage();
     
     for (int i = 0; i < _numberOfThreads; ++i)
         _threads[i]->reset();

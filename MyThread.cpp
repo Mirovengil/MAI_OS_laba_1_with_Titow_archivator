@@ -25,7 +25,6 @@ void MyThread::run()
     _matrixOfXConvolution->summWith(*_matrixOfXConvolution, _startLine, _endLine);
     _matrixOfXConvolution->useFunctionToCells(_functorOfSqrt, _startLine, _endLine);
     _matrixOfXConvolution->convertToImageMatrix(*_resultImageMatrix, _startLine, _endLine);
-    _resultImageMatrix->convertToImage(*_resultImage, _startLine, _endLine);
 }
 
 void MyThread::reset()
@@ -35,7 +34,6 @@ void MyThread::reset()
     _matrixOfXConvolution = nullptr;
     _matrixOfYConvolution = nullptr;
     _resultImageMatrix = nullptr;
-    _resultImage = nullptr;
 
     _functorOfLuminocity = nullptr;
     _functorOfPow2 = nullptr;
@@ -67,11 +65,6 @@ void MyThread::setMatrixOfXYConvolution(Matrix *mx, Matrix *my)
 void MyThread::setResultImageMatrix(ImageMatrix *m)
 {
     _resultImageMatrix = m;
-}
-
-void MyThread::setResultImage(QImage *m)
-{
-    _resultImage = m;
 }
 
 void MyThread::setFunctorOfLuminocity(int (*f)(RGBCell))

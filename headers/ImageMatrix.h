@@ -18,10 +18,7 @@ public:
     RGBCell getRGBValue(int i, int j);
     void setRGBValue(int i, int j, RGBCell value);
     void setRGBValue(int i, int j, uint8_t coeff);  // заполняет клетку серым цветом с указанным коэффициентом яркости
-
-    // ф-ии для многопоточки
-    void convertToImage(QImage &result,
-        int startLine,  int endLine);
+    QImage convertToImage();
 };
 
 #endif //IMAGE_MATRIX_H
