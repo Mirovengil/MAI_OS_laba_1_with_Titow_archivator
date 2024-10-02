@@ -8,6 +8,7 @@
 const QSize _stdSizeOfGUIWindow = {1200, 800}; 
 const QSize _stdSizeOfImageLabel = {1200, 600};
 const int _stdValueOfSlider = 0;
+const int _maxValueOfSlider = 10;
 const QString _sliderText = "Заданное число потоков: ";
 
 MyGUI::MyGUI()
@@ -34,10 +35,14 @@ MyGUI::MyGUI()
     _layoutMain->addWidget(_lblNumberOfThreads);
     
     _sliderNumberOfThreads = new QSlider(Qt::Horizontal);
-    _sliderNumberOfThreads->setMinimum(0);  // 2^0 = 1 поток
-    _sliderNumberOfThreads->setMaximum(8);  // 2^8 = 256 потоков
+    _sliderNumberOfThreads->setMinimum(0);                  // 2^0 = 1 поток
+    _sliderNumberOfThreads->setMaximum(_maxValueOfSlider);  // 2^10 = 1024 потока
     _sliderNumberOfThreads->setValue(_stdValueOfSlider);
     _layoutMain->addWidget(_sliderNumberOfThreads);
+
+    _threads.resize((1<<_maxValueOfSlider));
+    for (int i = 0; i < _threads.size(); ++i)
+        _threads[i] = new MyThread;
 
     _btnUseSobelsFilter = new QPushButton;
     _btnUseSobelsFilter->setText("Применить фильтр Собела");
@@ -126,12 +131,36 @@ void MyGUI::makeProcessing()
     QImage resultImage(_imageMatrix->getN(), _imageMatrix->getM(), QImage::Format_RGB32);
 
     // здесь начинается многопоточка и замер времени
-    // start() для всех потоков
-    
+    for (int i = 0; i < _numberOfThreads; ++i)
+    {
+        int from, to;
 
-    // wait() для всех потоков
+        from = (_imageMatrix->getN() / _numberOfThreads + 1) * i;
+        to = std::min((_imageMatrix->getN() / _numberOfThreads + 1) * (i+1), _imageMatrix->getN());
+        // qDebug() << "[" << from << "; " << to << ") is in [" << 0 << "; " << _imageMatrix->getN() << ")?";
+
+        _threads[i]->setOrigMatrix(_imageMatrix);
+        _threads[i]->setMatrixOfLuminocity(&matrixOfLuminosity);
+        _threads[i]->setMatrixOfXYConvolution(&matrixOfXConvolution, &matrixOfYConvolution);
+        _threads[i]->setResultImageMatrix(&resultImageMatrix);
+        _threads[i]->setResultImage(&resultImage);
+        _threads[i]->setFunctorOfLuminocity(luminosityFunctor);
+        _threads[i]->setFunctorOfPow2(pow2Functor);
+        _threads[i]->setFunctorOfSqrt(sqrtFunctor);
+        _threads[i]->setLines(from, to);
+    }
+
+    for (int i = 0; i < _numberOfThreads; ++i)
+        _threads[i]->start();    
+
+
+    for (int i = 0; i < _numberOfThreads; ++i)
+        _threads[i]->wait();
     // здесь уже можно заканчивать замер времени
     
+    for (int i = 0; i < _numberOfThreads; ++i)
+        _threads[i]->reset();
+
     QPixmap temporalPixmap = QPixmap::fromImage(resultImage);
     _lblImagePreview->setPixmap(temporalPixmap.scaled(_stdSizeOfImageLabel, Qt::KeepAspectRatio));
 
@@ -152,4 +181,6 @@ MyGUI::~MyGUI()
     delete _fileDialogForSelectImageFile;
     delete _imageForProcessing;
     delete _imageMatrix;
+    for (int i = 0; i < _threads.size(); ++i)
+        delete _threads[i];
 };

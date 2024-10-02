@@ -12,6 +12,8 @@
 #include <QString>
 #include <QImage>
 #include "ImageMatrix.h"
+#include <vector>
+#include "MyThread.h"
 
 class MyGUI : public QWidget
 {
@@ -29,7 +31,10 @@ private:
     QPushButton *_btnReset;
     ImageMatrix *_imageMatrix;
 
+
     int _numberOfThreads;
+    std::vector <MyThread*> _threads;
+
     void _openImage(QString filename);
 
 public slots:

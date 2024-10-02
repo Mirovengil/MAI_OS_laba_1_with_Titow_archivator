@@ -9,8 +9,8 @@ void MyThread::run()
 {
     _matrixOfLuminocity->fillWithImageMatrix(*_origMatrix, _functorOfLuminocity, _startLine, _endLine);
 
-    _matrixOfLuminocity->doConvolution(SobelsMatrixX, *_matrixOfXConvolution, _startLine+1, _endLine+1);
-    _matrixOfLuminocity->doConvolution(SobelsMatrixY, *_matrixOfYConvolution, _startLine-1, _endLine-1);
+    _matrixOfLuminocity->doConvolution(SobelsMatrixX, *_matrixOfXConvolution, _startLine+1, _endLine-1);
+    _matrixOfLuminocity->doConvolution(SobelsMatrixY, *_matrixOfYConvolution, _startLine+1, _endLine-1);
 
     _matrixOfXConvolution->useFunctionToCells(_functorOfPow2, _startLine, _endLine);
     _matrixOfYConvolution->useFunctionToCells(_functorOfPow2, _startLine, _endLine);
