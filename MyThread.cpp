@@ -5,12 +5,18 @@ MyThread::MyThread()
     this->reset();
 }
 
+void MyThread::setBordersProcessing(bool left, bool right)
+{
+    _processLeftBorder = left;
+    _processRightBorder = right;
+};
+
 void MyThread::run()
 {
     _matrixOfLuminocity->fillWithImageMatrix(*_origMatrix, _functorOfLuminocity, _startLine, _endLine);
 
-    _matrixOfLuminocity->doConvolution(SobelsMatrixX, *_matrixOfXConvolution, _startLine+1, _endLine-1);
-    _matrixOfLuminocity->doConvolution(SobelsMatrixY, *_matrixOfYConvolution, _startLine+1, _endLine-1);
+    _matrixOfLuminocity->doConvolution(SobelsMatrixX, *_matrixOfXConvolution, _startLine+_processLeftBorder, _endLine-_processRightBorder);
+    _matrixOfLuminocity->doConvolution(SobelsMatrixY, *_matrixOfYConvolution, _startLine+_processLeftBorder, _endLine-_processRightBorder);
 
     _matrixOfXConvolution->useFunctionToCells(_functorOfPow2, _startLine, _endLine);
     _matrixOfYConvolution->useFunctionToCells(_functorOfPow2, _startLine, _endLine);
@@ -18,7 +24,7 @@ void MyThread::run()
     // все оставшиеся вычисления провожу с _matrixOfXConvolution
     _matrixOfXConvolution->summWith(*_matrixOfXConvolution, _startLine, _endLine);
     _matrixOfXConvolution->useFunctionToCells(_functorOfSqrt, _startLine, _endLine);
-    _matrixOfXConvolution->convertToImageMatrix(*_resultImageMatrix, _startLine+1, _endLine-1);
+    _matrixOfXConvolution->convertToImageMatrix(*_resultImageMatrix, _startLine, _endLine);
     _resultImageMatrix->convertToImage(*_resultImage, _startLine, _endLine);
 }
 
@@ -34,6 +40,9 @@ void MyThread::reset()
     _functorOfLuminocity = nullptr;
     _functorOfPow2 = nullptr;
     _functorOfSqrt = nullptr;
+
+    _processLeftBorder = true;
+    _processRightBorder = true;
 
     _startLine = -1;
     _endLine = -1;

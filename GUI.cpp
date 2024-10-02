@@ -135,9 +135,12 @@ void MyGUI::makeProcessing()
     {
         int from, to;
 
-        from = (_imageMatrix->getN() / _numberOfThreads + 1) * i;
-        to = std::min((_imageMatrix->getN() / _numberOfThreads + 1) * (i+1), _imageMatrix->getN());
-        // qDebug() << "[" << from << "; " << to << ") is in [" << 0 << "; " << _imageMatrix->getN() << ")?";
+        from = (_imageMatrix->getN() / _numberOfThreads) * i;
+        to = std::min((_imageMatrix->getN() / _numberOfThreads) * (i+1), _imageMatrix->getN());
+        if (i + 1 == _numberOfThreads)
+            to = _imageMatrix->getN();
+        
+        // qDebug() << i << ":[" << from << "; " << to << ") is in [" << 0 << "; " << _imageMatrix->getN() << ")?";
 
         _threads[i]->setOrigMatrix(_imageMatrix);
         _threads[i]->setMatrixOfLuminocity(&matrixOfLuminosity);
@@ -148,6 +151,9 @@ void MyGUI::makeProcessing()
         _threads[i]->setFunctorOfPow2(pow2Functor);
         _threads[i]->setFunctorOfSqrt(sqrtFunctor);
         _threads[i]->setLines(from, to);
+        _threads[i]->setBordersProcessing((i==0), (i+1==_numberOfThreads));
+
+        // qDebug() << i << "\t" << (i==0) << "\t" << (i+1==_numberOfThreads);
     }
 
     for (int i = 0; i < _numberOfThreads; ++i)

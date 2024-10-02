@@ -23,6 +23,8 @@ private:
     int _startLine;
     int _endLine;
 
+    bool _processLeftBorder;
+    bool _processRightBorder;
 public:
     MyThread(); // сильно много параметров, поэтому -- пустой конструктор + сеттеры
     void run(); // здесь происходит вся основная обработка
@@ -38,6 +40,7 @@ public:
     void setFunctorOfPow2(int (*f)(int));
     void setFunctorOfSqrt(int (*f)(int));
     void setLines(int start, int end);
+    void setBordersProcessing(bool left, bool right);
 };
 
 #endif// MY_THREAD_H
