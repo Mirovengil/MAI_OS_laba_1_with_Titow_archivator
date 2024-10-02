@@ -13,6 +13,7 @@
 #include <QImage>
 #include "ImageMatrix.h"
 #include <vector>
+#include <QElapsedTimer>
 #include "MyThread.h"
 
 class MyGUI : public QWidget
@@ -30,7 +31,7 @@ private:
     QFileDialog *_fileDialogForSelectImageFile;
     QPushButton *_btnReset;
     ImageMatrix *_imageMatrix;
-
+    QElapsedTimer *_timerOfProcessing;
 
     int _numberOfThreads;
     std::vector <MyThread*> _threads;

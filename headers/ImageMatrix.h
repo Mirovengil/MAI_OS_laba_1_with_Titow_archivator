@@ -18,8 +18,6 @@ public:
     RGBCell getRGBValue(int i, int j);
     void setRGBValue(int i, int j, RGBCell value);
     void setRGBValue(int i, int j, uint8_t coeff);  // заполняет клетку серым цветом с указанным коэффициентом яркости
-    // void doConvolution(const TCore *with);   // TODO : либо реализуй и здесь 
-            // свёртки с какой-нибудь прикольной шнягой, либо удали функцию 
 
     // ф-ии для многопоточки
     void convertToImage(QImage &result,

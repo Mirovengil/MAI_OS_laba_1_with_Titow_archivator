@@ -1,6 +1,5 @@
 #include "GUI.h"
 #include <QStringList>
-#include <QDebug>   // TODO : убей меня
 #include <QSize>
 #include "Matrix.h"
 #include <math.h>
@@ -69,6 +68,8 @@ MyGUI::MyGUI()
 
     // здесь -- стартовые значения обработки
     _imageMatrix = nullptr;
+
+    _timerOfProcessing = new QElapsedTimer;
 };
 
 void MyGUI::resetImageToNonFiltered()
@@ -121,14 +122,14 @@ void MyGUI::makeProcessing()
         return (int)result;
     };
 
-    // TODO : добавить замер времени!!
-    // TODO на подумать : сделать перевод времени во внятные величины?
     // выделяю сразу всю память перед тем, как начать замер времени
     Matrix matrixOfLuminosity(_imageMatrix->getN(), _imageMatrix->getM());
     Matrix matrixOfXConvolution(_imageMatrix->getN(), _imageMatrix->getM());
     Matrix matrixOfYConvolution(_imageMatrix->getN(), _imageMatrix->getM());
     ImageMatrix resultImageMatrix(_imageMatrix->getN(), _imageMatrix->getM());
     QImage resultImage(_imageMatrix->getN(), _imageMatrix->getM(), QImage::Format_RGB32);
+
+    qint64 processingTimeElapsed;
 
     // здесь начинается многопоточка и замер времени
     for (int i = 0; i < _numberOfThreads; ++i)
@@ -140,7 +141,6 @@ void MyGUI::makeProcessing()
         if (i + 1 == _numberOfThreads)
             to = _imageMatrix->getN();
         
-        // qDebug() << i << ":[" << from << "; " << to << ") is in [" << 0 << "; " << _imageMatrix->getN() << ")?";
 
         _threads[i]->setOrigMatrix(_imageMatrix);
         _threads[i]->setMatrixOfLuminocity(&matrixOfLuminosity);
@@ -153,16 +153,16 @@ void MyGUI::makeProcessing()
         _threads[i]->setLines(from, to);
         _threads[i]->setBordersProcessing((i==0), (i+1==_numberOfThreads));
 
-        // qDebug() << i << "\t" << (i==0) << "\t" << (i+1==_numberOfThreads);
     }
 
+    _timerOfProcessing->start();
     for (int i = 0; i < _numberOfThreads; ++i)
         _threads[i]->start();    
 
 
     for (int i = 0; i < _numberOfThreads; ++i)
         _threads[i]->wait();
-    // здесь уже можно заканчивать замер времени
+    processingTimeElapsed = _timerOfProcessing->elapsed();
     
     for (int i = 0; i < _numberOfThreads; ++i)
         _threads[i]->reset();
@@ -170,7 +170,8 @@ void MyGUI::makeProcessing()
     QPixmap temporalPixmap = QPixmap::fromImage(resultImage);
     _lblImagePreview->setPixmap(temporalPixmap.scaled(_stdSizeOfImageLabel, Qt::KeepAspectRatio));
 
-    _messageBoxTimesResult->setText("А вот тут будет временной замер: ABOBA!!!\n");
+    _messageBoxTimesResult->setText("Потрачено на обработку изображения: " + 
+        QString::number(processingTimeElapsed) + "мс");
     _messageBoxTimesResult->exec();
 };
 
@@ -189,4 +190,5 @@ MyGUI::~MyGUI()
     delete _imageMatrix;
     for (int i = 0; i < _threads.size(); ++i)
         delete _threads[i];
+    delete _timerOfProcessing;
 };
