@@ -87,5 +87,9 @@ void Matrix::convertToImageMatrix(ImageMatrix &result,
 {
     for (int i = startLine; i < endLine; ++i)
         for (int j = 0; j < _data[i].size(); ++j)
+        {
+            if (_data[i][j] < 0 || _data[i][j] > 255)
+                _data[i][j] = 0;
             result.setRGBValue(i, j, _data[i][j]);
+        };
 };

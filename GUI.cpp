@@ -126,32 +126,10 @@ void MyGUI::makeProcessing()
     QImage resultImage(_imageMatrix->getN(), _imageMatrix->getM(), QImage::Format_RGB32);
 
     // здесь начинается многопоточка и замер времени
-
-    // TODO : добавить многопоточку
-    matrixOfLuminosity.fillWithImageMatrix(*_imageMatrix, luminosityFunctor, 0, _imageMatrix->getN());
-
-    // TODO : добавить многопоточку
-    matrixOfLuminosity.doConvolution(SobelsMatrixX, matrixOfXConvolution, 1, _imageMatrix->getN()-1);
-    matrixOfLuminosity.doConvolution(SobelsMatrixY, matrixOfYConvolution, 1, _imageMatrix->getN()-1);
-
-
-    // TODO : добавить многопоточку
-    matrixOfXConvolution.useFunctionToCells(pow2Functor, 1, _imageMatrix->getN()-1);
-    matrixOfYConvolution.useFunctionToCells(pow2Functor, 1, _imageMatrix->getN()-1);
-
-    // чтоб не выделять память под третью матрицу -- сделаю оставшуюся математику  в matrixOfXConvolution
-    // TODO : добавить многопоточку
-    matrixOfXConvolution.summWith(matrixOfYConvolution, 1, _imageMatrix->getN()-1);
-
-    // TODO : добавить многопоточку
-    matrixOfXConvolution.useFunctionToCells(sqrtFunctor, 1, _imageMatrix->getN() - 1);
+    // start() для всех потоков
     
-    // TODO : добавить многопоточку
-    matrixOfXConvolution.convertToImageMatrix(resultImageMatrix, 1, _imageMatrix->getN()-1);
 
-    // TODO : добавить многопоточку
-    resultImageMatrix.convertToImage(resultImage, 0, _imageMatrix->getN());
-    
+    // wait() для всех потоков
     // здесь уже можно заканчивать замер времени
     
     QPixmap temporalPixmap = QPixmap::fromImage(resultImage);
