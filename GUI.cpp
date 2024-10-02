@@ -101,12 +101,20 @@ void MyGUI::makeProcessing()
     if (_imageMatrix == nullptr)
         _imageMatrix = new ImageMatrix(_imageForProcessing);
 
-    // формирую две матрицы светимости: для работы с вертикальным ядром собеля и с горизонтальным
-
     auto luminosityFunctor =  [](RGBCell rgbCell)
         {
             return (int)rgbCell.getLuminosity();
         };
+    auto pow2Functor = [](int value)
+        {
+            return value * value;
+        };
+    auto sqrtFunctor = [](int value)
+    {
+        double result = sqrt(value);
+        result = result * 255.0 / 1442.5;
+        return (int)result;
+    };
 
     // выделяю сразу всю память перед тем, как начать замер времени
     Matrix matrixOfLuminosity(_imageMatrix->getN(), _imageMatrix->getM());
@@ -124,24 +132,16 @@ void MyGUI::makeProcessing()
     matrixOfLuminosity.doConvolution(SobelsMatrixX, matrixOfXConvolution, 1, _imageMatrix->getN()-1);
     matrixOfLuminosity.doConvolution(SobelsMatrixY, matrixOfYConvolution, 1, _imageMatrix->getN()-1);
 
-    auto pow2Functor = [](int value)
-    {
-        return value * value;
-    };
 
+    // TODO : добавить многопоточку
     matrixOfXConvolution.useFunctionToCells(pow2Functor, 1, _imageMatrix->getN()-1);
     matrixOfYConvolution.useFunctionToCells(pow2Functor, 1, _imageMatrix->getN()-1);
 
     // чтоб не порождать новые, занимающие дофига памяти, сущности
-    matrixOfXConvolution += matrixOfYConvolution;
+    matrixOfXConvolution.summWith(matrixOfYConvolution, 1, _imageMatrix->getN()-1);
 
-    matrixOfXConvolution.useFunctionToCells([](int value)
-    {
-        double result = sqrt(value);
-        result = result * 255.0 / 1442.5;
-        return (int)result;
-    },
-    1, _imageMatrix->getN() - 1);
+    // TODO : добавить многопоточку
+    matrixOfXConvolution.useFunctionToCells(sqrtFunctor, 1, _imageMatrix->getN() - 1);
     
     resultImage = matrixOfXConvolution.convertToImageMatrix();
 

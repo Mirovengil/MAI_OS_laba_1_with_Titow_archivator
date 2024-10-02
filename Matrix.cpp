@@ -70,23 +70,24 @@ void Matrix::useFunctionToCells(int (*func)(int),
 void Matrix::operator+=(Matrix &with)
 {
     for (int i = 0; i < with._data.size(); ++i)
-    {
         for (int j = 0; j < with._data[i].size(); ++j)
-        {
             _data[i][j] += with._data[i][j];
-        }
-    }
 };
+
+void Matrix::summWith(Matrix &withMatrix,
+    int startLine, int endLine)
+{
+    for (int i = startLine; i < endLine; ++i)
+        for (int j = 0; j < withMatrix._data[i].size(); ++j)
+            _data[i][j] += withMatrix._data[i][j];
+}
 
 ImageMatrix Matrix::convertToImageMatrix()
 {
     ImageMatrix result(_data.size(), _data[0].size());
     for (int i = 0; i < _data.size(); ++i)
-    {
         for (int j = 0; j < _data[i].size(); ++j)
-        {
             result.setRGBValue(i, j, _data[i][j]);
-        }
-    }
+
     return result;
 };

@@ -28,6 +28,8 @@ public:
         int startLine, int endLine);    
     void useFunctionToCells(int (*func)(int),
         int startLine, int endLine);
+    void summWith(Matrix &withMatrix,
+        int startLine, int endLine);
 };
 
 #endif// MATRIX_H
