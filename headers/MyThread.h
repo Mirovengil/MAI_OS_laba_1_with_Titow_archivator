@@ -27,6 +27,17 @@ public:
     MyThread(); // сильно много параметров, поэтому -- пустой конструктор + сеттеры
     void run(); // здесь происходит вся основная обработка
     void reset();
+
+    // сеттеры входных данных
+    void setOrigMatrix(ImageMatrix *m);
+    void setMatrixOfLuminocity(Matrix *m);
+    void setMatrixOfXYConvolution(Matrix *mx, Matrix *my);
+    void setResultImageMatrix(ImageMatrix *m);
+    void setResultImage(QImage *m);
+    void setFunctorOfLuminocity(int (*f)(RGBCell));
+    void setFunctorOfPow2(int (*f)(int));
+    void setFunctorOfSqrt(int (*f)(int));
+    void setLines(int start, int end);
 };
 
 #endif// MY_THREAD_H

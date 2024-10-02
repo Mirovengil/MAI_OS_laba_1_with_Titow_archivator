@@ -38,3 +38,50 @@ void MyThread::reset()
     _startLine = -1;
     _endLine = -1;
 };
+
+void MyThread::setOrigMatrix(ImageMatrix *m)
+{
+    _origMatrix = m;
+}
+
+void MyThread::setMatrixOfLuminocity(Matrix *m)
+{
+    _matrixOfLuminocity = m;
+}
+
+void MyThread::setMatrixOfXYConvolution(Matrix *mx, Matrix *my)
+{
+    _matrixOfXConvolution = mx;
+    _matrixOfYConvolution = my;
+}
+
+void MyThread::setResultImageMatrix(ImageMatrix *m)
+{
+    _resultImageMatrix = m;
+}
+
+void MyThread::setResultImage(QImage *m)
+{
+    _resultImage = m;
+}
+
+void MyThread::setFunctorOfLuminocity(int (*f)(RGBCell))
+{
+    _functorOfLuminocity = f;
+}
+
+void MyThread::setFunctorOfPow2(int (*f)(int))
+{
+    _functorOfPow2 = f;
+}
+
+void MyThread::setFunctorOfSqrt(int (*f)(int))
+{
+    _functorOfSqrt = f;
+}
+
+void MyThread::setLines(int start, int end)
+{
+    _startLine = start;
+    _endLine = end;
+};
