@@ -96,6 +96,8 @@ void MyGUI::makeProcessing()
 {
     *_imageForProcessing = _pixmapImageLoader->toImage();
 
+    // вот это я не добавляю в многопоточку, потому что иначе замеры для случаев, когда картинка уже считана
+    // и когда -- ещё нет, будут сильно разниться. 
     if (_imageMatrix == nullptr)
         _imageMatrix = new ImageMatrix(_imageForProcessing);
 
@@ -106,8 +108,15 @@ void MyGUI::makeProcessing()
             return (int)rgbCell.getLuminosity();
         };
 
-    Matrix matrixForXConvolution(*_imageMatrix, luminosityFunctor);
-    Matrix matrixForYConvolution(*_imageMatrix, luminosityFunctor);
+    // выделяю сразу всю память перед тем, как начать замер времени
+    Matrix matrixForXConvolution(_imageMatrix->getN(), _imageMatrix->getM());
+    Matrix matrixForYConvolution(_imageMatrix->getN(), _imageMatrix->getM());
+    ImageMatrix resultImage(_imageMatrix->getN(), _imageMatrix->getM());
+
+    // TODO : добавить многопоточку
+    matrixForXConvolution.fillWithImageMatrix(*_imageMatrix, luminosityFunctor, 0, _imageMatrix->getN());
+    matrixForYConvolution.fillWithImageMatrix(*_imageMatrix, luminosityFunctor, 0, _imageMatrix->getN());
+
     matrixForXConvolution.doConvolution(SobelsMatrixX);
     matrixForYConvolution.doConvolution(SobelsMatrixY);
 
@@ -128,8 +137,8 @@ void MyGUI::makeProcessing()
         result = result * 255.0 / 1442.5;
         return (int)result;
     });
-
-    ImageMatrix resultImage = matrixForXConvolution.convertToImageMatrix();
+    
+    resultImage = matrixForXConvolution.convertToImageMatrix();
     QImage operatedImage = resultImage.convertToImage();
     QPixmap temporalPixmap = QPixmap::fromImage(operatedImage);
     _lblImagePreview->setPixmap(temporalPixmap.scaled(_stdSizeOfImageLabel, Qt::KeepAspectRatio));

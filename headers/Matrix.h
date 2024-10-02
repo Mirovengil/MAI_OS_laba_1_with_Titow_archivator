@@ -14,13 +14,15 @@ public:
     Matrix();
     Matrix(int n, int m);
     Matrix(ImageMatrix &source, int (*func)(RGBCell));
+
     ImageMatrix convertToImageMatrix();
     void resize(int n, int m);
     int getValue(int i, int j);
     void setValue(int i, int j, int value);
     void doConvolution(const TCore &with);    
     void useFunctionToCells(int (*func)(int));
-
+    void fillWithImageMatrix(ImageMatrix &source, int (*func)(RGBCell),
+        int startLine, int endLine);
     void operator+=(Matrix &with);
 };
 

@@ -40,6 +40,14 @@ Matrix::Matrix(ImageMatrix &source, int (*func)(RGBCell))
             _data[i][j] = func(source.getRGBValue(i, j));    
 };
 
+void Matrix::fillWithImageMatrix(ImageMatrix &source, int (*func)(RGBCell),
+    int startLine, int endLine)
+{
+    for (int i = startLine; i < endLine; ++i)
+        for (int j = 0; j < _data[i].size(); ++j)
+            _data[i][j] = func(source.getRGBValue(i, j));    
+};
+
 void Matrix::doConvolution(const TCore &with)
 {
     Matrix tmpMatrix(_data.size(), _data[0].size());
