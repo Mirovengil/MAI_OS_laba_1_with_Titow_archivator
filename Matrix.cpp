@@ -48,26 +48,15 @@ void Matrix::fillWithImageMatrix(ImageMatrix &source, int (*func)(RGBCell),
             _data[i][j] = func(source.getRGBValue(i, j));    
 };
 
-void Matrix::doConvolution(const TCore &with)
+void Matrix::doConvolution(const TCore &with, Matrix &resultMatrix,
+        int startLine, int endLine)
 {
-    Matrix tmpMatrix(_data.size(), _data[0].size());
 
-    for (int i = 1; i < _data.size()-1; ++i)
-    {
+    for (int i = startLine; i < endLine; ++i)
         for (int j = 1; j < _data[i].size()-1; ++j)
-        {
-            
             for (int coreI = -1; coreI <= 1; ++coreI)
-            {
                 for (int coreJ = -1; coreJ <= 1; ++coreJ)
-                {
-                    tmpMatrix._data[i][j] += _data[i + coreI][j + coreJ] * with.getValue(coreI, coreJ);
-                }
-            }
-        }
-    }
-
-    *this = tmpMatrix;
+                    resultMatrix._data[i][j] += _data[i + coreI][j + coreJ] * with.getValue(coreI, coreJ);
 }; 
 
 void Matrix::useFunctionToCells(int (*func)(int))

@@ -109,36 +109,39 @@ void MyGUI::makeProcessing()
         };
 
     // выделяю сразу всю память перед тем, как начать замер времени
-    Matrix matrixForXConvolution(_imageMatrix->getN(), _imageMatrix->getM());
-    Matrix matrixForYConvolution(_imageMatrix->getN(), _imageMatrix->getM());
+    Matrix matrixOfLuminosity(_imageMatrix->getN(), _imageMatrix->getM());
+    Matrix matrixOfXConvolution(_imageMatrix->getN(), _imageMatrix->getM());
+    Matrix matrixOfYConvolution(_imageMatrix->getN(), _imageMatrix->getM());
     ImageMatrix resultImage(_imageMatrix->getN(), _imageMatrix->getM());
 
-    // TODO : добавить многопоточку
-    matrixForXConvolution.fillWithImageMatrix(*_imageMatrix, luminosityFunctor, 0, _imageMatrix->getN());
-    matrixForYConvolution.fillWithImageMatrix(*_imageMatrix, luminosityFunctor, 0, _imageMatrix->getN());
+    // здесь начинается многопоточка и замер времени
 
-    matrixForXConvolution.doConvolution(SobelsMatrixX);
-    matrixForYConvolution.doConvolution(SobelsMatrixY);
+    // TODO : добавить многопоточку
+    matrixOfLuminosity.fillWithImageMatrix(*_imageMatrix, luminosityFunctor, 0, _imageMatrix->getN());
+
+    // TODO : добавить многопоточку
+    matrixOfLuminosity.doConvolution(SobelsMatrixX, matrixOfXConvolution, 1, _imageMatrix->getN()-1);
+    matrixOfLuminosity.doConvolution(SobelsMatrixY, matrixOfYConvolution, 1, _imageMatrix->getN()-1);
 
     auto pow2Functor = [](int value)
     {
         return value * value;
     };
 
-    matrixForXConvolution.useFunctionToCells(pow2Functor);
-    matrixForYConvolution.useFunctionToCells(pow2Functor);
+    matrixOfXConvolution.useFunctionToCells(pow2Functor);
+    matrixOfYConvolution.useFunctionToCells(pow2Functor);
 
     // чтоб не порождать новые, занимающие дофига памяти, сущности
-    matrixForXConvolution += matrixForYConvolution;
+    matrixOfXConvolution += matrixOfYConvolution;
 
-    matrixForXConvolution.useFunctionToCells([](int value)
+    matrixOfXConvolution.useFunctionToCells([](int value)
     {
         double result = sqrt(value);
         result = result * 255.0 / 1442.5;
         return (int)result;
     });
     
-    resultImage = matrixForXConvolution.convertToImageMatrix();
+    resultImage = matrixOfXConvolution.convertToImageMatrix();
     QImage operatedImage = resultImage.convertToImage();
     QPixmap temporalPixmap = QPixmap::fromImage(operatedImage);
     _lblImagePreview->setPixmap(temporalPixmap.scaled(_stdSizeOfImageLabel, Qt::KeepAspectRatio));
