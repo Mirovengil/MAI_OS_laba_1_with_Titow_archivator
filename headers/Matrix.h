@@ -15,7 +15,6 @@ public:
     Matrix(int n, int m);
     Matrix(ImageMatrix &source, int (*func)(RGBCell));
 
-    ImageMatrix convertToImageMatrix();
     void resize(int n, int m);
     int getValue(int i, int j);
     void setValue(int i, int j, int value);
@@ -29,6 +28,8 @@ public:
     void useFunctionToCells(int (*func)(int),
         int startLine, int endLine);
     void summWith(Matrix &withMatrix,
+        int startLine, int endLine);
+    void convertToImageMatrix(ImageMatrix &result,
         int startLine, int endLine);
 };
 

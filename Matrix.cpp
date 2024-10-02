@@ -82,12 +82,10 @@ void Matrix::summWith(Matrix &withMatrix,
             _data[i][j] += withMatrix._data[i][j];
 }
 
-ImageMatrix Matrix::convertToImageMatrix()
+void Matrix::convertToImageMatrix(ImageMatrix &result,
+        int startLine, int endLine)
 {
-    ImageMatrix result(_data.size(), _data[0].size());
-    for (int i = 0; i < _data.size(); ++i)
+    for (int i = startLine; i < endLine; ++i)
         for (int j = 0; j < _data[i].size(); ++j)
             result.setRGBValue(i, j, _data[i][j]);
-
-    return result;
 };

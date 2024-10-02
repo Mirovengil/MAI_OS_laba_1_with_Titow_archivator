@@ -137,14 +137,15 @@ void MyGUI::makeProcessing()
     matrixOfXConvolution.useFunctionToCells(pow2Functor, 1, _imageMatrix->getN()-1);
     matrixOfYConvolution.useFunctionToCells(pow2Functor, 1, _imageMatrix->getN()-1);
 
-    // чтоб не порождать новые, занимающие дофига памяти, сущности
+    // чтоб не выделять память под третью матрицу -- сделаю оставшуюся математику  в matrixOfXConvolution
+    // TODO : добавить многопоточку
     matrixOfXConvolution.summWith(matrixOfYConvolution, 1, _imageMatrix->getN()-1);
 
     // TODO : добавить многопоточку
     matrixOfXConvolution.useFunctionToCells(sqrtFunctor, 1, _imageMatrix->getN() - 1);
     
-    resultImage = matrixOfXConvolution.convertToImageMatrix();
-
+    // TODO : добавить многопоточку
+    matrixOfXConvolution.convertToImageMatrix(resultImage, 1, _imageMatrix->getN()-1);
 
     operatedImage = resultImage.convertToImage();
     
