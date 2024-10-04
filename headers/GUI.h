@@ -31,7 +31,7 @@ private:
     QLabel *_lblNumberOfThreads;
     QSlider *_sliderNumberOfThreads;
     QMessageBox *_messageBoxTimesResult;
-    QFileDialog *_fileDialogForSelectImageFile;
+    QFileDialog *_fileDialogForLoadImageFile;
     QPushButton *_btnReset;
     ImageMatrix *_imageMatrix;
     QElapsedTimer *_timerOfProcessing;
@@ -45,8 +45,9 @@ private:
 public slots:
     void renewNumberOfThreads();
     void makeProcessing();
-    void selectImageFile();
+    void loadImageFromFile();
     void resetImageToNonFiltered();
+    void saveImageToFile();
 public:
     MyGUI();
     ~MyGUI();

@@ -64,18 +64,18 @@ MyGUI::MyGUI()
     // эти товарищи не являются детьми основного виджета, и в деструкторе их надо убивать по отдельности
     _messageBoxTimesResult = new QMessageBox;
 
-    _fileDialogForSelectImageFile = new QFileDialog;
-    _fileDialogForSelectImageFile->setNameFilter(tr("Images (*.png *.png)"));
-    _fileDialogForSelectImageFile->setFileMode(QFileDialog::ExistingFile);
+    _fileDialogForLoadImageFile = new QFileDialog;
+    _fileDialogForLoadImageFile->setNameFilter(tr("Images (*.png *.png)"));
+    _fileDialogForLoadImageFile->setFileMode(QFileDialog::ExistingFile);
 
     _imageForProcessing = new QImage;
 
     // привязываю сигналы к слотам
     connect(_sliderNumberOfThreads, &QSlider::valueChanged, this, &MyGUI::renewNumberOfThreads);
     connect(_btnUseSobelsFilter, &QPushButton::pressed, this, &MyGUI::makeProcessing);
-    connect(_btnSelectImage, &QPushButton::pressed, this, &MyGUI::selectImageFile);
+    connect(_btnSelectImage, &QPushButton::pressed, this, &MyGUI::loadImageFromFile);
     connect(_btnReset, &QPushButton::pressed, this, &MyGUI::resetImageToNonFiltered);
-
+    connect(_btnSaveImage, &QPushButton::pressed, this, &MyGUI::saveImageToFile);
     // здесь -- стартовые значения обработки
     _imageMatrix = nullptr;
 
@@ -87,12 +87,12 @@ void MyGUI::resetImageToNonFiltered()
     _lblImagePreview->setPixmap(_pixmapImageLoader->scaled(_stdSizeOfImageLabel, Qt::KeepAspectRatio));
 };
 
-void MyGUI::selectImageFile()
+void MyGUI::loadImageFromFile()
 {
     QStringList selectedFile;
-    if (_fileDialogForSelectImageFile->exec())
+    if (_fileDialogForLoadImageFile->exec())
     {
-        selectedFile = _fileDialogForSelectImageFile->selectedFiles();
+        selectedFile = _fileDialogForLoadImageFile->selectedFiles();
         _openImage(selectedFile[0]);
         if (_imageMatrix != nullptr)
         {
@@ -101,6 +101,11 @@ void MyGUI::selectImageFile()
         }
     }
 };
+
+void MyGUI::saveImageToFile()
+{
+
+}
 
 void MyGUI::_openImage(QString filename)
 {
@@ -195,7 +200,7 @@ MyGUI::~MyGUI()
 {
     delete _layoutMain;
     delete _messageBoxTimesResult;
-    delete _fileDialogForSelectImageFile;
+    delete _fileDialogForLoadImageFile;
     delete _imageForProcessing;
     delete _imageMatrix;
     for (int i = 0; i < _threads.size(); ++i)
