@@ -32,6 +32,7 @@ private:
     QPushButton *_btnReset;
     ImageMatrix *_imageMatrix;
     QElapsedTimer *_timerOfProcessing;
+    QPushButton *_btnSaveImage;
 
     int _numberOfThreads;
     std::vector <MyThread*> _threads;

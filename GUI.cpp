@@ -29,6 +29,10 @@ MyGUI::MyGUI()
     _lblImagePreview->resize(_stdSizeOfImageLabel);
     _layoutMain->addWidget(_lblImagePreview);
 
+    _btnSaveImage = new QPushButton;
+    _btnSaveImage->setText("Сохранить изображение");
+    _layoutMain->addWidget(_btnSaveImage);
+
     _numberOfThreads = 1;
     _lblNumberOfThreads = new QLabel(_sliderText + "1");
     _layoutMain->addWidget(_lblNumberOfThreads);
@@ -154,9 +158,9 @@ void MyGUI::makeProcessing()
 
     }
 
+    _timerOfProcessing->start();
     for (int i = 0; i < _numberOfThreads; ++i)
         _threads[i]->start();    
-    _timerOfProcessing->start();
 
 
     for (int i = 0; i < _numberOfThreads; ++i)
