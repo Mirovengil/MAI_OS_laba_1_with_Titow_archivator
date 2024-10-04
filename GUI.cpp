@@ -13,35 +13,37 @@ const QString _sliderText = "Заданное число потоков: ";
 MyGUI::MyGUI()
 {
     this->resize(_stdSizeOfGUIWindow);
-
+    this->setWindowTitle("Программа по обработке изображений фильтром Собела by IVAN");
     _pixmapImageLoader = new QPixmap;
 
     _layoutMain = new QGridLayout(this);
-    
+    _layoutOfProcessingElems = new QVBoxLayout;
+    _layoutOfImageElems = new QVBoxLayout;
+
     _btnSelectImage = new QPushButton;
     _btnSelectImage->setText("Выбрать изображение для обработки");
-    _layoutMain->addWidget(_btnSelectImage);
+    _layoutOfImageElems->addWidget(_btnSelectImage);
     
     _lblImagePreview = new QLabel("Здесь будет изображение");
     _pixmapImageLoader->load("../pic/picture_404.png");
     _lblImagePreview->setPixmap(_pixmapImageLoader->scaled(_stdSizeOfImageLabel, Qt::KeepAspectRatio));
     
     _lblImagePreview->resize(_stdSizeOfImageLabel);
-    _layoutMain->addWidget(_lblImagePreview);
+    _layoutOfImageElems->addWidget(_lblImagePreview);
 
     _btnSaveImage = new QPushButton;
     _btnSaveImage->setText("Сохранить изображение");
-    _layoutMain->addWidget(_btnSaveImage);
+    _layoutOfImageElems->addWidget(_btnSaveImage);
 
     _numberOfThreads = 1;
     _lblNumberOfThreads = new QLabel(_sliderText + "1");
-    _layoutMain->addWidget(_lblNumberOfThreads);
+    _layoutOfProcessingElems->addWidget(_lblNumberOfThreads);
     
     _sliderNumberOfThreads = new QSlider(Qt::Horizontal);
     _sliderNumberOfThreads->setMinimum(0);                  // 2^0 = 1 поток
     _sliderNumberOfThreads->setMaximum(_maxValueOfSlider);  // 2^7 = 128 потоков
     _sliderNumberOfThreads->setValue(_stdValueOfSlider);
-    _layoutMain->addWidget(_sliderNumberOfThreads);
+    _layoutOfProcessingElems->addWidget(_sliderNumberOfThreads);
 
     _threads.resize((1<<_maxValueOfSlider));
     for (int i = 0; i < _threads.size(); ++i)
@@ -49,11 +51,15 @@ MyGUI::MyGUI()
 
     _btnUseSobelsFilter = new QPushButton;
     _btnUseSobelsFilter->setText("Применить фильтр Собела");
-    _layoutMain->addWidget(_btnUseSobelsFilter);
+    _layoutOfProcessingElems->addWidget(_btnUseSobelsFilter);
 
     _btnReset = new QPushButton;
     _btnReset->setText("Сбросить результат фильтрации");
-    _layoutMain->addWidget(_btnReset);
+    _layoutOfProcessingElems->addWidget(_btnReset);
+
+    _layoutMain->addLayout(_layoutOfImageElems, 0, 0);
+    _layoutMain->addLayout(_layoutOfProcessingElems, 0, 1, Qt::AlignVCenter);
+
 
     // эти товарищи не являются детьми основного виджета, и в деструкторе их надо убивать по отдельности
     _messageBoxTimesResult = new QMessageBox;

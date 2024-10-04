@@ -4,6 +4,7 @@
 #include <QWidget>
 #include <QPushButton>
 #include <QGridLayout>
+#include <QVBoxLayout>
 #include <QLabel>
 #include <QPixmap>
 #include <QSlider>
@@ -20,6 +21,8 @@ class MyGUI : public QWidget
 {
 private:
     QGridLayout *_layoutMain;
+    QVBoxLayout *_layoutOfProcessingElems;
+    QVBoxLayout *_layoutOfImageElems;
     QPushButton *_btnSelectImage;
     QPushButton *_btnUseSobelsFilter;
     QLabel *_lblImagePreview;
