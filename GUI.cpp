@@ -16,7 +16,7 @@ MyGUI::MyGUI()
 
     _pixmapImageLoader = new QPixmap;
 
-    _layoutMain = new QVBoxLayout(this);
+    _layoutMain = new QGridLayout(this);
     
     _btnSelectImage = new QPushButton;
     _btnSelectImage->setText("Выбрать изображение для обработки");

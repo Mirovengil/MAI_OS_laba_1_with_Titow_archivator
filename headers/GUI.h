@@ -3,7 +3,7 @@
 
 #include <QWidget>
 #include <QPushButton>
-#include <QVBoxLayout>
+#include <QGridLayout>
 #include <QLabel>
 #include <QPixmap>
 #include <QSlider>
@@ -19,7 +19,7 @@
 class MyGUI : public QWidget
 {
 private:
-    QVBoxLayout *_layoutMain;
+    QGridLayout *_layoutMain;
     QPushButton *_btnSelectImage;
     QPushButton *_btnUseSobelsFilter;
     QLabel *_lblImagePreview;
