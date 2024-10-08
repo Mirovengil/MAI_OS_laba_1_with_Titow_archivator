@@ -31,7 +31,9 @@ private:
     QLabel *_lblNumberOfThreads;
     QSlider *_sliderNumberOfThreads;
     QMessageBox *_messageBoxTimesResult;
+    QMessageBox *_messageBoxFileWasSaved;
     QFileDialog *_fileDialogForLoadImageFile;
+    QFileDialog *_fileDialogForSavingImageFile;
     QPushButton *_btnReset;
     ImageMatrix *_imageMatrix;
     QElapsedTimer *_timerOfProcessing;

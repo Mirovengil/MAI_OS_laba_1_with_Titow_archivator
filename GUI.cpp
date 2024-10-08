@@ -7,7 +7,7 @@
 const QSize _stdSizeOfGUIWindow = {1200, 800}; 
 const QSize _stdSizeOfImageLabel = {1200, 600};
 const int _stdValueOfSlider = 0;
-const int _maxValueOfSlider = 7;
+const int _maxValueOfSlider = 10;
 const QString _sliderText = "Заданное число потоков: ";
 
 MyGUI::MyGUI()
@@ -63,10 +63,17 @@ MyGUI::MyGUI()
 
     // эти товарищи не являются детьми основного виджета, и в деструкторе их надо убивать по отдельности
     _messageBoxTimesResult = new QMessageBox;
+    _messageBoxFileWasSaved = new QMessageBox;
+    _messageBoxFileWasSaved->setText("Файл был успешно сохранён!");
 
     _fileDialogForLoadImageFile = new QFileDialog;
-    _fileDialogForLoadImageFile->setNameFilter(tr("Images (*.png *.png)"));
+    _fileDialogForLoadImageFile->setNameFilter(tr("Images (*.png *.jpg)"));
     _fileDialogForLoadImageFile->setFileMode(QFileDialog::ExistingFile);
+
+    _fileDialogForSavingImageFile = new QFileDialog;
+    _fileDialogForSavingImageFile->setAcceptMode(QFileDialog::AcceptSave);
+    _fileDialogForSavingImageFile->setNameFilter(tr("Images (*.png)"));
+    _fileDialogForLoadImageFile->setFileMode(QFileDialog::AnyFile);
 
     _imageForProcessing = new QImage;
 
@@ -104,7 +111,13 @@ void MyGUI::loadImageFromFile()
 
 void MyGUI::saveImageToFile()
 {
-
+    QStringList fileToSave;
+    if (_fileDialogForSavingImageFile->exec())
+    {
+        fileToSave = _fileDialogForSavingImageFile->selectedFiles();
+        _lblImagePreview->pixmap()->save(fileToSave[0]);
+        _messageBoxFileWasSaved->exec();
+    }
 }
 
 void MyGUI::_openImage(QString filename)
@@ -147,6 +160,7 @@ void MyGUI::makeProcessing()
     qint64 processingTimeElapsed;
 
     // здесь начинается многопоточка и замер времени
+    
     for (int i = 0; i < _numberOfThreads; ++i)
     {
         int from, to;
@@ -206,4 +220,6 @@ MyGUI::~MyGUI()
     for (int i = 0; i < _threads.size(); ++i)
         delete _threads[i];
     delete _timerOfProcessing;
+    delete _fileDialogForSavingImageFile;
+    delete _messageBoxFileWasSaved;
 };
