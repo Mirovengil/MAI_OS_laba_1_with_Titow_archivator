@@ -1,0 +1,12 @@
+[
+{
+  "directory": "/home/ivan/MAI/OS/laba_3_cpp_ver/build",
+  "command": "/usr/bin/c++   -g -o CMakeFiles/laba_3_cpp_ver.dir/program1.cpp.o -c /home/ivan/MAI/OS/laba_3_cpp_ver/program1.cpp",
+  "file": "/home/ivan/MAI/OS/laba_3_cpp_ver/program1.cpp"
+},
+{
+  "directory": "/home/ivan/MAI/OS/laba_3_cpp_ver/build",
+  "command": "/usr/bin/c++   -g -o CMakeFiles/laba_3_cpp_ver.dir/TQueue.cpp.o -c /home/ivan/MAI/OS/laba_3_cpp_ver/TQueue.cpp",
+  "file": "/home/ivan/MAI/OS/laba_3_cpp_ver/TQueue.cpp"
+}
+]

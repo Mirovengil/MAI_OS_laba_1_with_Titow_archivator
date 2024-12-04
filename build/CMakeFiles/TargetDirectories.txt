@@ -1,0 +1,3 @@
+/home/ivan/MAI/OS/laba_3_cpp_ver/build/CMakeFiles/laba_3_cpp_ver.dir
+/home/ivan/MAI/OS/laba_3_cpp_ver/build/CMakeFiles/edit_cache.dir
+/home/ivan/MAI/OS/laba_3_cpp_ver/build/CMakeFiles/rebuild_cache.dir

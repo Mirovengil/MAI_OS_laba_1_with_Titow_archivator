@@ -1,0 +1,1 @@
+/usr/bin/g++ -g CMakeFiles/program1.dir/program1.cpp.o CMakeFiles/program1.dir/TQueue.cpp.o CMakeFiles/program1.dir/TMessage.cpp.o CMakeFiles/program1.dir/TTxtReader.cpp.o -o program1 

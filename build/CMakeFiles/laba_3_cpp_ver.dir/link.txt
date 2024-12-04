@@ -1,0 +1,1 @@
+/usr/bin/c++ -g CMakeFiles/laba_3_cpp_ver.dir/program1.cpp.o CMakeFiles/laba_3_cpp_ver.dir/TQueue.cpp.o -o laba_3_cpp_ver 

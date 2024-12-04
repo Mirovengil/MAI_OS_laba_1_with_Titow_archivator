@@ -1,0 +1,3 @@
+/home/ivan/MAI/OS/laba_3_cpp_ver/out/build/GCC 11.3.0 x86_64-linux-gnu/CMakeFiles/laba_3_cpp_ver.dir
+/home/ivan/MAI/OS/laba_3_cpp_ver/out/build/GCC 11.3.0 x86_64-linux-gnu/CMakeFiles/edit_cache.dir
+/home/ivan/MAI/OS/laba_3_cpp_ver/out/build/GCC 11.3.0 x86_64-linux-gnu/CMakeFiles/rebuild_cache.dir
