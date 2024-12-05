@@ -1,0 +1,22 @@
+[
+{
+  "directory": "/home/ivan/MAI/OS/laba_2/MAI_OS_labs_with_Titow/build",
+  "command": "/usr/bin/c++   -g -o CMakeFiles/laba_2.dir/main.cpp.o -c /home/ivan/MAI/OS/laba_2/MAI_OS_labs_with_Titow/main.cpp",
+  "file": "/home/ivan/MAI/OS/laba_2/MAI_OS_labs_with_Titow/main.cpp"
+},
+{
+  "directory": "/home/ivan/MAI/OS/laba_2/MAI_OS_labs_with_Titow/build",
+  "command": "/usr/bin/c++   -g -o CMakeFiles/laba_2.dir/TTerminal.cpp.o -c /home/ivan/MAI/OS/laba_2/MAI_OS_labs_with_Titow/TTerminal.cpp",
+  "file": "/home/ivan/MAI/OS/laba_2/MAI_OS_labs_with_Titow/TTerminal.cpp"
+},
+{
+  "directory": "/home/ivan/MAI/OS/laba_2/MAI_OS_labs_with_Titow/build",
+  "command": "/usr/bin/c++   -g -o CMakeFiles/laba_2.dir/TParser.cpp.o -c /home/ivan/MAI/OS/laba_2/MAI_OS_labs_with_Titow/TParser.cpp",
+  "file": "/home/ivan/MAI/OS/laba_2/MAI_OS_labs_with_Titow/TParser.cpp"
+},
+{
+  "directory": "/home/ivan/MAI/OS/laba_2/MAI_OS_labs_with_Titow/build",
+  "command": "/usr/bin/c++   -g -o CMakeFiles/laba_2.dir/TProcesser.cpp.o -c /home/ivan/MAI/OS/laba_2/MAI_OS_labs_with_Titow/TProcesser.cpp",
+  "file": "/home/ivan/MAI/OS/laba_2/MAI_OS_labs_with_Titow/TProcesser.cpp"
+}
+]

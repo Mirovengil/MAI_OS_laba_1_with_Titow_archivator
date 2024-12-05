@@ -1,0 +1,3 @@
+/home/ivan/MAI/OS/laba_2/MAI_OS_labs_with_Titow/build/CMakeFiles/laba_2.dir
+/home/ivan/MAI/OS/laba_2/MAI_OS_labs_with_Titow/build/CMakeFiles/edit_cache.dir
+/home/ivan/MAI/OS/laba_2/MAI_OS_labs_with_Titow/build/CMakeFiles/rebuild_cache.dir
