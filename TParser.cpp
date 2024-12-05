@@ -1,4 +1,5 @@
 #include "TParser.h"
+#include <iostream>
 
 TParser::TParser()
 {
@@ -15,7 +16,8 @@ TParser::TParser()
 
 bool TParser::cmdIsUnkonwn()
 {
-    
+    parseWord(0);   
+    return (!isInDictionary());
 }
 
 void TParser::parseWord(int wordIndex)
@@ -24,28 +26,34 @@ void TParser::parseWord(int wordIndex)
     int currentWordIndex = 0;
     for (int i = 0; i < inputString.size(); ++i)
     {
-        if (inputString[i] != ' ')
-            continue;
-        
-        if (currentWordIndex++ < wordIndex)
-            continue;
+        if (currentWordIndex < wordIndex)
+        {
+            if (inputString[i] == ' ')
+                currentWordIndex++;
 
-        for (int j = i + 1; j < inputString.size(); ++j)
+            continue;
+        }
+
+        for (int j = i; j < inputString.size(); ++j)
         {
             if (inputString[j] != ' ')
             {
                 targetWord = targetWord + inputString[j];
                 continue;
             }
-
-            return;
         }        
+        return;
     }
 };
 
 bool TParser::isInDictionary()
 {
+    std::cout << "word: " << targetWord << "\n";
+    for (int i = 0; i < dictionary.size(); ++i)
+        if (dictionary[i].text == targetWord)
+            return true;
 
+    return false;
 }
 
 void TParser::parseCmd(std::string cmd)

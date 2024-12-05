@@ -13,9 +13,6 @@ void TTerminal::inputCmd()
 {
     std::cout << invitationForInput;
     std::getline(std::cin, currentCmd);
-
-    // TODO : сотри сию херню
-    //std::cout << "input currentCmd: " << currentCmd << "\n";
 }
 
 TTerminal::~TTerminal()
