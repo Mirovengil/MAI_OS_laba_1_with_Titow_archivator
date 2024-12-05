@@ -4,20 +4,15 @@
 TParser::TParser()
 {
     dictionary.resize(0);
-    dictionary.push_back({"ls", 0});            // показать текущую папку
-    dictionary.push_back({"ls", 1});            // показать указанную папку
-    dictionary.push_back({"cat", INF});         // вывести на экран указанные файлы
-    dictionary.push_back({"nice", 0});          // показать приоритет текущего процесса
-    dictionary.push_back({"nice", 3});          // запустить процесс с указанным приоритетом
-    dictionary.push_back({"exit", 0});          // выйти из терминала
-    dictionary.push_back({"exit", 1});          // убить i-ый дочерний процесс
-    dictionary.push_back({"killall"});          // убить процесс по имени
-}
-
-bool TParser::cmdIsUnkonwn()
-{
-    parseWord(0);   
-    return (!isInDictionary());
+    dictionary.push_back({"ls", 0, LS});                // показать текущую папку
+    dictionary.push_back({"ls", 1, LS_TARGET});         // показать указанную папку
+    dictionary.push_back({"cat", INF, CAT});            // вывести на экран указанные файлы
+    dictionary.push_back({"nice", 0, NICE_ME});         // показать приоритет текущего процесса
+    dictionary.push_back({"nice", 3, NICE_SMB});        // запустить процесс с указанным приоритетом
+    dictionary.push_back({"exit", 0, FINISH_PROGRAM});  // выйти из терминала
+    dictionary.push_back({"exit", 1, EXIT_SMB});        // убить i-ый дочерний процесс
+    dictionary.push_back({"killall", 1, KILLALL});         // убить процесс по имени
+    dictionary.push_back({"unknown", 1, UNKNOWN});         // убить процесс по имени
 }
 
 void TParser::parseWord(int wordIndex)
@@ -46,17 +41,38 @@ void TParser::parseWord(int wordIndex)
     }
 };
 
-bool TParser::isInDictionary()
-{
-    std::cout << "word: " << targetWord << "\n";
-    for (int i = 0; i < dictionary.size(); ++i)
-        if (dictionary[i].text == targetWord)
-            return true;
-
-    return false;
-}
-
 void TParser::parseCmd(std::string cmd)
 {
     inputString = cmd; 
 }
+
+int TParser::getNumberOfWords()
+{
+    int numberOfWords = 1;
+    for (int i = 0; i < inputString.size(); ++i)
+        numberOfWords += (inputString[i] == ' ');
+    
+    return numberOfWords;
+}
+
+int TParser::getIndexInDictionary(std::string cmd, int paramsNumber)
+{
+    for (int i = 0; i < dictionary.size(); ++i)
+    {
+        if (dictionary[i].text == cmd && dictionary[i].numberOfParams == paramsNumber)
+            return i;    
+    }
+    return dictionary.size()-1;
+};
+
+CommandCode TParser::getCmdCode()
+{
+    int numberOfWords = getNumberOfWords();
+    
+    parseWord(0);
+    std::string firstWord = targetWord;
+
+    int indexInDictionary = getIndexInDictionary(firstWord, numberOfWords-1);
+    return dictionary[indexInDictionary].code;
+}
+

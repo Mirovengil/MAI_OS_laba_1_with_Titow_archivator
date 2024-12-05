@@ -35,7 +35,7 @@ void TTerminal::exec()
 void TTerminal::parseCmd()
 {
     parser.parseCmd(currentCmd);
-    if (parser.cmdIsUnkonwn())
+    if (parser.getCmdCode() == UNKNOWN)
     {
         std::cout << "I don't know command\"" << currentCmd << "\"!\n";
         std::cout << "But I'll try to make it by cmd system()\n";

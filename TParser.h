@@ -14,11 +14,12 @@ private:
     std::string targetWord;
 
     void parseWord(int wordIndex);
-    bool isInDictionary();
+    int getNumberOfWords();
 public:
     TParser();
     void parseCmd(std::string cmd);
-    bool cmdIsUnkonwn();
+    CommandCode getCmdCode();
+    int getIndexInDictionary(std::string cmd, int paramsNumber);
 };
 
 #endif //TPARSER_H
