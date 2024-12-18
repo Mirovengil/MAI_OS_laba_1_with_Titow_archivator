@@ -37,8 +37,8 @@ bool TProcessesWorker::startProcess(std::string name, int priority)
         if (execvp(name.c_str(), argv.data()) == -1)
             return false;
         
-        openedProcesses.push_back({child_pid, name});
     }
+    openedProcesses.push_back({child_pid, name});
 
     return true;
 }
