@@ -1,4 +1,5 @@
 #include "TProcessesWorker.h"
+#include <vector>
 #include <sys/resource.h>
 #include <sys/types.h>
 #include <unistd.h>
@@ -19,4 +20,24 @@ int TProcessesWorker::getCurrentPriority()
 
 bool TProcessesWorker::startProcess(std::string name, int priority)
 {
+    pid_t child_pid = fork();
+    if (child_pid == -1)
+        return false;
+    
+    if (child_pid == 0)
+    {
+        // дочерний процесс
+        if (setpriority(PRIO_PROCESS, child_pid, priority) == -1)
+            return false;
+        
+        std::vector <char*> argv;
+        argv.push_back(const_cast<char*>(name.c_str()));
+        // что бы мы не запускали -- запустим это без аргументов...
+        argv.push_back(nullptr);
+
+        if (execvp(name.c_str(), argv.data()) == -1)
+            return false;
+    }
+
+    return true;
 }

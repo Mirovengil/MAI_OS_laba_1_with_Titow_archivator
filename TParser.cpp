@@ -8,7 +8,7 @@ TParser::TParser()
     dictionary.push_back({"ls", 1, LS_TARGET});         // показать указанную папку
     dictionary.push_back({"cat", INF, CAT});            // вывести на экран указанные файлы
     dictionary.push_back({"nice", 0, NICE_ME});         // показать приоритет текущего процесса
-    dictionary.push_back({"nice", 3, NICE_SMB});        // запустить процесс с указанным приоритетом
+    dictionary.push_back({"nice", 2, NICE_SMB});        // запустить процесс с указанным приоритетом
     dictionary.push_back({"exit", 0, FINISH_PROGRAM});  // выйти из терминала
     dictionary.push_back({"exit", 1, EXIT_SMB});        // убить i-ый дочерний процесс
     dictionary.push_back({"killall", 1, KILLALL});         // убить процесс по имени
