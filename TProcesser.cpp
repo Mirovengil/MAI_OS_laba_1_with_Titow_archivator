@@ -143,7 +143,7 @@ std::vector<std::string> TProcesser::getSonslistCommandResult()
 
         std::string PID = std::to_string(static_cast<int>(process.first));
         std::string processName = process.second;
-        std::string index = std::to_string(i);
+        std::string index = std::to_string(i+1);
         out.push_back(tabulations + index + ". " + processName + "(PID: " + PID + ")");
     }
 
