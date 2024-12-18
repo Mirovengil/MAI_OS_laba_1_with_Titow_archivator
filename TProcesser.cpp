@@ -168,3 +168,16 @@ std::vector<std::string> TProcesser::getExitCommandResult(std::vector<std::strin
         out.push_back("Не удалось закрыть процесс...");
     return out;
 }
+
+std::vector<std::string> TProcesser::getKillallCommandResult(std::vector<std::string> params)
+{
+    std::vector <std::string> out;
+
+    std::string processName = params[0];
+    if (processesWorker.closeProcess(processName))
+        out.push_back("Процесс был успешно закрыт!");
+    else
+        out.push_back("Не удалось закрыть процесс...");
+
+    return out;
+}

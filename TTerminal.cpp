@@ -85,7 +85,10 @@ void TTerminal::parseCmd()
     }
     if (parser.getCmdCode() == KILLALL)
     {
-        
+        auto params = parser.getParams();
+        auto out = processer.getKillallCommandResult(params);
+        for (auto it : out)
+            std::cout << it << "\n"; 
     }
     if (parser.getCmdCode() == SONS_LIST)
     {

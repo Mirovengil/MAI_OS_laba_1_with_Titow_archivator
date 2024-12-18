@@ -60,6 +60,16 @@ bool TProcessesWorker::closeProcess(int index)
     return true;
 }
 
+bool TProcessesWorker::closeProcess(std::string name)
+{
+    for (int i = 0; i < openedProcesses.size(); ++i)
+    {
+        if (openedProcesses[i].second == name)
+            return closeProcess(i);
+    }
+    return false;
+}
+
 
 int TProcessesWorker::getNumberOfProcesses()
 {

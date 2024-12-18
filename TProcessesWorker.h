@@ -15,6 +15,7 @@ public:
     int getCurrentPriority();
     bool startProcess(std::string name, int priority);
     bool closeProcess(int index);
+    bool closeProcess(std::string name);
 
     int getNumberOfProcesses();
     std::pair<pid_t, std::string> getProcess(int index);

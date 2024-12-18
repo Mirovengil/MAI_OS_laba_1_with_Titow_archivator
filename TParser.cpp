@@ -11,9 +11,9 @@ TParser::TParser()
     dictionary.push_back({"nice", 2, NICE_SMB});        // запустить процесс с указанным приоритетом
     dictionary.push_back({"exit", 0, FINISH_PROGRAM});  // выйти из терминала
     dictionary.push_back({"exit", 1, EXIT_SMB});        // убить i-ый дочерний процесс
-    dictionary.push_back({"killall", 1, KILLALL});         // убить процесс по имени
-    dictionary.push_back({"sonslist", 0, SONS_LIST});         // убить процесс по имени
-    dictionary.push_back({"unknown", 1, UNKNOWN});         // убить процесс по имени
+    dictionary.push_back({"killall", 1, KILLALL});      // убить процесс по имени
+    dictionary.push_back({"sonslist", 0, SONS_LIST});   // список открытых процессов
+    dictionary.push_back({"unknown", 1, UNKNOWN});      // убить процесс по имени
 }
 
 void TParser::parseWord(int wordIndex)
