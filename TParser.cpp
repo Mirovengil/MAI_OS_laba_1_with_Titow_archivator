@@ -60,8 +60,13 @@ int TParser::getIndexInDictionary(std::string cmd, int paramsNumber)
 {
     for (int i = 0; i < dictionary.size(); ++i)
     {
-        if (dictionary[i].text == cmd && dictionary[i].numberOfParams == paramsNumber)
-            return i;    
+        if (dictionary[i].text == cmd)
+        {
+            if (dictionary[i].numberOfParams == paramsNumber)
+                return i;    
+            if (dictionary[i].numberOfParams == INF && paramsNumber >= 1)
+                return i;
+        }
     }
     return dictionary.size()-1;
 };
