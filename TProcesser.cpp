@@ -107,3 +107,17 @@ std::vector<std::string> TProcesser::getNiceCommandResult()
     out.push_back(result + priorityCorrectValue);
     return out;
 }
+
+std::vector<std::string> TProcesser::getNiceCommandResult(std::vector<std::string>params)
+{
+    std::vector <std::string> out;
+
+    if (!processesWorker.startProcess("vlc", 5))
+    {
+        out.push_back("При запуске указанного процесса возникли проблемы!");
+        return out;
+    };
+
+    out.push_back("Дочерний процесс был успешно запущен!");
+    return out;
+}

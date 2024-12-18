@@ -67,7 +67,10 @@ void TTerminal::parseCmd()
     }
     if (parser.getCmdCode() == NICE_SMB)
     {
-        
+        auto params = parser.getParams();
+        auto out = processer.getNiceCommandResult(params);
+        for (auto it : out)
+            std::cout << it << "\n";        
     }
     if (parser.getCmdCode() == EXIT_SMB)
     {

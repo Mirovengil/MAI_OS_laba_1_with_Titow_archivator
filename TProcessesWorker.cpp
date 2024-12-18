@@ -3,6 +3,7 @@
 #include <sys/types.h>
 #include <unistd.h>
 #include <cerrno>
+#include <signal.h>
 
 int TProcessesWorker::getCurrentPriority()
 {
@@ -14,4 +15,8 @@ int TProcessesWorker::getCurrentPriority()
         return BAD_PRIORITY;
 
     return priority;
+}
+
+bool TProcessesWorker::startProcess(std::string name, int priority)
+{
 }

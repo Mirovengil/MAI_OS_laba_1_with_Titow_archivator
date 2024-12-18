@@ -8,8 +8,8 @@ enum CommandCode
     LS,                 // ГОТОВО
     LS_TARGET,          // ГОТОВО
     CAT,                // ГОТОВО
-    NICE_ME,            // 
-    NICE_SMB,
+    NICE_ME,            // ГОТОВО
+    NICE_SMB,           
     EXIT_SMB,
     FINISH_PROGRAM,     // ГОТОВО
     KILLALL,
