@@ -5,13 +5,13 @@
 
 enum CommandCode
 {
-    LS,
-    LS_TARGET,
+    LS,                 // ГОТОВО
+    LS_TARGET,          // ГОТОВО
     CAT,
-    NICE_ME,
+    NICE_ME,            // ГОТОВО
     NICE_SMB,
     EXIT_SMB,
-    FINISH_PROGRAM,
+    FINISH_PROGRAM,     // ГОТОВО
     KILLALL,
     UNKNOWN,
 };

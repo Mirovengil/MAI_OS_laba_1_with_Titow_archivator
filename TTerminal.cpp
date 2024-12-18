@@ -5,8 +5,8 @@ const std::string invitationForInput = "> ";
 
 TTerminal::TTerminal()
 {
-    std::cout << "Hello, traveller!\n";
-    std::cout << "I'm the terminal by IVAN_IV\n";
+    std::cout << "Здравствуй, путник!!\n";
+    std::cout << "Я есмь терминал by IVAN_IV...\n";
 }
 
 void TTerminal::inputCmd()
@@ -17,8 +17,8 @@ void TTerminal::inputCmd()
 
 TTerminal::~TTerminal()
 {
-    std::cout << "Thank you for using me!\n";
-    std::cout << "Good luck you, traveller!\n";
+    std::cout << "Спасибо за использование терминала by_IVAN_IV...\n";
+    std::cout << "Удачи, путник!\n";
 }
 
 void TTerminal::exec()
@@ -37,7 +37,7 @@ void TTerminal::parseCmd()
     parser.parseCmd(currentCmd);
     if (parser.getCmdCode() == UNKNOWN)
     {
-        std::cout << "I don't know command \"" << currentCmd << "\"!\n";
+        std::cout << "Я не знаю команды \"" << currentCmd << "\"!\n";
     }
     if (parser.getCmdCode() == LS)
     {
@@ -73,7 +73,7 @@ void TTerminal::parseCmd()
     }
     if (parser.getCmdCode() == FINISH_PROGRAM)
     {
-        
+        isRunning = false;
     }
     if (parser.getCmdCode() == KILLALL)
     {

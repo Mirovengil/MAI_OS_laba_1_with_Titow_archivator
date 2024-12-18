@@ -15,7 +15,7 @@ std::vector<std::string> TProcesser::getLsCommandResult()
     out.push_back("Директория: " + currentDirStr);     // директория
                                             
                                             // все файлы директории -- подряд
-    out.push_back("Files list:");
+    out.push_back("Список файлов:");
     
     std::string tabulations = "\t\t";
     for (auto &fileIterator : std::filesystem::directory_iterator(currentDir))
@@ -36,7 +36,7 @@ std::vector<std::string> TProcesser::getLsCommandResult(std::string directory)
         out.push_back("Директория: " + directory + "/");     // директория
                                                 
                                                 // все файлы директории -- подряд
-        out.push_back("Files list:");
+        out.push_back("Список файлов:");
         
         std::string tabulations = "\t\t";
         for (auto &fileIterator : std::filesystem::directory_iterator(directory))
