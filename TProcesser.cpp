@@ -112,12 +112,16 @@ std::vector<std::string> TProcesser::getNiceCommandResult(std::vector<std::strin
 {
     std::vector <std::string> out;
 
-    if (!processesWorker.startProcess(params[0], std::atoi(params[1].c_str())))
-    {
-        out.push_back("При запуске указанного процесса возникли проблемы!");
-        return out;
-    };
 
-    out.push_back("Дочерний процесс был успешно запущен!");
+    std::string processName = params[0];
+    int priority = std::atoi(params[1].c_str());
+    if (!processesWorker.startProcess(processName, priority))
+        out.push_back("При запуске указанного процесса возникли проблемы!");
+
+    if (priority > 19)
+    {
+        out.push_back("Возможность задавать приоритет больше, чем число 19, отсутствует.");
+        out.push_back("Приоритет запущенного процесса равен: 19.");
+    }
     return out;
 }
