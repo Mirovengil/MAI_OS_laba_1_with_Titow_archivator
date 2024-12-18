@@ -112,7 +112,7 @@ std::vector<std::string> TProcesser::getNiceCommandResult(std::vector<std::strin
 {
     std::vector <std::string> out;
 
-    if (!processesWorker.startProcess("vlc", 5))
+    if (!processesWorker.startProcess(params[0], std::atoi(params[1].c_str())))
     {
         out.push_back("При запуске указанного процесса возникли проблемы!");
         return out;
