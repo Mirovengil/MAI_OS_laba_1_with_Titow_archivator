@@ -20,6 +20,7 @@ int TProcessesWorker::getCurrentPriority()
 bool TProcessesWorker::startProcess(std::string name, int priority)
 {
     pid_t child_pid = fork();
+    
     if (child_pid == -1)
         return false;
 

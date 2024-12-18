@@ -118,7 +118,9 @@ std::vector<std::string> TProcesser::getNiceCommandResult(std::vector<std::strin
     if (!processesWorker.startProcess(processName, priority))
     {
         out.push_back("При запуске указанного процесса возникли проблемы!");
-        processesWorker.popProcess();
+        
+        // здесь может оказаться только дочерний процесс, т.к. родитель всегда возвращает true
+        exit(0);
     }
 
     if (priority > 19)
