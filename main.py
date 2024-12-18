@@ -1,17 +1,7 @@
-from pydbus import SessionBus, SystemBus
 from TFileOpener import TFileOpener
 from TInputParser import TInputParser
-# # bus = SessionBus()
+from TDBusCommander import TDBusCommander
 
-
-# # runner = bus.get(
-# #     'org.freedesktop.Application', '/org/freedesktop/Application'
-# # )
-
-# bus = SystemBus()
-# app = bus.get('org.freedesktop.Application', '/org/freedesktop/Application')
-
-# #runner.Activate('org.mozilla.firefox')
 
 if __name__ == "__main__":
     file_opener = TFileOpener()

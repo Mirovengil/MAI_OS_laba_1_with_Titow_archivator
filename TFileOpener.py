@@ -1,3 +1,8 @@
+import subprocess
+import os
+
+from TDBusCommander import TDBusCommander
+
 class TFileOpener(object):
 
     def __init__(self):
@@ -16,7 +21,7 @@ class TFileOpener(object):
         self.__accordance['.odt'] = 'loffice'
         self.__accordance['.docx'] = 'loffice'
 
-
+        self.__dbus_commander = TDBusCommander()
         pass
     
     @staticmethod
@@ -34,13 +39,28 @@ class TFileOpener(object):
         dot_position = TFileOpener.__get_left_dot_position(filename)
         return filename[dot_position:]
 
+    @staticmethod
+    def __check_if_file_exists(filename):
+        if not os.path.isfile(filename):
+            print('Вы ввели имя несуществующего файла!')
+            print('Пожалуйста, будте аккуратнее!')
+            return False
+        return True
+
     def open_file(self, filename):
+        if not TFileOpener.__check_if_file_exists(filename):
+            return
+
         extension = TFileOpener.__get_file_extension(filename)
-        
+        programm = self.__accordance.get(extension, 'ghex')
+
         print('filename:\t', filename)
         print('extension:\t', extension)
 
         print('File with extension {} will be opened with {}'.format(
             extension,
-            self.__accordance.get(extension, 'ghex')
+            programm    
         ))
+
+        result = subprocess.run([programm], capture_output=True, text=True, check=True)
+        self.__dbus_commander.sendMessage(programm, filename)
