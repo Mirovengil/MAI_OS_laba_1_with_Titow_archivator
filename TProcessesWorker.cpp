@@ -53,7 +53,10 @@ bool TProcessesWorker::closeProcess(int index)
     id_t PID = openedProcesses[index].first;
     if (kill(PID, SIGKILL) == -1)
         return false;
-    // TODO : delete from list of opened processes
+    
+    openedProcesses[index] = openedProcesses[openedProcesses.size() - 1];
+    popProcess();
+
     return true;
 }
 
