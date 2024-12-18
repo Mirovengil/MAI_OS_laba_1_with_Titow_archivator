@@ -36,6 +36,7 @@ void TParser::parseWord(int wordIndex)
                 targetWord = targetWord + inputString[j];
                 continue;
             }
+            return;
         }        
         return;
     }
@@ -76,3 +77,16 @@ CommandCode TParser::getCmdCode()
     return dictionary[indexInDictionary].code;
 }
 
+std::vector <std::string> TParser::getParams()
+{
+    std::vector <std::string> params;
+    params.resize(0);
+
+    for (int i = 0; i < getNumberOfWords()-1; ++i)
+    {
+        parseWord(i + 1);
+        params.push_back(targetWord);
+    }
+
+    return params;
+}

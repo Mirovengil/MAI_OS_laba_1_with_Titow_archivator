@@ -20,6 +20,7 @@ public:
     void parseCmd(std::string cmd);
     CommandCode getCmdCode();
     int getIndexInDictionary(std::string cmd, int paramsNumber);
+    std::vector <std::string> getParams();
 };
 
 #endif //TPARSER_H

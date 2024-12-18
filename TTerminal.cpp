@@ -37,8 +37,43 @@ void TTerminal::parseCmd()
     parser.parseCmd(currentCmd);
     if (parser.getCmdCode() == UNKNOWN)
     {
-        std::cout << "I don't know command\"" << currentCmd << "\"!\n";
-        std::cout << "But I'll try to make it by cmd system()\n";
-        processer.makeCommandBySystem(currentCmd);
+        std::cout << "I don't know command \"" << currentCmd << "\"!\n";
+    }
+    if (parser.getCmdCode() == LS)
+    {
+        auto out = processer.getLsCommandResult();
+        for (auto it : out)
+            std::cout << it << "\n";
+    }
+    if (parser.getCmdCode() == LS_TARGET)
+    {
+        auto params = parser.getParams();
+        auto out = processer.getLsCommandResult(params[0]);
+        for (auto it : out)
+            std::cout << it << "\n";
+    }
+    if (parser.getCmdCode() == CAT)
+    {
+        
+    }
+    if (parser.getCmdCode() == NICE_ME)
+    {
+        
+    }
+    if (parser.getCmdCode() == NICE_SMB)
+    {
+        
+    }
+    if (parser.getCmdCode() == EXIT_SMB)
+    {
+        
+    }
+    if (parser.getCmdCode() == FINISH_PROGRAM)
+    {
+        
+    }
+    if (parser.getCmdCode() == KILLALL)
+    {
+        
     }
 }

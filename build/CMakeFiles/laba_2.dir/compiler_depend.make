@@ -342,6 +342,11 @@ CMakeFiles/laba_2.dir/TProcesser.cpp.o: ../TProcesser.cpp \
   /usr/include/x86_64-linux-gnu/bits/types/error_t.h \
   /usr/include/c++/11/bits/charconv.h \
   /usr/include/c++/11/bits/basic_string.tcc \
+  /usr/include/c++/11/vector \
+  /usr/include/c++/11/bits/stl_uninitialized.h \
+  /usr/include/c++/11/bits/stl_vector.h \
+  /usr/include/c++/11/bits/stl_bvector.h \
+  /usr/include/c++/11/bits/vector.tcc \
   /usr/include/c++/11/iostream \
   /usr/include/c++/11/ostream \
   /usr/include/c++/11/ios \
@@ -370,7 +375,43 @@ CMakeFiles/laba_2.dir/TProcesser.cpp.o: ../TProcesser.cpp \
   /usr/include/c++/11/bits/basic_ios.tcc \
   /usr/include/c++/11/bits/ostream.tcc \
   /usr/include/c++/11/istream \
-  /usr/include/c++/11/bits/istream.tcc
+  /usr/include/c++/11/bits/istream.tcc \
+  /usr/include/c++/11/filesystem \
+  /usr/include/c++/11/bits/fs_fwd.h \
+  /usr/include/c++/11/chrono \
+  /usr/include/c++/11/ratio \
+  /usr/include/c++/11/limits \
+  /usr/include/c++/11/ctime \
+  /usr/include/c++/11/bits/parse_numbers.h \
+  /usr/include/c++/11/bits/fs_path.h \
+  /usr/include/c++/11/utility \
+  /usr/include/c++/11/bits/stl_relops.h \
+  /usr/include/c++/11/locale \
+  /usr/include/c++/11/bits/locale_facets_nonio.h \
+  /usr/include/x86_64-linux-gnu/c++/11/bits/time_members.h \
+  /usr/include/x86_64-linux-gnu/c++/11/bits/messages_members.h \
+  /usr/include/libintl.h \
+  /usr/include/c++/11/bits/codecvt.h \
+  /usr/include/c++/11/bits/locale_facets_nonio.tcc \
+  /usr/include/c++/11/bits/locale_conv.h \
+  /usr/include/c++/11/bits/unique_ptr.h \
+  /usr/include/c++/11/tuple \
+  /usr/include/c++/11/array \
+  /usr/include/c++/11/bits/uses_allocator.h \
+  /usr/include/c++/11/bits/invoke.h \
+  /usr/include/c++/11/iomanip \
+  /usr/include/c++/11/bits/quoted_string.h \
+  /usr/include/c++/11/sstream \
+  /usr/include/c++/11/bits/sstream.tcc \
+  /usr/include/c++/11/codecvt \
+  /usr/include/c++/11/ext/concurrence.h \
+  /usr/include/c++/11/bits/shared_ptr.h \
+  /usr/include/c++/11/bits/shared_ptr_base.h \
+  /usr/include/c++/11/bits/allocated_ptr.h \
+  /usr/include/c++/11/bits/refwrap.h \
+  /usr/include/c++/11/ext/aligned_buffer.h \
+  /usr/include/c++/11/bits/fs_dir.h \
+  /usr/include/c++/11/bits/fs_ops.h
 
 CMakeFiles/laba_2.dir/TTerminal.cpp.o: ../TTerminal.cpp \
   /usr/include/stdc-predef.h \
@@ -726,6 +767,36 @@ CMakeFiles/laba_2.dir/main.cpp.o: ../main.cpp \
 
 ../main.cpp:
 
+/usr/include/c++/11/bits/fs_ops.h:
+
+/usr/include/c++/11/bits/refwrap.h:
+
+/usr/include/c++/11/sstream:
+
+/usr/include/c++/11/bits/quoted_string.h:
+
+/usr/include/c++/11/bits/uses_allocator.h:
+
+/usr/include/c++/11/array:
+
+/usr/include/c++/11/bits/locale_conv.h:
+
+/usr/include/x86_64-linux-gnu/c++/11/bits/messages_members.h:
+
+/usr/include/x86_64-linux-gnu/c++/11/bits/time_members.h:
+
+/usr/include/c++/11/bits/locale_facets_nonio.h:
+
+/usr/include/c++/11/bits/parse_numbers.h:
+
+/usr/include/c++/11/limits:
+
+/usr/include/c++/11/ratio:
+
+/usr/include/c++/11/bits/fs_fwd.h:
+
+/usr/include/c++/11/filesystem:
+
 /usr/include/c++/11/stdlib.h:
 
 /usr/include/c++/11/bits/istream.tcc:
@@ -762,7 +833,11 @@ CMakeFiles/laba_2.dir/main.cpp.o: ../main.cpp \
 
 /usr/include/c++/11/typeinfo:
 
+/usr/include/c++/11/codecvt:
+
 /usr/include/c++/11/exception:
+
+/usr/include/c++/11/bits/unique_ptr.h:
 
 /usr/include/c++/11/ostream:
 
@@ -782,11 +857,17 @@ CMakeFiles/laba_2.dir/main.cpp.o: ../main.cpp \
 
 /usr/include/x86_64-linux-gnu/bits/errno.h:
 
+/usr/include/c++/11/utility:
+
 /usr/include/errno.h:
+
+/usr/include/c++/11/bits/fs_dir.h:
 
 /usr/include/c++/11/cerrno:
 
 /usr/include/stdio.h:
+
+/usr/include/c++/11/chrono:
 
 /usr/include/c++/11/cstdio:
 
@@ -798,7 +879,11 @@ CMakeFiles/laba_2.dir/main.cpp.o: ../main.cpp \
 
 /usr/include/x86_64-linux-gnu/bits/uintn-identity.h:
 
+/usr/include/c++/11/bits/shared_ptr.h:
+
 /usr/include/x86_64-linux-gnu/bits/byteswap.h:
+
+/usr/include/c++/11/ext/aligned_buffer.h:
 
 /usr/include/endian.h:
 
@@ -848,6 +933,8 @@ CMakeFiles/laba_2.dir/main.cpp.o: ../main.cpp \
 
 /usr/include/c++/11/bits/stl_vector.h:
 
+/usr/include/libintl.h:
+
 /usr/include/x86_64-linux-gnu/bits/endianness.h:
 
 /usr/include/x86_64-linux-gnu/bits/long-double.h:
@@ -876,6 +963,8 @@ CMakeFiles/laba_2.dir/main.cpp.o: ../main.cpp \
 
 /usr/include/c++/11/bits/postypes.h:
 
+/usr/include/c++/11/bits/invoke.h:
+
 /usr/include/x86_64-linux-gnu/bits/timex.h:
 
 /usr/include/c++/11/bits/exception_ptr.h:
@@ -883,6 +972,8 @@ CMakeFiles/laba_2.dir/main.cpp.o: ../main.cpp \
 /usr/include/c++/11/ext/string_conversions.h:
 
 /usr/include/features-time64.h:
+
+/usr/include/c++/11/locale:
 
 /usr/include/linux/errno.h:
 
@@ -918,7 +1009,11 @@ CMakeFiles/laba_2.dir/main.cpp.o: ../main.cpp \
 
 /usr/include/c++/11/bits/functexcept.h:
 
+/usr/include/c++/11/bits/fs_path.h:
+
 /usr/include/x86_64-linux-gnu/c++/11/bits/gthr.h:
+
+/usr/include/c++/11/tuple:
 
 /usr/include/c++/11/type_traits:
 
@@ -949,6 +1044,8 @@ CMakeFiles/laba_2.dir/main.cpp.o: ../main.cpp \
 /usr/include/c++/11/bits/ostream_insert.h:
 
 /usr/include/x86_64-linux-gnu/c++/11/bits/c++allocator.h:
+
+/usr/include/c++/11/bits/stl_relops.h:
 
 ../TParser.cpp:
 
@@ -1028,6 +1125,10 @@ CMakeFiles/laba_2.dir/main.cpp.o: ../main.cpp \
 
 /usr/include/x86_64-linux-gnu/bits/typesizes.h:
 
+/usr/include/c++/11/bits/codecvt.h:
+
+/usr/include/c++/11/ctime:
+
 /usr/include/x86_64-linux-gnu/bits/time64.h:
 
 /usr/include/c++/11/iosfwd:
@@ -1066,6 +1167,8 @@ CMakeFiles/laba_2.dir/main.cpp.o: ../main.cpp \
 
 /usr/include/c++/11/bits/basic_string.h:
 
+/usr/include/c++/11/ext/concurrence.h:
+
 /usr/include/x86_64-linux-gnu/c++/11/bits/gthr-default.h:
 
 /usr/include/c++/11/bits/cpp_type_traits.h:
@@ -1077,6 +1180,8 @@ CMakeFiles/laba_2.dir/main.cpp.o: ../main.cpp \
 /usr/include/x86_64-linux-gnu/bits/cpu-set.h:
 
 /usr/include/time.h:
+
+/usr/include/c++/11/bits/locale_facets_nonio.tcc:
 
 /usr/include/c++/11/bits/stl_pair.h:
 
@@ -1090,17 +1195,25 @@ CMakeFiles/laba_2.dir/main.cpp.o: ../main.cpp \
 
 /usr/include/x86_64-linux-gnu/bits/types/timer_t.h:
 
+/usr/include/c++/11/bits/allocated_ptr.h:
+
 /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h:
+
+/usr/include/c++/11/iomanip:
 
 /usr/include/c++/11/ext/new_allocator.h:
 
 /usr/include/x86_64-linux-gnu/bits/thread-shared-types.h:
+
+/usr/include/c++/11/bits/shared_ptr_base.h:
 
 /usr/include/x86_64-linux-gnu/bits/struct_mutex.h:
 
 /usr/include/c++/11/bits/stl_iterator_base_types.h:
 
 /usr/include/c++/11/cstdlib:
+
+/usr/include/c++/11/bits/sstream.tcc:
 
 /usr/lib/gcc/x86_64-linux-gnu/11/include/stddef.h:
 
