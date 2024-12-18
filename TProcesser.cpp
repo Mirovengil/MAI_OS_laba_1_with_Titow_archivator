@@ -125,3 +125,24 @@ std::vector<std::string> TProcesser::getNiceCommandResult(std::vector<std::strin
     }
     return out;
 }
+
+std::vector<std::string> TProcesser::getSonslistCommandResult()
+{
+    std::vector <std::string> out;
+
+    int N = processesWorker.getNumberOfProcesses();
+    out.push_back("Число дочерних процессов: " + std::to_string(N));
+
+    std::string tabulations = "\t\t";
+    for (int i = 0; i < N; ++i)
+    {
+        auto process = processesWorker.getProcess(i);
+
+        std::string PID = std::to_string(static_cast<int>(process.first));
+        std::string processName = process.second;
+
+        out.push_back(tabulations + PID + ". " + processName);
+    }
+
+    return out;
+}

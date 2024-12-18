@@ -9,10 +9,11 @@ enum CommandCode
     LS_TARGET,          // ГОТОВО
     CAT,                // ГОТОВО
     NICE_ME,            // ГОТОВО
-    NICE_SMB,           
+    NICE_SMB,           // ГОТОВО
     EXIT_SMB,
     FINISH_PROGRAM,     // ГОТОВО
     KILLALL,
+    SONS_LIST,
     UNKNOWN,            // ГОТОВО
 };
 

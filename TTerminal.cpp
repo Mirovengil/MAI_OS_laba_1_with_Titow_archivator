@@ -84,4 +84,10 @@ void TTerminal::parseCmd()
     {
         
     }
+    if (parser.getCmdCode() == SONS_LIST)
+    {
+        auto out = processer.getSonslistCommandResult();
+        for (auto it : out)
+            std::cout << it << "\n";   
+    }
 }

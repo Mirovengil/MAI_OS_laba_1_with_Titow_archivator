@@ -15,6 +15,7 @@ public:
     std::vector<std::string> getCatCommandResult(std::vector<std::string>params);
     std::vector<std::string> getNiceCommandResult();
     std::vector<std::string> getNiceCommandResult(std::vector<std::string>params);
+    std::vector<std::string> getSonslistCommandResult();
 };
 
 #endif //TPROCESSER_H
