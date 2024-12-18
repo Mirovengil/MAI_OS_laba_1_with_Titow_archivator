@@ -16,6 +16,7 @@ public:
 
     int getNumberOfProcesses();
     std::pair<pid_t, std::string> getProcess(int index);
+    void popProcess();
 };
 
 #endif// PROCESSES_WORKER_H

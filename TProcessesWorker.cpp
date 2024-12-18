@@ -43,6 +43,11 @@ bool TProcessesWorker::startProcess(std::string name, int priority)
     return true;
 }
 
+void TProcessesWorker::popProcess()
+{
+    openedProcesses.pop_back();
+}
+
 int TProcessesWorker::getNumberOfProcesses()
 {
     return openedProcesses.size();
