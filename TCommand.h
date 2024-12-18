@@ -10,10 +10,10 @@ enum CommandCode
     CAT,                // ГОТОВО
     NICE_ME,            // ГОТОВО
     NICE_SMB,           // ГОТОВО
-    EXIT_SMB,
+    EXIT_SMB,           // 
     FINISH_PROGRAM,     // ГОТОВО
     KILLALL,
-    SONS_LIST,
+    SONS_LIST,          // ГОТОВО
     UNKNOWN,            // ГОТОВО
 };
 

@@ -48,6 +48,16 @@ void TProcessesWorker::popProcess()
     openedProcesses.pop_back();
 }
 
+bool TProcessesWorker::closeProcess(int index)
+{
+    id_t PID = openedProcesses[index].first;
+    if (kill(PID, SIGKILL) == -1)
+        return false;
+    // TODO : delete from list of opened processes
+    return true;
+}
+
+
 int TProcessesWorker::getNumberOfProcesses()
 {
     return openedProcesses.size();

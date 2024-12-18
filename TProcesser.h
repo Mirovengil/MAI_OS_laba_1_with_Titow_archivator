@@ -16,6 +16,7 @@ public:
     std::vector<std::string> getNiceCommandResult();
     std::vector<std::string> getNiceCommandResult(std::vector<std::string>params);
     std::vector<std::string> getSonslistCommandResult();
+    std::vector<std::string> getExitCommandResult(std::vector<std::string> params);
 };
 
 #endif //TPROCESSER_H

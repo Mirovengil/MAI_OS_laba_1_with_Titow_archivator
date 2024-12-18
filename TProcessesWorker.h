@@ -10,9 +10,11 @@ class TProcessesWorker
 private:
     std::vector <std::pair<pid_t, std::string>> openedProcesses;
 public:
+    static const int BAD_PRIORITY = 7777; 
+    
     int getCurrentPriority();
     bool startProcess(std::string name, int priority);
-    static const int BAD_PRIORITY = 7777; 
+    bool closeProcess(int index);
 
     int getNumberOfProcesses();
     std::pair<pid_t, std::string> getProcess(int index);

@@ -120,7 +120,7 @@ std::vector<std::string> TProcesser::getNiceCommandResult(std::vector<std::strin
         out.push_back("При запуске указанного процесса возникли проблемы!");
         processesWorker.popProcess();
     }
-    
+
     if (priority > 19)
     {
         out.push_back("Возможность задавать приоритет больше, чем число 19, отсутствует.");
@@ -147,5 +147,24 @@ std::vector<std::string> TProcesser::getSonslistCommandResult()
         out.push_back(tabulations + index + ". " + processName + "(PID: " + PID + ")");
     }
 
+    return out;
+}
+
+std::vector<std::string> TProcesser::getExitCommandResult(std::vector<std::string> params)
+{
+    std::vector <std::string> out;
+
+    int processIndex = std::atoi(params[0].c_str()) - 1;
+    if (processIndex >= processesWorker.getNumberOfProcesses() ||
+    processIndex < 0)
+    {
+        out.push_back("Выберите процесс с допустимым индексом!");
+        return out;
+    }
+
+    if (processesWorker.closeProcess(processIndex))
+        out.push_back("Процесс был успешно закрыт!");
+    else
+        out.push_back("Не удалось закрыть процесс...");
     return out;
 }
