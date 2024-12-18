@@ -58,6 +58,7 @@ CMakeFiles/laba_2.dir/TProcesser.cpp.o: \
  /usr/include/x86_64-linux-gnu/bits/stdlib-float.h \
  /usr/include/c++/11/bits/std_abs.h \
  /home/ivan/MAI/OS/laba_2/MAI_OS_labs_with_Titow/TProcesser.h \
+ /home/ivan/MAI/OS/laba_2/MAI_OS_labs_with_Titow/TProcessesWorker.h \
  /usr/include/c++/11/string /usr/include/c++/11/bits/stringfwd.h \
  /usr/include/c++/11/bits/memoryfwd.h \
  /usr/include/c++/11/bits/char_traits.h \

@@ -7,13 +7,13 @@ enum CommandCode
 {
     LS,                 // ГОТОВО
     LS_TARGET,          // ГОТОВО
-    CAT,
-    NICE_ME,            // ГОТОВО
+    CAT,                // ГОТОВО
+    NICE_ME,            // 
     NICE_SMB,
     EXIT_SMB,
     FINISH_PROGRAM,     // ГОТОВО
     KILLALL,
-    UNKNOWN,
+    UNKNOWN,            // ГОТОВО
 };
 
 const int INF = -1; // unlimited number of params

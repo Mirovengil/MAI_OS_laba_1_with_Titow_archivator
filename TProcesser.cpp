@@ -89,3 +89,21 @@ std::vector<std::string> TProcesser::getCatCommandResult(std::vector<std::string
     }
     return out;
 }
+
+std::vector<std::string> TProcesser::getNiceCommandResult()
+{
+    std::vector <std::string> out;
+    
+    std::string result = "Приоритет текущего процесса: ";
+
+    int priority = processesWorker.getCurrentPriority();
+    if (priority == TProcessesWorker::BAD_PRIORITY)
+    {
+        out.push_back("Возникла ошибка!");
+        return out;
+    }
+
+    std::string priorityCorrectValue = std::to_string(priority);
+    out.push_back(result + priorityCorrectValue);
+    return out;
+}

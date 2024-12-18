@@ -254,6 +254,7 @@ CMakeFiles/laba_2.dir/TProcesser.cpp.o: ../TProcesser.cpp \
   /usr/include/x86_64-linux-gnu/bits/stdlib-float.h \
   /usr/include/c++/11/bits/std_abs.h \
   ../TProcesser.h \
+  ../TProcessesWorker.h \
   /usr/include/c++/11/string \
   /usr/include/c++/11/bits/stringfwd.h \
   /usr/include/c++/11/bits/memoryfwd.h \
@@ -417,6 +418,68 @@ CMakeFiles/laba_2.dir/TProcesser.cpp.o: ../TProcesser.cpp \
   /usr/include/x86_64-linux-gnu/c++/11/bits/c++io.h \
   /usr/include/c++/11/bits/fstream.tcc
 
+CMakeFiles/laba_2.dir/TProcessesWorker.cpp.o: ../TProcessesWorker.cpp \
+  /usr/include/stdc-predef.h \
+  ../TProcessesWorker.h \
+  /usr/include/x86_64-linux-gnu/sys/resource.h \
+  /usr/include/features.h \
+  /usr/include/features-time64.h \
+  /usr/include/x86_64-linux-gnu/bits/wordsize.h \
+  /usr/include/x86_64-linux-gnu/bits/timesize.h \
+  /usr/include/x86_64-linux-gnu/sys/cdefs.h \
+  /usr/include/x86_64-linux-gnu/bits/long-double.h \
+  /usr/include/x86_64-linux-gnu/gnu/stubs.h \
+  /usr/include/x86_64-linux-gnu/gnu/stubs-64.h \
+  /usr/include/x86_64-linux-gnu/bits/resource.h \
+  /usr/include/x86_64-linux-gnu/bits/types.h \
+  /usr/include/x86_64-linux-gnu/bits/typesizes.h \
+  /usr/include/x86_64-linux-gnu/bits/time64.h \
+  /usr/include/x86_64-linux-gnu/bits/types/struct_timeval.h \
+  /usr/include/x86_64-linux-gnu/bits/types/struct_rusage.h \
+  /usr/include/x86_64-linux-gnu/sys/types.h \
+  /usr/include/x86_64-linux-gnu/bits/types/clock_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/clockid_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/time_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/timer_t.h \
+  /usr/lib/gcc/x86_64-linux-gnu/11/include/stddef.h \
+  /usr/include/x86_64-linux-gnu/bits/stdint-intn.h \
+  /usr/include/endian.h \
+  /usr/include/x86_64-linux-gnu/bits/endian.h \
+  /usr/include/x86_64-linux-gnu/bits/endianness.h \
+  /usr/include/x86_64-linux-gnu/bits/byteswap.h \
+  /usr/include/x86_64-linux-gnu/bits/uintn-identity.h \
+  /usr/include/x86_64-linux-gnu/sys/select.h \
+  /usr/include/x86_64-linux-gnu/bits/select.h \
+  /usr/include/x86_64-linux-gnu/bits/types/sigset_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/__sigset_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/struct_timespec.h \
+  /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h \
+  /usr/include/x86_64-linux-gnu/bits/thread-shared-types.h \
+  /usr/include/x86_64-linux-gnu/bits/pthreadtypes-arch.h \
+  /usr/include/x86_64-linux-gnu/bits/atomic_wide_counter.h \
+  /usr/include/x86_64-linux-gnu/bits/struct_mutex.h \
+  /usr/include/x86_64-linux-gnu/bits/struct_rwlock.h \
+  /usr/include/unistd.h \
+  /usr/include/x86_64-linux-gnu/bits/posix_opt.h \
+  /usr/include/x86_64-linux-gnu/bits/environments.h \
+  /usr/include/x86_64-linux-gnu/bits/confname.h \
+  /usr/include/x86_64-linux-gnu/bits/getopt_posix.h \
+  /usr/include/x86_64-linux-gnu/bits/getopt_core.h \
+  /usr/include/x86_64-linux-gnu/bits/unistd_ext.h \
+  /usr/include/linux/close_range.h \
+  /usr/include/c++/11/cerrno \
+  /usr/include/x86_64-linux-gnu/c++/11/bits/c++config.h \
+  /usr/include/x86_64-linux-gnu/c++/11/bits/os_defines.h \
+  /usr/include/x86_64-linux-gnu/c++/11/bits/cpu_defines.h \
+  /usr/include/c++/11/pstl/pstl_config.h \
+  /usr/include/errno.h \
+  /usr/include/x86_64-linux-gnu/bits/errno.h \
+  /usr/include/linux/errno.h \
+  /usr/include/x86_64-linux-gnu/asm/errno.h \
+  /usr/include/asm-generic/errno.h \
+  /usr/include/asm-generic/errno-base.h \
+  /usr/include/x86_64-linux-gnu/bits/types/error_t.h
+
 CMakeFiles/laba_2.dir/TTerminal.cpp.o: ../TTerminal.cpp \
   /usr/include/stdc-predef.h \
   ../TTerminal.h \
@@ -577,6 +640,7 @@ CMakeFiles/laba_2.dir/TTerminal.cpp.o: ../TTerminal.cpp \
   /usr/include/c++/11/bits/vector.tcc \
   ../TCommand.h \
   ../TProcesser.h \
+  ../TProcessesWorker.h \
   /usr/include/c++/11/iostream \
   /usr/include/c++/11/ostream \
   /usr/include/c++/11/ios \
@@ -766,10 +830,21 @@ CMakeFiles/laba_2.dir/main.cpp.o: ../main.cpp \
   /usr/include/c++/11/bits/stl_bvector.h \
   /usr/include/c++/11/bits/vector.tcc \
   ../TCommand.h \
-  ../TProcesser.h
+  ../TProcesser.h \
+  ../TProcessesWorker.h
 
 
 ../main.cpp:
+
+/usr/include/x86_64-linux-gnu/bits/getopt_posix.h:
+
+/usr/include/x86_64-linux-gnu/bits/environments.h:
+
+/usr/include/x86_64-linux-gnu/bits/posix_opt.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/struct_rusage.h:
+
+/usr/include/x86_64-linux-gnu/bits/resource.h:
 
 /usr/include/c++/11/bits/fstream.tcc:
 
@@ -795,9 +870,9 @@ CMakeFiles/laba_2.dir/main.cpp.o: ../main.cpp \
 
 /usr/include/x86_64-linux-gnu/c++/11/bits/time_members.h:
 
-/usr/include/c++/11/bits/locale_facets_nonio.h:
+/usr/include/x86_64-linux-gnu/bits/unistd_ext.h:
 
-/usr/include/c++/11/bits/parse_numbers.h:
+/usr/include/c++/11/bits/locale_facets_nonio.h:
 
 /usr/include/c++/11/limits:
 
@@ -806,6 +881,10 @@ CMakeFiles/laba_2.dir/main.cpp.o: ../main.cpp \
 /usr/include/c++/11/bits/fs_fwd.h:
 
 /usr/include/c++/11/filesystem:
+
+/usr/include/c++/11/bits/parse_numbers.h:
+
+../TProcessesWorker.h:
 
 /usr/include/c++/11/stdlib.h:
 
@@ -871,6 +950,8 @@ CMakeFiles/laba_2.dir/main.cpp.o: ../main.cpp \
 
 /usr/include/errno.h:
 
+/usr/include/x86_64-linux-gnu/sys/resource.h:
+
 /usr/include/c++/11/bits/fs_dir.h:
 
 /usr/include/c++/11/cerrno:
@@ -902,6 +983,8 @@ CMakeFiles/laba_2.dir/main.cpp.o: ../main.cpp \
 /usr/include/x86_64-linux-gnu/bits/waitflags.h:
 
 /usr/include/stdlib.h:
+
+/usr/include/x86_64-linux-gnu/bits/getopt_core.h:
 
 /usr/include/c++/11/vector:
 
@@ -1029,6 +1112,8 @@ CMakeFiles/laba_2.dir/main.cpp.o: ../main.cpp \
 
 ../TTerminal.cpp:
 
+/usr/include/linux/close_range.h:
+
 /usr/include/c++/11/debug/assertions.h:
 
 /usr/include/x86_64-linux-gnu/bits/wordsize.h:
@@ -1048,6 +1133,8 @@ CMakeFiles/laba_2.dir/main.cpp.o: ../main.cpp \
 /usr/include/c++/11/bits/streambuf.tcc:
 
 ../TParser.h:
+
+/usr/include/x86_64-linux-gnu/bits/confname.h:
 
 /usr/include/x86_64-linux-gnu/c++/11/bits/c++config.h:
 
@@ -1082,6 +1169,8 @@ CMakeFiles/laba_2.dir/main.cpp.o: ../main.cpp \
 /usr/include/c++/11/bits/stl_function.h:
 
 /usr/include/c++/11/bits/concept_check.h:
+
+../TProcessesWorker.cpp:
 
 /usr/include/stdint.h:
 
@@ -1148,6 +1237,8 @@ CMakeFiles/laba_2.dir/main.cpp.o: ../main.cpp \
 /usr/include/x86_64-linux-gnu/bits/stdint-intn.h:
 
 /usr/include/c++/11/cctype:
+
+/usr/include/unistd.h:
 
 /usr/include/x86_64-linux-gnu/sys/select.h:
 

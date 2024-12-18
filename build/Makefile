@@ -177,6 +177,30 @@ TProcesser.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/laba_2.dir/build.make CMakeFiles/laba_2.dir/TProcesser.cpp.s
 .PHONY : TProcesser.cpp.s
 
+TProcessesWorker.o: TProcessesWorker.cpp.o
+.PHONY : TProcessesWorker.o
+
+# target to build an object file
+TProcessesWorker.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/laba_2.dir/build.make CMakeFiles/laba_2.dir/TProcessesWorker.cpp.o
+.PHONY : TProcessesWorker.cpp.o
+
+TProcessesWorker.i: TProcessesWorker.cpp.i
+.PHONY : TProcessesWorker.i
+
+# target to preprocess a source file
+TProcessesWorker.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/laba_2.dir/build.make CMakeFiles/laba_2.dir/TProcessesWorker.cpp.i
+.PHONY : TProcessesWorker.cpp.i
+
+TProcessesWorker.s: TProcessesWorker.cpp.s
+.PHONY : TProcessesWorker.s
+
+# target to generate assembly for a file
+TProcessesWorker.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/laba_2.dir/build.make CMakeFiles/laba_2.dir/TProcessesWorker.cpp.s
+.PHONY : TProcessesWorker.cpp.s
+
 TTerminal.o: TTerminal.cpp.o
 .PHONY : TTerminal.o
 
@@ -240,6 +264,9 @@ help:
 	@echo "... TProcesser.o"
 	@echo "... TProcesser.i"
 	@echo "... TProcesser.s"
+	@echo "... TProcessesWorker.o"
+	@echo "... TProcessesWorker.i"
+	@echo "... TProcessesWorker.s"
 	@echo "... TTerminal.o"
 	@echo "... TTerminal.i"
 	@echo "... TTerminal.s"

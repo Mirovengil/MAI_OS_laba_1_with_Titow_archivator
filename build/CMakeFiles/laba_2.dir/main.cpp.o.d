@@ -136,4 +136,5 @@ CMakeFiles/laba_2.dir/main.cpp.o: \
  /usr/include/c++/11/bits/stl_bvector.h \
  /usr/include/c++/11/bits/vector.tcc \
  /home/ivan/MAI/OS/laba_2/MAI_OS_labs_with_Titow/TCommand.h \
- /home/ivan/MAI/OS/laba_2/MAI_OS_labs_with_Titow/TProcesser.h
+ /home/ivan/MAI/OS/laba_2/MAI_OS_labs_with_Titow/TProcesser.h \
+ /home/ivan/MAI/OS/laba_2/MAI_OS_labs_with_Titow/TProcessesWorker.h

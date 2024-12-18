@@ -1,1 +1,1 @@
-/usr/bin/c++ -g CMakeFiles/laba_2.dir/main.cpp.o CMakeFiles/laba_2.dir/TTerminal.cpp.o CMakeFiles/laba_2.dir/TParser.cpp.o CMakeFiles/laba_2.dir/TProcesser.cpp.o -o laba_2 
+/usr/bin/c++ -g CMakeFiles/laba_2.dir/main.cpp.o CMakeFiles/laba_2.dir/TTerminal.cpp.o CMakeFiles/laba_2.dir/TParser.cpp.o CMakeFiles/laba_2.dir/TProcesser.cpp.o CMakeFiles/laba_2.dir/TProcessesWorker.cpp.o -o laba_2 

@@ -3,6 +3,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/laba_2.dir/TParser.cpp.o.d"
   "CMakeFiles/laba_2.dir/TProcesser.cpp.o"
   "CMakeFiles/laba_2.dir/TProcesser.cpp.o.d"
+  "CMakeFiles/laba_2.dir/TProcessesWorker.cpp.o"
+  "CMakeFiles/laba_2.dir/TProcessesWorker.cpp.o.d"
   "CMakeFiles/laba_2.dir/TTerminal.cpp.o"
   "CMakeFiles/laba_2.dir/TTerminal.cpp.o.d"
   "CMakeFiles/laba_2.dir/main.cpp.o"

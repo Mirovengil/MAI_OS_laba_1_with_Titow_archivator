@@ -10,6 +10,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/ivan/MAI/OS/laba_2/MAI_OS_labs_with_Titow/TParser.cpp" "CMakeFiles/laba_2.dir/TParser.cpp.o" "gcc" "CMakeFiles/laba_2.dir/TParser.cpp.o.d"
   "/home/ivan/MAI/OS/laba_2/MAI_OS_labs_with_Titow/TProcesser.cpp" "CMakeFiles/laba_2.dir/TProcesser.cpp.o" "gcc" "CMakeFiles/laba_2.dir/TProcesser.cpp.o.d"
+  "/home/ivan/MAI/OS/laba_2/MAI_OS_labs_with_Titow/TProcessesWorker.cpp" "CMakeFiles/laba_2.dir/TProcessesWorker.cpp.o" "gcc" "CMakeFiles/laba_2.dir/TProcessesWorker.cpp.o.d"
   "/home/ivan/MAI/OS/laba_2/MAI_OS_labs_with_Titow/TTerminal.cpp" "CMakeFiles/laba_2.dir/TTerminal.cpp.o" "gcc" "CMakeFiles/laba_2.dir/TTerminal.cpp.o.d"
   "/home/ivan/MAI/OS/laba_2/MAI_OS_labs_with_Titow/main.cpp" "CMakeFiles/laba_2.dir/main.cpp.o" "gcc" "CMakeFiles/laba_2.dir/main.cpp.o.d"
   )

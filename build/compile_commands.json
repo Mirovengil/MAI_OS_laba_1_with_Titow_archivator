@@ -18,5 +18,10 @@
   "directory": "/home/ivan/MAI/OS/laba_2/MAI_OS_labs_with_Titow/build",
   "command": "/usr/bin/c++   -g -o CMakeFiles/laba_2.dir/TProcesser.cpp.o -c /home/ivan/MAI/OS/laba_2/MAI_OS_labs_with_Titow/TProcesser.cpp",
   "file": "/home/ivan/MAI/OS/laba_2/MAI_OS_labs_with_Titow/TProcesser.cpp"
+},
+{
+  "directory": "/home/ivan/MAI/OS/laba_2/MAI_OS_labs_with_Titow/build",
+  "command": "/usr/bin/c++   -g -o CMakeFiles/laba_2.dir/TProcessesWorker.cpp.o -c /home/ivan/MAI/OS/laba_2/MAI_OS_labs_with_Titow/TProcessesWorker.cpp",
+  "file": "/home/ivan/MAI/OS/laba_2/MAI_OS_labs_with_Titow/TProcessesWorker.cpp"
 }
 ]

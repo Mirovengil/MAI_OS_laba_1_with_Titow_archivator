@@ -137,6 +137,7 @@ CMakeFiles/laba_2.dir/TTerminal.cpp.o: \
  /usr/include/c++/11/bits/vector.tcc \
  /home/ivan/MAI/OS/laba_2/MAI_OS_labs_with_Titow/TCommand.h \
  /home/ivan/MAI/OS/laba_2/MAI_OS_labs_with_Titow/TProcesser.h \
+ /home/ivan/MAI/OS/laba_2/MAI_OS_labs_with_Titow/TProcessesWorker.h \
  /usr/include/c++/11/iostream /usr/include/c++/11/ostream \
  /usr/include/c++/11/ios /usr/include/c++/11/exception \
  /usr/include/c++/11/bits/exception_ptr.h \
