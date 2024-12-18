@@ -411,7 +411,11 @@ CMakeFiles/laba_2.dir/TProcesser.cpp.o: ../TProcesser.cpp \
   /usr/include/c++/11/bits/refwrap.h \
   /usr/include/c++/11/ext/aligned_buffer.h \
   /usr/include/c++/11/bits/fs_dir.h \
-  /usr/include/c++/11/bits/fs_ops.h
+  /usr/include/c++/11/bits/fs_ops.h \
+  /usr/include/c++/11/fstream \
+  /usr/include/x86_64-linux-gnu/c++/11/bits/basic_file.h \
+  /usr/include/x86_64-linux-gnu/c++/11/bits/c++io.h \
+  /usr/include/c++/11/bits/fstream.tcc
 
 CMakeFiles/laba_2.dir/TTerminal.cpp.o: ../TTerminal.cpp \
   /usr/include/stdc-predef.h \
@@ -766,6 +770,12 @@ CMakeFiles/laba_2.dir/main.cpp.o: ../main.cpp \
 
 
 ../main.cpp:
+
+/usr/include/c++/11/bits/fstream.tcc:
+
+/usr/include/x86_64-linux-gnu/c++/11/bits/c++io.h:
+
+/usr/include/x86_64-linux-gnu/c++/11/bits/basic_file.h:
 
 /usr/include/c++/11/bits/fs_ops.h:
 
@@ -1150,6 +1160,8 @@ CMakeFiles/laba_2.dir/main.cpp.o: ../main.cpp \
 /usr/include/locale.h:
 
 /usr/include/x86_64-linux-gnu/bits/locale.h:
+
+/usr/include/c++/11/fstream:
 
 /usr/include/c++/11/ext/alloc_traits.h:
 

@@ -11,6 +11,7 @@ private:
 public:
     std::vector<std::string> getLsCommandResult();
     std::vector<std::string> getLsCommandResult(std::string directory);
+    std::vector<std::string> getCatCommandResult(std::vector<std::string>params);
 };
 
 #endif //TPROCESSER_H

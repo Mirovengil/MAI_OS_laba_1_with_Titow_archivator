@@ -3,6 +3,7 @@
 #include "TProcesser.h"
 #include <iostream>
 #include <filesystem>
+#include <fstream>
 
 std::vector<std::string> TProcesser::getLsCommandResult()
 {
@@ -49,7 +50,42 @@ std::vector<std::string> TProcesser::getLsCommandResult(std::string directory)
         out.resize(0);
         out.push_back("Возникли проблемы с открытием указаной папки!");
     }
-    
+
     return out; 
 }
 
+std::vector<std::string> TProcesser::getCatCommandResult(std::vector<std::string>params)
+{
+    std::vector <std::string> out;
+
+    // проверка, что все файлы существуют
+    for (auto it : params)
+    {
+        if (!std::filesystem::exists(it))
+        {
+            out.push_back("Часть указанных файлов не найдена!!");
+            return out;
+        }
+    }
+
+    // считывание содержимого файлов
+    out.push_back("Содержимое файлов:\n");
+    std::string line;
+    std::string tabulations = "\t\t";
+
+    for (auto it : params)
+    {
+        // подпись: "имя файла"
+        out.push_back("Файл: " + it);
+        std::ifstream fIn(it);
+
+        // содержимое файла подряд
+        while (std::getline(fIn, line))
+        {
+            out.push_back(tabulations + line);
+        }
+        fIn.close();
+        out.push_back("\n");
+    }
+    return out;
+}

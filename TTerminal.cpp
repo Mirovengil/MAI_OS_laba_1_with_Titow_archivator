@@ -54,7 +54,10 @@ void TTerminal::parseCmd()
     }
     if (parser.getCmdCode() == CAT)
     {
-        std::cout << "Начинается работа по говне говна говны...";
+        auto params = parser.getParams();
+        auto out = processer.getCatCommandResult(params);
+        for (auto it : out)
+            std::cout << it << "\n";
     }
     if (parser.getCmdCode() == NICE_ME)
     {
