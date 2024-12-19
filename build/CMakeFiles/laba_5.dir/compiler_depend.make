@@ -55,12 +55,17 @@ CMakeFiles/laba_5.dir/main.cpp.o: ../main.cpp \
   /usr/include/c++/11/ext/type_traits.h \
   /usr/include/c++/11/ext/numeric_traits.h \
   /usr/include/c++/11/bits/stl_pair.h \
+  /usr/include/c++/11/compare \
+  /usr/include/c++/11/concepts \
   /usr/include/c++/11/bits/stl_iterator_base_types.h \
+  /usr/include/c++/11/bits/iterator_concepts.h \
+  /usr/include/c++/11/bits/ptr_traits.h \
+  /usr/include/c++/11/bits/ranges_cmp.h \
   /usr/include/c++/11/bits/stl_iterator_base_funcs.h \
   /usr/include/c++/11/bits/concept_check.h \
   /usr/include/c++/11/debug/assertions.h \
   /usr/include/c++/11/bits/stl_iterator.h \
-  /usr/include/c++/11/bits/ptr_traits.h \
+  /usr/include/c++/11/bits/stl_construct.h \
   /usr/include/c++/11/debug/debug.h \
   /usr/include/c++/11/bits/predefined_ops.h \
   /usr/include/c++/11/cstdint \
@@ -121,16 +126,7 @@ CMakeFiles/laba_5.dir/main.cpp.o: ../main.cpp \
   /usr/include/c++/11/bits/cxxabi_forced.h \
   /usr/include/c++/11/bits/stl_function.h \
   /usr/include/c++/11/backward/binders.h \
-  /usr/include/c++/11/bits/range_access.h \
-  /usr/include/c++/11/initializer_list \
-  /usr/include/c++/11/bits/basic_string.h \
-  /usr/include/c++/11/ext/alloc_traits.h \
-  /usr/include/c++/11/bits/alloc_traits.h \
-  /usr/include/c++/11/bits/stl_construct.h \
-  /usr/include/c++/11/string_view \
-  /usr/include/c++/11/bits/functional_hash.h \
-  /usr/include/c++/11/bits/string_view.tcc \
-  /usr/include/c++/11/ext/string_conversions.h \
+  /usr/include/c++/11/bits/stl_algo.h \
   /usr/include/c++/11/cstdlib \
   /usr/include/stdlib.h \
   /usr/include/x86_64-linux-gnu/bits/waitflags.h \
@@ -145,6 +141,22 @@ CMakeFiles/laba_5.dir/main.cpp.o: ../main.cpp \
   /usr/include/alloca.h \
   /usr/include/x86_64-linux-gnu/bits/stdlib-float.h \
   /usr/include/c++/11/bits/std_abs.h \
+  /usr/include/c++/11/bits/algorithmfwd.h \
+  /usr/include/c++/11/initializer_list \
+  /usr/include/c++/11/bits/stl_heap.h \
+  /usr/include/c++/11/bits/stl_tempbuf.h \
+  /usr/include/c++/11/bits/uniform_int_dist.h \
+  /usr/include/c++/11/bits/range_access.h \
+  /usr/include/c++/11/bits/basic_string.h \
+  /usr/include/c++/11/ext/alloc_traits.h \
+  /usr/include/c++/11/bits/alloc_traits.h \
+  /usr/include/c++/11/string_view \
+  /usr/include/c++/11/bits/functional_hash.h \
+  /usr/include/c++/11/bits/ranges_base.h \
+  /usr/include/c++/11/bits/max_size_type.h \
+  /usr/include/c++/11/numbers \
+  /usr/include/c++/11/bits/string_view.tcc \
+  /usr/include/c++/11/ext/string_conversions.h \
   /usr/include/c++/11/cstdio \
   /usr/include/stdio.h \
   /usr/include/x86_64-linux-gnu/bits/types/__fpos_t.h \
@@ -191,7 +203,6 @@ CMakeFiles/laba_5.dir/main.cpp.o: ../main.cpp \
   /usr/include/c++/11/bits/stl_vector.h \
   /usr/include/c++/11/bits/stl_bvector.h \
   /usr/include/c++/11/bits/vector.tcc \
-  /usr/include/c++/11/bits/stl_heap.h \
   /usr/include/c++/11/bits/stl_queue.h \
   /usr/include/c++/11/bits/uses_allocator.h \
   /usr/include/unistd.h \
@@ -203,6 +214,27 @@ CMakeFiles/laba_5.dir/main.cpp.o: ../main.cpp \
   /usr/include/x86_64-linux-gnu/bits/unistd_ext.h \
   /usr/include/linux/close_range.h \
   /usr/include/c++/11/thread \
+  /usr/include/c++/11/stop_token \
+  /usr/include/c++/11/atomic \
+  /usr/include/c++/11/bits/atomic_base.h \
+  /usr/include/c++/11/bits/atomic_lockfree_defines.h \
+  /usr/include/c++/11/bits/atomic_wait.h \
+  /usr/include/c++/11/climits \
+  /usr/lib/gcc/x86_64-linux-gnu/11/include/limits.h \
+  /usr/lib/gcc/x86_64-linux-gnu/11/include/syslimits.h \
+  /usr/include/limits.h \
+  /usr/include/x86_64-linux-gnu/bits/posix1_lim.h \
+  /usr/include/x86_64-linux-gnu/bits/local_lim.h \
+  /usr/include/linux/limits.h \
+  /usr/include/x86_64-linux-gnu/bits/posix2_lim.h \
+  /usr/include/x86_64-linux-gnu/bits/xopen_lim.h \
+  /usr/include/x86_64-linux-gnu/bits/uio_lim.h \
+  /usr/include/syscall.h \
+  /usr/include/x86_64-linux-gnu/sys/syscall.h \
+  /usr/include/x86_64-linux-gnu/asm/unistd.h \
+  /usr/include/x86_64-linux-gnu/asm/unistd_64.h \
+  /usr/include/x86_64-linux-gnu/bits/syscall.h \
+  /usr/include/c++/11/bits/std_mutex.h \
   /usr/include/c++/11/bits/std_thread.h \
   /usr/include/c++/11/tuple \
   /usr/include/c++/11/utility \
@@ -211,14 +243,21 @@ CMakeFiles/laba_5.dir/main.cpp.o: ../main.cpp \
   /usr/include/c++/11/bits/invoke.h \
   /usr/include/c++/11/bits/refwrap.h \
   /usr/include/c++/11/bits/unique_ptr.h \
+  /usr/include/c++/11/semaphore \
+  /usr/include/c++/11/bits/semaphore_base.h \
+  /usr/include/c++/11/bits/atomic_timed_wait.h \
   /usr/include/c++/11/bits/this_thread_sleep.h \
   /usr/include/c++/11/chrono \
   /usr/include/c++/11/ratio \
   /usr/include/c++/11/limits \
   /usr/include/c++/11/ctime \
   /usr/include/c++/11/bits/parse_numbers.h \
-  /usr/include/c++/11/semaphore
+  /usr/include/x86_64-linux-gnu/sys/time.h \
+  /usr/include/semaphore.h \
+  /usr/include/x86_64-linux-gnu/bits/semaphore.h
 
+
+/usr/include/x86_64-linux-gnu/sys/time.h:
 
 /usr/include/c++/11/bits/parse_numbers.h:
 
@@ -226,13 +265,27 @@ CMakeFiles/laba_5.dir/main.cpp.o: ../main.cpp \
 
 /usr/include/c++/11/ratio:
 
+/usr/include/c++/11/bits/semaphore_base.h:
+
 /usr/include/c++/11/bits/refwrap.h:
 
-/usr/include/c++/11/array:
+/usr/include/c++/11/bits/std_thread.h:
+
+/usr/include/x86_64-linux-gnu/bits/syscall.h:
+
+/usr/include/x86_64-linux-gnu/bits/uio_lim.h:
+
+/usr/include/x86_64-linux-gnu/bits/posix1_lim.h:
 
 /usr/include/c++/11/bits/stl_relops.h:
 
-/usr/include/c++/11/bits/std_thread.h:
+/usr/lib/gcc/x86_64-linux-gnu/11/include/syslimits.h:
+
+/usr/lib/gcc/x86_64-linux-gnu/11/include/limits.h:
+
+/usr/include/c++/11/array:
+
+/usr/include/c++/11/climits:
 
 /usr/include/x86_64-linux-gnu/bits/unistd_ext.h:
 
@@ -243,8 +296,6 @@ CMakeFiles/laba_5.dir/main.cpp.o: ../main.cpp \
 /usr/include/x86_64-linux-gnu/bits/posix_opt.h:
 
 /usr/include/c++/11/bits/uses_allocator.h:
-
-/usr/include/c++/11/bits/stl_heap.h:
 
 /usr/include/c++/11/bits/vector.tcc:
 
@@ -259,6 +310,8 @@ CMakeFiles/laba_5.dir/main.cpp.o: ../main.cpp \
 /usr/include/c++/11/bits/stl_uninitialized.h:
 
 /usr/include/c++/11/stdlib.h:
+
+/usr/include/limits.h:
 
 /usr/include/c++/11/bits/istream.tcc:
 
@@ -278,6 +331,8 @@ CMakeFiles/laba_5.dir/main.cpp.o: ../main.cpp \
 
 /usr/include/c++/11/bits/basic_ios.h:
 
+/usr/include/c++/11/bits/atomic_lockfree_defines.h:
+
 /usr/include/c++/11/bits/streambuf.tcc:
 
 /usr/include/c++/11/stdexcept:
@@ -295,6 +350,8 @@ CMakeFiles/laba_5.dir/main.cpp.o: ../main.cpp \
 /usr/include/c++/11/bits/charconv.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/error_t.h:
+
+/usr/include/syscall.h:
 
 /usr/include/asm-generic/errno.h:
 
@@ -318,6 +375,28 @@ CMakeFiles/laba_5.dir/main.cpp.o: ../main.cpp \
 
 /usr/include/c++/11/cstdio:
 
+/usr/include/c++/11/bits/max_size_type.h:
+
+/usr/include/c++/11/bits/functional_hash.h:
+
+/usr/include/x86_64-linux-gnu/asm/unistd.h:
+
+/usr/include/c++/11/string_view:
+
+/usr/include/c++/11/bits/alloc_traits.h:
+
+/usr/include/c++/11/bits/ranges_base.h:
+
+/usr/include/c++/11/bits/range_access.h:
+
+/usr/include/c++/11/bits/stl_heap.h:
+
+/usr/include/c++/11/initializer_list:
+
+/usr/include/c++/11/bits/algorithmfwd.h:
+
+/usr/include/c++/11/bits/atomic_timed_wait.h:
+
 /usr/include/c++/11/bits/std_abs.h:
 
 /usr/include/alloca.h:
@@ -325,6 +404,8 @@ CMakeFiles/laba_5.dir/main.cpp.o: ../main.cpp \
 /usr/include/x86_64-linux-gnu/bits/stdlib-float.h:
 
 /usr/include/x86_64-linux-gnu/bits/uintn-identity.h:
+
+/usr/include/c++/11/stop_token:
 
 /usr/include/x86_64-linux-gnu/bits/byteswap.h:
 
@@ -336,17 +417,21 @@ CMakeFiles/laba_5.dir/main.cpp.o: ../main.cpp \
 
 /usr/include/stdlib.h:
 
-/usr/include/c++/11/bits/functional_hash.h:
+/usr/include/c++/11/bits/ostream.tcc:
 
-/usr/include/c++/11/bits/stl_queue.h:
+/usr/include/c++/11/clocale:
 
-/usr/include/c++/11/bits/stl_iterator_base_funcs.h:
+/usr/include/c++/11/bits/iterator_concepts.h:
 
-/usr/include/ctype.h:
+/usr/include/features.h:
+
+/usr/include/c++/11/bits/atomic_base.h:
+
+/usr/include/c++/11/ext/numeric_traits.h:
+
+/usr/include/x86_64-linux-gnu/bits/xopen_lim.h:
 
 /usr/include/x86_64-linux-gnu/c++/11/bits/c++locale.h:
-
-/usr/include/c++/11/initializer_list:
 
 /usr/include/c++/11/streambuf:
 
@@ -360,11 +445,13 @@ CMakeFiles/laba_5.dir/main.cpp.o: ../main.cpp \
 
 /usr/include/x86_64-linux-gnu/bits/cpu-set.h:
 
+/usr/include/semaphore.h:
+
+/usr/include/c++/11/atomic:
+
 /usr/include/c++/11/bits/exception_defines.h:
 
 /usr/include/x86_64-linux-gnu/c++/11/bits/atomic_word.h:
-
-/usr/include/c++/11/string_view:
 
 /usr/include/c++/11/ext/string_conversions.h:
 
@@ -372,21 +459,23 @@ CMakeFiles/laba_5.dir/main.cpp.o: ../main.cpp \
 
 /usr/include/c++/11/bits/concept_check.h:
 
+/usr/include/x86_64-linux-gnu/bits/posix2_lim.h:
+
+/usr/include/linux/limits.h:
+
 /usr/include/stdint.h:
 
 /usr/include/c++/11/bits/exception.h:
+
+/usr/include/x86_64-linux-gnu/bits/local_lim.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/cookie_io_functions_t.h:
 
 /usr/include/x86_64-linux-gnu/bits/wchar.h:
 
-/usr/include/c++/11/bits/range_access.h:
-
-/usr/include/c++/11/cstdlib:
-
-/usr/include/c++/11/bits/stl_iterator_base_types.h:
-
 /usr/include/x86_64-linux-gnu/bits/types/struct_timespec.h:
+
+/usr/include/c++/11/bits/stl_tempbuf.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/__FILE.h:
 
@@ -406,6 +495,8 @@ CMakeFiles/laba_5.dir/main.cpp.o: ../main.cpp \
 
 /usr/include/x86_64-linux-gnu/bits/types/__sigset_t.h:
 
+/usr/include/c++/11/concepts:
+
 /usr/include/x86_64-linux-gnu/sys/cdefs.h:
 
 /usr/include/x86_64-linux-gnu/asm/errno.h:
@@ -421,10 +512,6 @@ CMakeFiles/laba_5.dir/main.cpp.o: ../main.cpp \
 /usr/include/x86_64-linux-gnu/c++/11/bits/c++config.h:
 
 /usr/include/c++/11/bits/ostream_insert.h:
-
-/usr/include/linux/close_range.h:
-
-/usr/include/c++/11/debug/assertions.h:
 
 /usr/include/x86_64-linux-gnu/bits/wctype-wchar.h:
 
@@ -448,9 +535,7 @@ CMakeFiles/laba_5.dir/main.cpp.o: ../main.cpp \
 
 /usr/include/x86_64-linux-gnu/bits/types/FILE.h:
 
-/usr/include/features.h:
-
-/usr/include/c++/11/ext/numeric_traits.h:
+/usr/include/c++/11/compare:
 
 /usr/include/c++/11/bits/stl_function.h:
 
@@ -470,8 +555,6 @@ CMakeFiles/laba_5.dir/main.cpp.o: ../main.cpp \
 
 /usr/include/c++/11/pstl/pstl_config.h:
 
-/usr/include/c++/11/bits/alloc_traits.h:
-
 /usr/include/c++/11/ext/type_traits.h:
 
 /usr/include/x86_64-linux-gnu/c++/11/bits/os_defines.h:
@@ -483,6 +566,8 @@ CMakeFiles/laba_5.dir/main.cpp.o: ../main.cpp \
 /usr/include/x86_64-linux-gnu/bits/time64.h:
 
 /usr/include/c++/11/bits/string_view.tcc:
+
+/usr/include/c++/11/numbers:
 
 /usr/include/c++/11/bits/hash_bytes.h:
 
@@ -510,11 +595,15 @@ CMakeFiles/laba_5.dir/main.cpp.o: ../main.cpp \
 
 /usr/include/x86_64-linux-gnu/bits/timex.h:
 
+/usr/include/x86_64-linux-gnu/bits/semaphore.h:
+
 /usr/include/c++/11/exception:
 
 /usr/include/x86_64-linux-gnu/c++/11/bits/cpu_defines.h:
 
 /usr/include/x86_64-linux-gnu/bits/timesize.h:
+
+/usr/include/c++/11/bits/std_mutex.h:
 
 /usr/lib/gcc/x86_64-linux-gnu/11/include/stdarg.h:
 
@@ -532,6 +621,8 @@ CMakeFiles/laba_5.dir/main.cpp.o: ../main.cpp \
 
 /usr/include/c++/11/string:
 
+/usr/include/c++/11/bits/uniform_int_dist.h:
+
 /usr/include/c++/11/bits/cxxabi_init_exception.h:
 
 /usr/include/wchar.h:
@@ -540,19 +631,33 @@ CMakeFiles/laba_5.dir/main.cpp.o: ../main.cpp \
 
 /usr/include/x86_64-linux-gnu/bits/floatn-common.h:
 
+/usr/include/c++/11/bits/ranges_cmp.h:
+
+/usr/include/c++/11/bits/stl_queue.h:
+
+/usr/include/c++/11/bits/stl_iterator_base_funcs.h:
+
+/usr/include/ctype.h:
+
+/usr/include/linux/close_range.h:
+
+/usr/include/c++/11/debug/assertions.h:
+
 /usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h:
-
-/usr/include/c++/11/bits/stl_iterator.h:
-
-/usr/include/c++/11/new:
 
 /usr/include/c++/11/bits/ptr_traits.h:
 
-/usr/include/c++/11/bits/ostream.tcc:
+/usr/include/c++/11/new:
 
-/usr/include/c++/11/clocale:
+/usr/include/c++/11/bits/stl_iterator.h:
+
+/usr/include/c++/11/bits/this_thread_sleep.h:
+
+/usr/include/c++/11/bits/stl_construct.h:
 
 /usr/include/c++/11/debug/debug.h:
+
+/usr/include/c++/11/bits/atomic_wait.h:
 
 /usr/include/c++/11/bits/predefined_ops.h:
 
@@ -562,11 +667,15 @@ CMakeFiles/laba_5.dir/main.cpp.o: ../main.cpp \
 
 /usr/include/x86_64-linux-gnu/bits/types/struct_sched_param.h:
 
+/usr/include/x86_64-linux-gnu/asm/unistd_64.h:
+
 /usr/include/c++/11/bits/move.h:
 
 /usr/include/x86_64-linux-gnu/bits/atomic_wide_counter.h:
 
 /usr/include/x86_64-linux-gnu/bits/typesizes.h:
+
+/usr/include/c++/11/bits/stl_algo.h:
 
 /usr/include/x86_64-linux-gnu/bits/types.h:
 
@@ -587,6 +696,12 @@ CMakeFiles/laba_5.dir/main.cpp.o: ../main.cpp \
 /usr/include/locale.h:
 
 /usr/include/x86_64-linux-gnu/bits/locale.h:
+
+/usr/include/c++/11/bits/basic_string.h:
+
+/usr/include/x86_64-linux-gnu/gnu/stubs.h:
+
+/usr/include/x86_64-linux-gnu/bits/endian.h:
 
 /usr/include/x86_64-linux-gnu/bits/endianness.h:
 
@@ -620,6 +735,10 @@ CMakeFiles/laba_5.dir/main.cpp.o: ../main.cpp \
 
 /usr/include/x86_64-linux-gnu/bits/struct_mutex.h:
 
+/usr/include/c++/11/bits/stl_iterator_base_types.h:
+
+/usr/include/c++/11/cstdlib:
+
 /usr/lib/gcc/x86_64-linux-gnu/11/include/stddef.h:
 
 /usr/include/x86_64-linux-gnu/bits/struct_rwlock.h:
@@ -632,6 +751,12 @@ CMakeFiles/laba_5.dir/main.cpp.o: ../main.cpp \
 
 /usr/include/x86_64-linux-gnu/c++/11/bits/c++allocator.h:
 
+/usr/include/c++/11/ext/alloc_traits.h:
+
+/usr/include/c++/11/bits/cxxabi_forced.h:
+
+/usr/include/x86_64-linux-gnu/sys/syscall.h:
+
 /usr/include/c++/11/bits/deque.tcc:
 
 /usr/include/x86_64-linux-gnu/bits/select.h:
@@ -639,17 +764,3 @@ CMakeFiles/laba_5.dir/main.cpp.o: ../main.cpp \
 /usr/include/c++/11/iostream:
 
 /usr/include/c++/11/backward/binders.h:
-
-/usr/include/x86_64-linux-gnu/gnu/stubs.h:
-
-/usr/include/x86_64-linux-gnu/bits/endian.h:
-
-/usr/include/c++/11/bits/basic_string.h:
-
-/usr/include/c++/11/bits/cxxabi_forced.h:
-
-/usr/include/c++/11/ext/alloc_traits.h:
-
-/usr/include/c++/11/bits/this_thread_sleep.h:
-
-/usr/include/c++/11/bits/stl_construct.h:

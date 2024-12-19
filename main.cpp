@@ -29,6 +29,8 @@ public:
     Sex getSex();
     std::string getSignature();
 };
+std::binary_semaphore mensSemaphore(1);
+std::binary_semaphore womansSemaphore(1);
 
 class TWashingRoom
 {
@@ -36,6 +38,7 @@ private:
     std::vector <TCreature*> showers;
 public:
     TWashingRoom(int size);
+    bool asbolutelyFree();
     bool hasMens();
     bool hasWomans();
     bool hasPlace();
@@ -64,7 +67,7 @@ int main()
     TWashingRoom washingRoom(2);
 
     std::vector <std::thread> threads;
-    // std::vector <>
+
     for (int i = 0; i < washingRoom.getSize(); ++i)
         threads.push_back(std::thread(doWashing, i, &mens, &womans, &washingRoom));
 
@@ -88,17 +91,63 @@ void doWashing(int indexOfShower, std::queue<TCreature> *mans, std::queue<TCreat
         
         // смотрим, кто сейчас в ванной
         std::queue <TCreature> *whoCanEnterQueue; 
-        if (washingRoom->hasMens())
-            whoCanEnterQueue = mans;
+        std::binary_semaphore *semaphoreToBlock;
+
+
+        if (washingRoom->asbolutelyFree())
+        {
+            // в кабинки может зайти кто угодно
+            mensSemaphore.acquire();
+            womansSemaphore.acquire();
+
+            if (mans->size() != 0)
+            {
+                whoCanEnterQueue = mans;
+                semaphoreToBlock = &mensSemaphore;
+            }
+            else
+            if (womans->size() != 0)
+            {
+                whoCanEnterQueue = womans;
+                semaphoreToBlock = &womansSemaphore;
+            }
+            else
+            {
+                mensSemaphore.release();
+                womansSemaphore.release();     
+                continue;          
+            }
+
+            mensSemaphore.release();
+            womansSemaphore.release();
+
+        }
         else
-            whoCanEnterQueue = womans;
+        {
+            if (washingRoom->hasMens())
+            {
+                whoCanEnterQueue = mans;
+                semaphoreToBlock = &mensSemaphore;
+            }
+            if (washingRoom->hasWomans())
+            {
+                whoCanEnterQueue = womans;
+                semaphoreToBlock = &womansSemaphore;
+            }
+        }
         
+        semaphoreToBlock->acquire();
+
         if (whoCanEnterQueue->size() == 0)
+        {
+            semaphoreToBlock->release();
             continue;
-        
+        }
         // моем чудика
         TCreature whoCanEnter = whoCanEnterQueue->front();
         whoCanEnterQueue->pop();
+        semaphoreToBlock->release();
+        
         washingRoom->add(&whoCanEnter);
         sleep(whoCanEnter.getTimeToWash() / 1000);
         washingRoom->remove(whoCanEnter.getIndex());
@@ -131,6 +180,14 @@ void logData(
         std::cout << "\n\n\n";
     }   
 };
+
+bool TWashingRoom::asbolutelyFree()
+{
+    for (int i = 0; i < showers.size(); ++i)
+        if (showers[i] != nullptr)
+            return false;
+    return true;
+}
 
 void addPeoples(std::queue<TCreature> *mans, std::queue<TCreature> *womans)
 {
@@ -173,8 +230,8 @@ std::string TCreature::getSignature()
 void waitRandomTime()
 {
     // новый человек приходит в диапазоне 7-20 сек
-    int MIN = 1000;
-    int MAX = 3000;
+    int MIN = 7000;
+    int MAX = 2000;
     int timeToSleep = rand() % (MAX - MIN) + MIN;
 
     sleep(timeToSleep/1000);
