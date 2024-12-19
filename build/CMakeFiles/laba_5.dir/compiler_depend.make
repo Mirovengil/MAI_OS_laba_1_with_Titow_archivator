@@ -216,7 +216,8 @@ CMakeFiles/laba_5.dir/main.cpp.o: ../main.cpp \
   /usr/include/c++/11/ratio \
   /usr/include/c++/11/limits \
   /usr/include/c++/11/ctime \
-  /usr/include/c++/11/bits/parse_numbers.h
+  /usr/include/c++/11/bits/parse_numbers.h \
+  /usr/include/c++/11/semaphore
 
 
 /usr/include/c++/11/bits/parse_numbers.h:
@@ -430,6 +431,8 @@ CMakeFiles/laba_5.dir/main.cpp.o: ../main.cpp \
 /usr/include/x86_64-linux-gnu/bits/types/locale_t.h:
 
 /usr/include/x86_64-linux-gnu/bits/wordsize.h:
+
+/usr/include/c++/11/semaphore:
 
 /usr/include/x86_64-linux-gnu/bits/types/__mbstate_t.h:
 

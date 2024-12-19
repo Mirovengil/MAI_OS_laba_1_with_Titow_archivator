@@ -5,6 +5,9 @@
         "type_traits": "c",
         "cmath": "c",
         "limits": "c",
-        "utility": "c"
+        "utility": "c",
+        "array": "cpp",
+        "string_view": "cpp",
+        "initializer_list": "cpp"
     }
 }

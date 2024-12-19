@@ -5,6 +5,7 @@
 #include <unistd.h>
 #include <vector>
 #include <thread>
+#include <semaphore>
 
 enum Sex
 {
@@ -41,11 +42,12 @@ public:
     void add(TCreature *creature);
     void remove(int index);
     std::string getSignature(int ind);
+    bool isFree(int index);
     int getSize();
 };
 
 void waitRandomTime();
-void doWashing(std::queue<TCreature> *queue, TWashingRoom *washingRoom);
+void doWashing(int indexOfShower, std::queue<TCreature> *mans, std::queue<TCreature> *womans, TWashingRoom *washingRoom);
 void addPeoples(std::queue<TCreature> *mans, std::queue<TCreature> *womans);
 void logData(
     std::queue<TCreature> *mans,
@@ -60,18 +62,49 @@ int main()
 
     std::queue<TCreature> mens, womans;
     TWashingRoom washingRoom(2);
-    std::thread t1(doWashing, &mens, &washingRoom);
-    std::thread t2(doWashing, &womans, &washingRoom);
+
+    std::vector <std::thread> threads;
+    // std::vector <>
+    for (int i = 0; i < washingRoom.getSize(); ++i)
+        threads.push_back(std::thread(doWashing, i, &mens, &womans, &washingRoom));
+
     std::thread t3(addPeoples, &mens, &womans);
     std::thread t4(logData, &mens, &womans, &washingRoom);
-
     t3.join();
-    t1.join();
-    t2.join();
     t4.join();
+    for (int i = 0; i < threads.size(); ++i)
+        threads[i].join();
 
     
 }
+
+void doWashing(int indexOfShower, std::queue<TCreature> *mans, std::queue<TCreature> *womans, TWashingRoom *washingRoom)
+{
+    while (true)
+    {
+        // душевая занята
+        if (!washingRoom->isFree(indexOfShower))
+            continue;
+        
+        // смотрим, кто сейчас в ванной
+        std::queue <TCreature> *whoCanEnterQueue; 
+        if (washingRoom->hasMens())
+            whoCanEnterQueue = mans;
+        else
+            whoCanEnterQueue = womans;
+        
+        if (whoCanEnterQueue->size() == 0)
+            continue;
+        
+        // моем чудика
+        TCreature whoCanEnter = whoCanEnterQueue->front();
+        whoCanEnterQueue->pop();
+        washingRoom->add(&whoCanEnter);
+        sleep(whoCanEnter.getTimeToWash() / 1000);
+        washingRoom->remove(whoCanEnter.getIndex());
+    }
+};
+
 
 void logData(
     std::queue<TCreature> *mans,
@@ -121,6 +154,12 @@ void addPeoples(std::queue<TCreature> *mans, std::queue<TCreature> *womans)
     }
 }
 
+bool TWashingRoom::isFree(int index)
+{
+    return (showers[index] == nullptr);
+}
+
+
 std::string TCreature::getSignature()
 {
     std::string signature = "";
@@ -129,34 +168,6 @@ std::string TCreature::getSignature()
     else
         signature = "w_";
     return signature + std::to_string(personalIndex);
-}
-
-
-void doWashing(std::queue<TCreature> *queue, TWashingRoom *washingRoom)
-{
-    while (true)
-    {
-        if (queue->size() == 0)
-            continue;
-
-        TCreature washer = queue->front();
-        
-        // может ли он помыться?
-        if (washer.getSex() == MALE && washingRoom->hasWomans())
-            continue;
-        if (washer.getSex() == FEMALE && washingRoom->hasMens())
-            continue;
-        if (!washingRoom->hasPlace())
-            continue;
-        
-        std::cout << " I AM " << washer.getSignature() << "\n";
-        std::cout << washingRoom->hasMens() << " ; " << washingRoom->hasWomans() << "\n"; 
-
-        washingRoom->add(&washer);
-        queue->pop();
-        sleep(washer.getTimeToWash() / 1000);
-        washingRoom->remove(washer.getIndex());
-    }
 }
 
 void waitRandomTime()
