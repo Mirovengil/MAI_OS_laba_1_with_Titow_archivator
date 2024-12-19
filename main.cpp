@@ -12,6 +12,8 @@ enum Sex
     FEMALE
 };
 
+int INDEX = 0;
+
 class TCreature
 {
 private:
@@ -19,10 +21,8 @@ private:
     int needTimeToWash;
     int personalIndex;
 
-    static int index;
 public:
     TCreature(Sex sex);
-    static void setIndex(int value);
     int getIndex();
     int getTimeToWash();
     Sex getSex();
@@ -45,46 +45,51 @@ public:
 };
 
 void waitRandomTime();
-void doWashing(std::queue<TCreature> &queue, TWashingRoom *washingRoom);
-void addPeoples(std::queue<TCreature> &mans, std::queue<TCreature> &womans);
+void doWashing(std::queue<TCreature> *queue, TWashingRoom *washingRoom);
+void addPeoples(std::queue<TCreature> *mans, std::queue<TCreature> *womans);
 void logData(
-    std::queue<TCreature> &mans,
-    std::queue<TCreature> &womans,
+    std::queue<TCreature> *mans,
+    std::queue<TCreature> *womans,
     TWashingRoom *washingRoom
 );
 
 int main()
 {
-    TCreature::setIndex(0);
     srand(time(0));
 
 
     std::queue<TCreature> mens, womans;
     TWashingRoom washingRoom(2);
-    std::thread t1(doWashing, mens, &washingRoom);
-    std::thread t2(doWashing, womans, &washingRoom);
-    std::thread t3(addPeoples, mens, womans);
+    std::thread t1(doWashing, &mens, &washingRoom);
+    std::thread t2(doWashing, &womans, &washingRoom);
+    std::thread t3(addPeoples, &mens, &womans);
+    std::thread t4(logData, &mens, &womans, &washingRoom);
 
+    t3.join();
     t1.join();
     t2.join();
-    t3.join();
+    t4.join();
+
+    
 }
 
 void logData(
-    std::queue<TCreature> &mans,
-    std::queue<TCreature> &womans,
+    std::queue<TCreature> *mans,
+    std::queue<TCreature> *womans,
     TWashingRoom *washingRoom
 )
 {
-    while (!(mans.empty() && womans.empty()))
+    while (true)
     {
         sleep(1);
         
-        std::cout << "Мужская очередь: " << mans.size() << " чел.\n";
-        std::cout << "Первый: " << mans.front().getSignature() << "\n\n";
+        std::cout << "Мужская очередь: " << mans->size() << " чел.\n";
+        if (mans->size() != 0)
+            std::cout << "Первый: " << mans->front().getSignature() << "\n\n";
 
-        std::cout << "Женская очередь: " << womans.size() << " чел.\n";
-        std::cout << "Первая: " << womans.front().getSignature() << "\n\n";
+        std::cout << "Женская очередь: " << womans->size() << " чел.\n";
+        if (womans->size() != 0)
+            std::cout << "Первая: " << womans->front().getSignature() << "\n\n";
         
         std::cout << "Душевые кабинки: \n";
         std::cout << "|";
@@ -94,7 +99,7 @@ void logData(
     }   
 };
 
-void addPeoples(std::queue<TCreature> &mans, std::queue<TCreature> &womans)
+void addPeoples(std::queue<TCreature> *mans, std::queue<TCreature> *womans)
 {
     int NUMBER_OF_PEOPLE = 100;
 
@@ -108,9 +113,11 @@ void addPeoples(std::queue<TCreature> &mans, std::queue<TCreature> &womans)
 
         TCreature newSmb(sex);
         if (sex == MALE)
-            mans.push(newSmb);
+            mans->push(newSmb);
         if (sex == FEMALE)
-            womans.push(newSmb);
+            womans->push(newSmb);
+        
+        waitRandomTime();
     }
 }
 
@@ -125,11 +132,14 @@ std::string TCreature::getSignature()
 }
 
 
-void doWashing(std::queue<TCreature> &queue, TWashingRoom *washingRoom)
+void doWashing(std::queue<TCreature> *queue, TWashingRoom *washingRoom)
 {
-    while (!queue.empty())
+    while (true)
     {
-        TCreature washer = queue.front();
+        if (queue->size() == 0)
+            continue;
+
+        TCreature washer = queue->front();
         
         // может ли он помыться?
         if (washer.getSex() == MALE && washingRoom->hasWomans())
@@ -139,32 +149,30 @@ void doWashing(std::queue<TCreature> &queue, TWashingRoom *washingRoom)
         if (!washingRoom->hasPlace())
             continue;
         
+        std::cout << " I AM " << washer.getSignature() << "\n";
+        std::cout << washingRoom->hasMens() << " ; " << washingRoom->hasWomans() << "\n"; 
+
         washingRoom->add(&washer);
+        queue->pop();
         sleep(washer.getTimeToWash() / 1000);
         washingRoom->remove(washer.getIndex());
-        queue.pop();
     }
 }
 
 void waitRandomTime()
 {
     // новый человек приходит в диапазоне 7-20 сек
-    int MIN = 7000;
-    int MAX = 20000;
+    int MIN = 1000;
+    int MAX = 3000;
     int timeToSleep = rand() % (MAX - MIN) + MIN;
 
     sleep(timeToSleep/1000);
 };
 
-void TCreature::setIndex(int value)
-{
-    index = value;
-}
-
 TCreature::TCreature(Sex sex)
 {
     this->sex = sex;
-    personalIndex = ++index;
+    personalIndex = ++INDEX;
     // моются чудики от 3 секунд до 10
     
     int MIN = 3000;
@@ -230,6 +238,8 @@ void TWashingRoom::remove(int index)
 {
     for (int i = 0; i < showers.size(); ++i)
     {
+        if (showers[i] == nullptr)
+            continue;
         if (showers[i]->getIndex() != index)
             continue;
         showers[i] = nullptr;
@@ -238,6 +248,8 @@ void TWashingRoom::remove(int index)
 
 std::string TWashingRoom::getSignature(int ind)
 {
+    if (showers[ind] == nullptr)
+        return "free";
     return showers[ind]->getSignature();
 }
 
