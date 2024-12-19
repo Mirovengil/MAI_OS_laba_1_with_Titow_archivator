@@ -69,28 +69,28 @@ include CMakeFiles/laba_5.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/laba_5.dir/flags.make
 
-CMakeFiles/laba_5.dir/main.cpp.o: CMakeFiles/laba_5.dir/flags.make
-CMakeFiles/laba_5.dir/main.cpp.o: ../main.cpp
-CMakeFiles/laba_5.dir/main.cpp.o: CMakeFiles/laba_5.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ivan/MAI/OS/laba_5/MAI_OS_labs_with_Titow/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/laba_5.dir/main.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/laba_5.dir/main.cpp.o -MF CMakeFiles/laba_5.dir/main.cpp.o.d -o CMakeFiles/laba_5.dir/main.cpp.o -c /home/ivan/MAI/OS/laba_5/MAI_OS_labs_with_Titow/main.cpp
+CMakeFiles/laba_5.dir/semaphores.cpp.o: CMakeFiles/laba_5.dir/flags.make
+CMakeFiles/laba_5.dir/semaphores.cpp.o: ../semaphores.cpp
+CMakeFiles/laba_5.dir/semaphores.cpp.o: CMakeFiles/laba_5.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ivan/MAI/OS/laba_5/MAI_OS_labs_with_Titow/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/laba_5.dir/semaphores.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/laba_5.dir/semaphores.cpp.o -MF CMakeFiles/laba_5.dir/semaphores.cpp.o.d -o CMakeFiles/laba_5.dir/semaphores.cpp.o -c /home/ivan/MAI/OS/laba_5/MAI_OS_labs_with_Titow/semaphores.cpp
 
-CMakeFiles/laba_5.dir/main.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/laba_5.dir/main.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ivan/MAI/OS/laba_5/MAI_OS_labs_with_Titow/main.cpp > CMakeFiles/laba_5.dir/main.cpp.i
+CMakeFiles/laba_5.dir/semaphores.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/laba_5.dir/semaphores.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ivan/MAI/OS/laba_5/MAI_OS_labs_with_Titow/semaphores.cpp > CMakeFiles/laba_5.dir/semaphores.cpp.i
 
-CMakeFiles/laba_5.dir/main.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/laba_5.dir/main.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ivan/MAI/OS/laba_5/MAI_OS_labs_with_Titow/main.cpp -o CMakeFiles/laba_5.dir/main.cpp.s
+CMakeFiles/laba_5.dir/semaphores.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/laba_5.dir/semaphores.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ivan/MAI/OS/laba_5/MAI_OS_labs_with_Titow/semaphores.cpp -o CMakeFiles/laba_5.dir/semaphores.cpp.s
 
 # Object files for target laba_5
 laba_5_OBJECTS = \
-"CMakeFiles/laba_5.dir/main.cpp.o"
+"CMakeFiles/laba_5.dir/semaphores.cpp.o"
 
 # External object files for target laba_5
 laba_5_EXTERNAL_OBJECTS =
 
-laba_5: CMakeFiles/laba_5.dir/main.cpp.o
+laba_5: CMakeFiles/laba_5.dir/semaphores.cpp.o
 laba_5: CMakeFiles/laba_5.dir/build.make
 laba_5: CMakeFiles/laba_5.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/ivan/MAI/OS/laba_5/MAI_OS_labs_with_Titow/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable laba_5"

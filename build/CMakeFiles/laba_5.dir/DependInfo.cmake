@@ -8,7 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/ivan/MAI/OS/laba_5/MAI_OS_labs_with_Titow/main.cpp" "CMakeFiles/laba_5.dir/main.cpp.o" "gcc" "CMakeFiles/laba_5.dir/main.cpp.o.d"
+  "/home/ivan/MAI/OS/laba_5/MAI_OS_labs_with_Titow/semaphores.cpp" "CMakeFiles/laba_5.dir/semaphores.cpp.o" "gcc" "CMakeFiles/laba_5.dir/semaphores.cpp.o.d"
   )
 
 # Targets to which this target links.

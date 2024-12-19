@@ -129,29 +129,29 @@ laba_5/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/laba_5.dir/build.make CMakeFiles/laba_5.dir/build
 .PHONY : laba_5/fast
 
-main.o: main.cpp.o
-.PHONY : main.o
+semaphores.o: semaphores.cpp.o
+.PHONY : semaphores.o
 
 # target to build an object file
-main.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/laba_5.dir/build.make CMakeFiles/laba_5.dir/main.cpp.o
-.PHONY : main.cpp.o
+semaphores.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/laba_5.dir/build.make CMakeFiles/laba_5.dir/semaphores.cpp.o
+.PHONY : semaphores.cpp.o
 
-main.i: main.cpp.i
-.PHONY : main.i
+semaphores.i: semaphores.cpp.i
+.PHONY : semaphores.i
 
 # target to preprocess a source file
-main.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/laba_5.dir/build.make CMakeFiles/laba_5.dir/main.cpp.i
-.PHONY : main.cpp.i
+semaphores.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/laba_5.dir/build.make CMakeFiles/laba_5.dir/semaphores.cpp.i
+.PHONY : semaphores.cpp.i
 
-main.s: main.cpp.s
-.PHONY : main.s
+semaphores.s: semaphores.cpp.s
+.PHONY : semaphores.s
 
 # target to generate assembly for a file
-main.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/laba_5.dir/build.make CMakeFiles/laba_5.dir/main.cpp.s
-.PHONY : main.cpp.s
+semaphores.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/laba_5.dir/build.make CMakeFiles/laba_5.dir/semaphores.cpp.s
+.PHONY : semaphores.cpp.s
 
 # Help Target
 help:
@@ -162,9 +162,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... laba_5"
-	@echo "... main.o"
-	@echo "... main.i"
-	@echo "... main.s"
+	@echo "... semaphores.o"
+	@echo "... semaphores.i"
+	@echo "... semaphores.s"
 .PHONY : help
 
 
