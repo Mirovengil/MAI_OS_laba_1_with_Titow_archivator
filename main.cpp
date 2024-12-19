@@ -31,6 +31,7 @@ public:
 };
 std::binary_semaphore mensSemaphore(1);
 std::binary_semaphore womansSemaphore(1);
+std::vector <std::binary_semaphore*> showersSemaphores;
 
 class TWashingRoom
 {
@@ -69,7 +70,10 @@ int main()
     std::vector <std::thread> threads;
 
     for (int i = 0; i < washingRoom.getSize(); ++i)
+    {
         threads.push_back(std::thread(doWashing, i, &mens, &womans, &washingRoom));
+        showersSemaphores.push_back(new std::binary_semaphore(1));
+    }
 
     std::thread t3(addPeoples, &mens, &womans);
     std::thread t4(logData, &mens, &womans, &washingRoom);
@@ -86,9 +90,12 @@ void doWashing(int indexOfShower, std::queue<TCreature> *mans, std::queue<TCreat
     while (true)
     {
         // душевая занята
+        showersSemaphores[indexOfShower]->acquire();
         if (!washingRoom->isFree(indexOfShower))
+        {
+            showersSemaphores[indexOfShower]->release();
             continue;
-        
+        }
         // смотрим, кто сейчас в ванной
         std::queue <TCreature> *whoCanEnterQueue; 
         std::binary_semaphore *semaphoreToBlock;
@@ -115,6 +122,7 @@ void doWashing(int indexOfShower, std::queue<TCreature> *mans, std::queue<TCreat
             {
                 mensSemaphore.release();
                 womansSemaphore.release();     
+                showersSemaphores[indexOfShower]->release();
                 continue;          
             }
 
@@ -141,6 +149,7 @@ void doWashing(int indexOfShower, std::queue<TCreature> *mans, std::queue<TCreat
         if (whoCanEnterQueue->size() == 0)
         {
             semaphoreToBlock->release();
+            showersSemaphores[indexOfShower]->release();
             continue;
         }
         // моем чудика
@@ -149,8 +158,12 @@ void doWashing(int indexOfShower, std::queue<TCreature> *mans, std::queue<TCreat
         semaphoreToBlock->release();
         
         washingRoom->add(&whoCanEnter);
+        showersSemaphores[indexOfShower]->release();
+
         sleep(whoCanEnter.getTimeToWash() / 1000);
+        showersSemaphores[indexOfShower]->acquire();
         washingRoom->remove(whoCanEnter.getIndex());
+        showersSemaphores[indexOfShower]->release();
     }
 };
 
@@ -165,6 +178,9 @@ void logData(
     {
         sleep(1);
         
+        mensSemaphore.acquire();
+        womansSemaphore.acquire();
+
         std::cout << "Мужская очередь: " << mans->size() << " чел.\n";
         if (mans->size() != 0)
             std::cout << "Первый: " << mans->front().getSignature() << "\n\n";
@@ -173,10 +189,17 @@ void logData(
         if (womans->size() != 0)
             std::cout << "Первая: " << womans->front().getSignature() << "\n\n";
         
+        mensSemaphore.release();
+        womansSemaphore.release();
+
         std::cout << "Душевые кабинки: \n";
         std::cout << "|";
         for (int i = 0; i < washingRoom->getSize(); ++i)
+        {
+            showersSemaphores[i]->acquire();
             std::cout << washingRoom->getSignature(i) << "\t|";
+            showersSemaphores[i]->release();
+        }
         std::cout << "\n\n\n";
     }   
 };
@@ -229,9 +252,9 @@ std::string TCreature::getSignature()
 
 void waitRandomTime()
 {
-    // новый человек приходит в диапазоне 7-20 сек
-    int MIN = 7000;
-    int MAX = 2000;
+    // новый человек приходит в диапазоне MIN..MAX секунд
+    int MIN = 2000;
+    int MAX = 5000;
     int timeToSleep = rand() % (MAX - MIN) + MIN;
 
     sleep(timeToSleep/1000);
@@ -241,10 +264,10 @@ TCreature::TCreature(Sex sex)
 {
     this->sex = sex;
     personalIndex = ++INDEX;
-    // моются чудики от 3 секунд до 10
+    // моются чудики от MIN секунд до MAX
     
-    int MIN = 3000;
-    int MAX = 1000;
+    int MIN = 6000;
+    int MAX = 10000;
     needTimeToWash = rand() % (MAX - MIN) + MIN; 
 }
 
